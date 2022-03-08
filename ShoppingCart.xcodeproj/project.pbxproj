@@ -11,6 +11,18 @@
 		C12AFFBD27CBA77400C53ABB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12AFFBC27CBA77400C53ABB /* ContentView.swift */; };
 		C12AFFBF27CBA77600C53ABB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C12AFFBE27CBA77600C53ABB /* Assets.xcassets */; };
 		C12AFFC227CBA77600C53ABB /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C12AFFC127CBA77600C53ABB /* Preview Assets.xcassets */; };
+		C12AFFCA27CBA8ED00C53ABB /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12AFFC927CBA8ED00C53ABB /* Product.swift */; };
+		C12AFFCD27CBAA8C00C53ABB /* ProductCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12AFFCC27CBAA8C00C53ABB /* ProductCard.swift */; };
+		C12AFFD027CBB49B00C53ABB /* CartButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12AFFCF27CBB49B00C53ABB /* CartButton.swift */; };
+		C12AFFD227CBB69D00C53ABB /* CartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12AFFD127CBB69D00C53ABB /* CartView.swift */; };
+		C12AFFD427CBB8AD00C53ABB /* CartManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12AFFD327CBB8AD00C53ABB /* CartManager.swift */; };
+		C12AFFD627CBBC4300C53ABB /* ProductRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12AFFD527CBBC4300C53ABB /* ProductRow.swift */; };
+		C12AFFD827CC150B00C53ABB /* PaymentButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12AFFD727CC150B00C53ABB /* PaymentButton.swift */; };
+		C12AFFDB27CC1B7300C53ABB /* PaymentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12AFFDA27CC1B7300C53ABB /* PaymentHandler.swift */; };
+		C13A035627D684DA00FC62FA /* DetailScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C13A035527D684DA00FC62FA /* DetailScreen.swift */; };
+		C19A8EFB27D249CB006D2B0B /* DiscountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19A8EFA27D249CB006D2B0B /* DiscountView.swift */; };
+		C19A8EFD27D24A18006D2B0B /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19A8EFC27D24A18006D2B0B /* HomeView.swift */; };
+		C1C36DFF27D0FF86005E960D /* PromotedCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C36DFE27D0FF85005E960D /* PromotedCard.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +31,19 @@
 		C12AFFBC27CBA77400C53ABB /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		C12AFFBE27CBA77600C53ABB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C12AFFC127CBA77600C53ABB /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		C12AFFC927CBA8ED00C53ABB /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
+		C12AFFCC27CBAA8C00C53ABB /* ProductCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCard.swift; sourceTree = "<group>"; };
+		C12AFFCF27CBB49B00C53ABB /* CartButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartButton.swift; sourceTree = "<group>"; };
+		C12AFFD127CBB69D00C53ABB /* CartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartView.swift; sourceTree = "<group>"; };
+		C12AFFD327CBB8AD00C53ABB /* CartManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartManager.swift; sourceTree = "<group>"; };
+		C12AFFD527CBBC4300C53ABB /* ProductRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductRow.swift; sourceTree = "<group>"; };
+		C12AFFD727CC150B00C53ABB /* PaymentButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentButton.swift; sourceTree = "<group>"; };
+		C12AFFD927CC1B1900C53ABB /* ShoppingCart.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ShoppingCart.entitlements; sourceTree = "<group>"; };
+		C12AFFDA27CC1B7300C53ABB /* PaymentHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentHandler.swift; sourceTree = "<group>"; };
+		C13A035527D684DA00FC62FA /* DetailScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailScreen.swift; sourceTree = "<group>"; };
+		C19A8EFA27D249CB006D2B0B /* DiscountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscountView.swift; sourceTree = "<group>"; };
+		C19A8EFC27D24A18006D2B0B /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		C1C36DFE27D0FF85005E960D /* PromotedCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromotedCard.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,10 +76,15 @@
 		C12AFFB927CBA77400C53ABB /* ShoppingCart */ = {
 			isa = PBXGroup;
 			children = (
+				C12AFFD927CC1B1900C53ABB /* ShoppingCart.entitlements */,
 				C12AFFBA27CBA77400C53ABB /* ShoppingCartApp.swift */,
-				C12AFFBC27CBA77400C53ABB /* ContentView.swift */,
+				C12AFFCE27CBAEC800C53ABB /* Views */,
+				C12AFFCB27CBAA6100C53ABB /* Components */,
+				C12AFFC827CBA8D100C53ABB /* Models */,
 				C12AFFBE27CBA77600C53ABB /* Assets.xcassets */,
 				C12AFFC027CBA77600C53ABB /* Preview Content */,
+				C12AFFD327CBB8AD00C53ABB /* CartManager.swift */,
+				C12AFFDA27CC1B7300C53ABB /* PaymentHandler.swift */,
 			);
 			path = ShoppingCart;
 			sourceTree = "<group>";
@@ -65,6 +95,38 @@
 				C12AFFC127CBA77600C53ABB /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		C12AFFC827CBA8D100C53ABB /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				C12AFFC927CBA8ED00C53ABB /* Product.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		C12AFFCB27CBAA6100C53ABB /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				C12AFFCC27CBAA8C00C53ABB /* ProductCard.swift */,
+				C12AFFCF27CBB49B00C53ABB /* CartButton.swift */,
+				C12AFFD527CBBC4300C53ABB /* ProductRow.swift */,
+				C12AFFD727CC150B00C53ABB /* PaymentButton.swift */,
+				C1C36DFE27D0FF85005E960D /* PromotedCard.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		C12AFFCE27CBAEC800C53ABB /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				C12AFFBC27CBA77400C53ABB /* ContentView.swift */,
+				C12AFFD127CBB69D00C53ABB /* CartView.swift */,
+				C19A8EFA27D249CB006D2B0B /* DiscountView.swift */,
+				C19A8EFC27D24A18006D2B0B /* HomeView.swift */,
+				C13A035527D684DA00FC62FA /* DetailScreen.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -137,8 +199,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C12AFFD827CC150B00C53ABB /* PaymentButton.swift in Sources */,
+				C1C36DFF27D0FF86005E960D /* PromotedCard.swift in Sources */,
+				C19A8EFD27D24A18006D2B0B /* HomeView.swift in Sources */,
+				C12AFFDB27CC1B7300C53ABB /* PaymentHandler.swift in Sources */,
+				C12AFFD227CBB69D00C53ABB /* CartView.swift in Sources */,
 				C12AFFBD27CBA77400C53ABB /* ContentView.swift in Sources */,
+				C19A8EFB27D249CB006D2B0B /* DiscountView.swift in Sources */,
+				C12AFFD427CBB8AD00C53ABB /* CartManager.swift in Sources */,
 				C12AFFBB27CBA77400C53ABB /* ShoppingCartApp.swift in Sources */,
+				C12AFFD627CBBC4300C53ABB /* ProductRow.swift in Sources */,
+				C12AFFCA27CBA8ED00C53ABB /* Product.swift in Sources */,
+				C12AFFCD27CBAA8C00C53ABB /* ProductCard.swift in Sources */,
+				C13A035627D684DA00FC62FA /* DetailScreen.swift in Sources */,
+				C12AFFD027CBB49B00C53ABB /* CartButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -266,6 +340,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = ShoppingCart/ShoppingCart.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"ShoppingCart/Preview Content\"";
@@ -295,6 +370,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = ShoppingCart/ShoppingCart.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"ShoppingCart/Preview Content\"";
