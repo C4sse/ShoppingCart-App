@@ -35,7 +35,6 @@ struct DiscountView: View {
                     .frame(width: UIScreen.main.bounds.size.width - 30, alignment: .leading)
                     .offset(y: 10)
                     
-                
                 LazyVGrid(columns: columns, spacing: 20) {
                     ForEach(productList, id: \.id) { product in
                         ProductCard(product: product)

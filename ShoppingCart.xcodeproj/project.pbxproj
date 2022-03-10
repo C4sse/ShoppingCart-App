@@ -23,6 +23,7 @@
 		C19A8EFB27D249CB006D2B0B /* DiscountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19A8EFA27D249CB006D2B0B /* DiscountView.swift */; };
 		C19A8EFD27D24A18006D2B0B /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19A8EFC27D24A18006D2B0B /* HomeView.swift */; };
 		C1C36DFF27D0FF86005E960D /* PromotedCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C36DFE27D0FF85005E960D /* PromotedCard.swift */; };
+		C1D243BE27DA38FF0036B041 /* ProductCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1D243BD27DA38FE0036B041 /* ProductCardView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,7 @@
 		C19A8EFA27D249CB006D2B0B /* DiscountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscountView.swift; sourceTree = "<group>"; };
 		C19A8EFC27D24A18006D2B0B /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		C1C36DFE27D0FF85005E960D /* PromotedCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromotedCard.swift; sourceTree = "<group>"; };
+		C1D243BD27DA38FE0036B041 /* ProductCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCardView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +115,7 @@
 				C12AFFD527CBBC4300C53ABB /* ProductRow.swift */,
 				C12AFFD727CC150B00C53ABB /* PaymentButton.swift */,
 				C1C36DFE27D0FF85005E960D /* PromotedCard.swift */,
+				C1D243BD27DA38FE0036B041 /* ProductCardView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -208,6 +211,7 @@
 				C19A8EFB27D249CB006D2B0B /* DiscountView.swift in Sources */,
 				C12AFFD427CBB8AD00C53ABB /* CartManager.swift in Sources */,
 				C12AFFBB27CBA77400C53ABB /* ShoppingCartApp.swift in Sources */,
+				C1D243BE27DA38FF0036B041 /* ProductCardView.swift in Sources */,
 				C12AFFD627CBBC4300C53ABB /* ProductRow.swift in Sources */,
 				C12AFFCA27CBA8ED00C53ABB /* Product.swift in Sources */,
 				C12AFFCD27CBAA8C00C53ABB /* ProductCard.swift in Sources */,
@@ -342,7 +346,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = ShoppingCart/ShoppingCart.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"ShoppingCart/Preview Content\"";
 				DEVELOPMENT_TEAM = YLUJFA3QRD;
 				ENABLE_PREVIEWS = YES;
@@ -372,7 +376,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = ShoppingCart/ShoppingCart.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"ShoppingCart/Preview Content\"";
 				DEVELOPMENT_TEAM = YLUJFA3QRD;
 				ENABLE_PREVIEWS = YES;
