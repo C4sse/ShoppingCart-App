@@ -37,8 +37,8 @@ struct DiscountView: View {
                     
                 LazyVGrid(columns: columns, spacing: 20) {
                     ForEach(productList, id: \.id) { product in
-                        ProductCard(product: product)
-                            .environmentObject(cartManager)
+                        ProductCardView(width: getItemWidth(), product: product)
+                        .environmentObject(cartManager)
                             
                     }
                 }

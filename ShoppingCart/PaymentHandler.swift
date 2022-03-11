@@ -47,7 +47,7 @@ class PaymentHandler: NSObject {
         return []
     }
     
-    func startPayment(products: [Product], total: Int, completion: @escaping PaymentCompletionHandler) {
+    func startPayment(products: [Product], total: Double, completion: @escaping PaymentCompletionHandler) {
         
         completionHandler = completion
         

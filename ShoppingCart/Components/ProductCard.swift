@@ -11,6 +11,7 @@ struct ProductCard: View {
     @EnvironmentObject var cartManager: CartManager
     var product: Product
     @State private var isPresentingOverlay: Bool = false
+    @State var isAdded : Bool = false
     
     var body: some View {
         
@@ -43,9 +44,21 @@ struct ProductCard: View {
                 .shadow(radius: 3)
                 
                 Button {
-                    cartManager.addToCart(product: product)
+                    if isAdded {
+                        
+                        var product = product
+                        product.addedToCart = false
+                        cartManager.removeFromCart(product: product)
+                        isAdded = product.addedToCart
+                    } else {
+                        
+                        var product = product
+                        product.addedToCart = true
+                        cartManager.addToCart(product: product)
+                        isAdded = product.addedToCart
+                    }
                 } label: {
-                    Image(systemName: "plus")
+                    Image(systemName: isAdded == true ? "checkmark" : "plus" )
                         .padding(10)
                         .foregroundColor(.white)
                         .background(.black)

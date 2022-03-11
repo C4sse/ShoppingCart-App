@@ -11,10 +11,11 @@ struct HomeView: View {
     
     @State private var search: String = ""
     @State private var selectedIndex: Int = 1
-    var columns = [GridItem(.adaptive(minimum: 160), spacing: 20)]
+    var columns = [GridItem(.adaptive(minimum: getItemWidth()), spacing: 16)]
     private let categories = ["Banana", "Apple", "Grape", "Orange", "Kiwi", "Tomato"]
-    @StateObject var cartManager = CartManager()
+    
     @State private var showingSheet = false
+    @StateObject var cartManager = CartManager()
     
     var body: some View {
         
@@ -27,7 +28,9 @@ struct HomeView: View {
                     ScrollView (.horizontal, showsIndicators: false) {
                         
                         HStack {
+                            
                             ForEach ( 0 ..< categories.count) { i in
+                               
                                 Button(action: {selectedIndex = i}) {
                                     CategoryView(isActive: selectedIndex == i, text: categories[i])
                                 }
@@ -38,10 +41,11 @@ struct HomeView: View {
                     
 //                    ScrollView (.horizontal, showsIndicators: false) {
 //                        HStack (spacing: 0) {
-                    LazyVGrid(columns: columns, spacing: 20) {
-                            ForEach(0 ..< 4) { i in
+                    LazyVGrid(columns: columns, spacing: 16) {
+                        ForEach(productList, id: \.id) { product in
                                 
-                                ProductCardView(image: Image("fruit\(i)"))
+                                ProductCardView(width: getItemWidth(), product: product)
+                                .environmentObject(cartManager)
                                     
 //                                NavigationLink(
 //                                    destination: DetailScreen(),
@@ -53,9 +57,9 @@ struct HomeView: View {
 //                                    .foregroundColor(.black)
                                     
                             }
-                            .padding(.leading)
+//                            .padding(.leading)
                     }
-                    .padding()
+//                    .padding()
 //                        }
 //                    }
 //                    .padding(.bottom)
@@ -83,21 +87,28 @@ struct HomeView_Previews: PreviewProvider {
     }
 }
 
+
+
 struct CategoryView: View {
     let isActive: Bool
     let text: String
     var body: some View {
-        VStack (alignment: .leading, spacing: 0) {
+        VStack (alignment: .center, spacing: 0) {
             Text(text)
                 .font(.system(size: 18))
                 .fontWeight(.medium)
-                .foregroundColor(isActive ? Color("Primary") : Color.black.opacity(0.5))
-            if (isActive) { Color("Primary")
+                .foregroundColor(isActive ? lightGrayBasic : Color.black.opacity(0.5))
+//                .padding()
+//                .overlay(
+//                        RoundedRectangle(cornerRadius: 16)
+//                            .stroke(Color("#39B54E"), lineWidth: 4)
+//                    )
+            if (isActive) {
+                Color("Primary")
                 .frame(width: 15, height: 2)
                 .clipShape(Capsule())
             }
         }
-        .padding(.trailing)
     }
 }
 
@@ -125,4 +136,20 @@ struct ContentVieww: View {
             SheetView()
         }
     }
+}
+
+func getItemWidth() -> CGFloat {
+    
+    let screenSize: CGRect = UIScreen.main.bounds
+    let _ = print(screenSize)
+    var width = 160.0
+    
+    if screenSize.width < 330 {
+        width = 130
+    } else if screenSize.width > 420 {
+            
+        width = 180
+    }
+    
+    return width
 }

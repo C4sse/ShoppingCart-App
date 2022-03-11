@@ -10,12 +10,13 @@ import Foundation
 class CartManager: ObservableObject {
     
     @Published private(set) var products: [Product] = []
-    @Published private(set) var total: Int = 0
+    @Published private(set) var total: Double = 0
     
     let paymentHandler = PaymentHandler()
     @Published var paymentSuccess = false
     
     func addToCart(product: Product) {
+        
         products.append(product)
         total += product.price
     }
