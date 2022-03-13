@@ -23,7 +23,6 @@ struct ContentView: View {
                     Image(systemName: "percent")
                     Text("Discount")
                 }
-            
         }
     }
 }

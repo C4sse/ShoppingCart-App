@@ -12,30 +12,95 @@ struct ProductRow: View {
     var product: Product
     
     var body: some View {
-        HStack(spacing: 20) {
+        HStack(alignment: .top,spacing: 20) {
+            
             Image(product.image)
                 .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(width: 50)
+                .aspectRatio(contentMode: .fill)
+                .frame(width: 90, height: 90)
                 .cornerRadius(10)
             
             VStack(alignment: .leading, spacing: 10) {
                 Text(product.name)
                     .bold()
                 
-                Text("\(product.price)")
-            }
-                Spacer()
+                Text("1 kg / $198.00 ")
+                    .font(.subheadline)
+                    .fontWeight(.semibold)
+                    .foregroundColor(.black)
+                    .padding(.bottom)
+                    .brightness(0.5)
                 
-                Image(systemName: "trash")
-                    .foregroundColor(Color(hue: 1.0, saturation: 0.89, brightness: 0.8351))
-                    .onTapGesture {
-                        cartManager.removeFromCart(product: product)
+                HStack(alignment: .center) {
+                    
+                    Button(action: {}) {
+                        Image(systemName: "minus")
+                            .foregroundColor(darkGrayBasic)
+                        //                        .padding(.all, 13)
+                            .padding(.bottom, 10)
+                            .padding(.top, 10)
+                            .padding(.leading, 3)
+                            .padding(.trailing, 3)
+                            .background(backgroundColor1)
+                            .cornerRadius(5.0)
+                        
                     }
+                    //                .frame(height: 60)
+                    //                .background(Color(red: 0.399, green: 0.5, blue: 0.6667))
+                    //                .foregroundColor(.black)
+                    
+                    
+                    VStack(alignment: .center) {
+                        Text("1 item/s")
+                            .font(.subheadline)
+                            .fontWeight(.semibold)
+                            .font(.system(size: 9))
+                            .frame(width: 60)
+                    }
+                    .padding(.all, 5)
+                    
+                    Button(action: {}) {
+                        Image(systemName: "plus")
+                            .foregroundColor(darkGrayBasic)
+                            .padding(.all, 3)
+                            .background(backgroundColor1)
+                            .cornerRadius(5.0)
+                    }
+                    
+                    Spacer()
+                    
+                    Text("$1399")
+                        .font(.title3)
+                        .foregroundColor(.green)
+                        .font(.system(size: 10))
+                        .bold()
+                        .offset(x: 30)
+                    
+                }
+            }
             
+            Image(systemName: "multiply")
+                .resizable()
+                .frame(width: 13,height: 13)
+                .foregroundColor(Color.gray)
+                .padding(.top)
+                .onTapGesture {
+                    cartManager.removeFromCart(product: product)
+                }
+            //            VStack(alignment: .trailing, spacing: 40) {
+            //
+            //            Text("$1399")
+            //                .font(.title3)
+            //                .foregroundColor(.green)
+            //                .font(.system(size: 10))
+            //                .bold()
+            //            }
         }
-        .padding(.horizontal)
+        
+        
+        .padding()
         .frame(maxWidth: .infinity, alignment: .leading)
+        .background(.white)
     }
 }
 

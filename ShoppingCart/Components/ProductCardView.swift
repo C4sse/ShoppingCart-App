@@ -14,6 +14,7 @@ struct ProductCardView: View {
     @EnvironmentObject var cartManager: CartManager
     @State var isAdded : Bool = false
     var product: Product
+    var showDiscount: Bool
     
     var body: some View {
         ZStack(alignment: .topTrailing) {
@@ -29,6 +30,7 @@ struct ProductCardView: View {
                         .aspectRatio(contentMode: .fill)
                         .frame(width: width, height: 200)
                         .clipped()
+                    
 //                        .onTapGesture {
 //                            let _ = print("on tap")
 //                            
@@ -83,12 +85,16 @@ struct ProductCardView: View {
                     .padding(.trailing, 8)
                 }
             }
+            
+            if showDiscount {
+                
                 Text("-20%")
                     .foregroundColor(.white)
                     .bold()
                     .padding(12)
                     .background(Color.red)
                     .cornerRadius(20, corners: [.bottomLeft, .topRight])
+            }
 
                     
         }
@@ -106,6 +112,6 @@ struct ProductCardView: View {
 struct ProductCardView_Previews: PreviewProvider {
     let image: Image
     static var previews: some View {
-        ProductCardView(width: 160, product: productList[0])
+        ProductCardView(width: 160, product: productList[0], showDiscount: true)
     }
 }

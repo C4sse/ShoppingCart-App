@@ -10,36 +10,36 @@ import SwiftUI
 struct CartView: View {
     @EnvironmentObject var cartManager: CartManager
     var body: some View {
-        ScrollView {
-            if cartManager.paymentSuccess {
-                
-                Text("Thanks for your purchase! You'll get cozy in our comfy sweaters soon! You'll also receive email confirmation shortly.")
-                    .padding()
-            } else {
-                
-                if cartManager.products.count > 0 {
+        
+        NavigationView {
+            
+            ZStack {
+                ScrollView {
                     
-                    ForEach(cartManager.products, id: \.id) { product in
+                    if cartManager.paymentSuccess {
                         
-                        ProductRow(product: product)
+                        Text("Thanks for your purchase! You'll get cozy in our comfy sweaters soon! You'll also receive email confirmation shortly.")
+                            .padding()
+                    } else {
+                        
+                        if cartManager.products.count > 0 {
+                            
+                            ForEach(cartManager.products, id: \.id) { product in
+                                
+                                ProductRow(product: product)
+                                    .padding(.leading)
+                                    .padding(.trailing)
+                            }
+                            
+                        } else {
+                            
+                            Text("Your cart is empty")
+                        }
                     }
-                    
-                    HStack {
-                        Text("Your Cart total is")
-                        Spacer()
-                        Text("$\(cartManager.total, specifier: "%.2f")")
-                            .bold()
-                    }
-                    .padding()
-                    
-                    PaymentButton(action: {
-                        cartManager.pay()
-                    })
-                        .padding()
-                } else {
-                    
-                    Text("Your cart is empty")
                 }
+                .background(backgroundColor1)
+            
+            
             }
         }
         .navigationTitle(Text("My Cart"))
@@ -49,6 +49,28 @@ struct CartView: View {
                 cartManager.paymentSuccess = false
             }
         }
+        
+        HStack(alignment: .center) {
+            
+            VStack(alignment: .leading) {
+                Text("Your Cart total is:")
+                    .bold()
+                
+                Text("$1399")
+                    .font(.title2)
+                    .foregroundColor(.green)
+                    .bold()
+            }
+            .padding(.all, 5)
+            
+            Spacer()
+            
+            PaymentButton(action: {
+                cartManager.pay()
+            })
+//                .padding()
+        }
+        .padding()
     }
 }
 

@@ -27,7 +27,7 @@ struct HomeView: View {
                     
                     ScrollView (.horizontal, showsIndicators: false) {
                         
-                        HStack {
+                        HStack(spacing: 12) {
                             
                             ForEach ( 0 ..< categories.count) { i in
                                
@@ -44,7 +44,7 @@ struct HomeView: View {
                     LazyVGrid(columns: columns, spacing: 16) {
                         ForEach(productList, id: \.id) { product in
                                 
-                                ProductCardView(width: getItemWidth(), product: product)
+                            ProductCardView(width: getItemWidth(), product: product, showDiscount: false)
                                 .environmentObject(cartManager)
                                     
 //                                NavigationLink(
@@ -97,18 +97,24 @@ struct CategoryView: View {
             Text(text)
                 .font(.system(size: 18))
                 .fontWeight(.medium)
-                .foregroundColor(isActive ? lightGrayBasic : Color.black.opacity(0.5))
-//                .padding()
-//                .overlay(
-//                        RoundedRectangle(cornerRadius: 16)
-//                            .stroke(Color("#39B54E"), lineWidth: 4)
-//                    )
+                .foregroundColor(isActive ? darkGrayBasic : lightGrayBasic)
+                .padding(8)
+//                .cornerRadius(16)
+                .background(isActive ? backgroundColor1 : .white)
+                .overlay(
+                        RoundedRectangle(cornerRadius: 16)
+                            .stroke(isActive ? .white : lightGrayBasic, lineWidth: isActive ? 0 : 2)
+//                            .background(.red)
+                    )
             if (isActive) {
-                Color("Primary")
-                .frame(width: 15, height: 2)
-                .clipShape(Capsule())
+//                Color("Primary")
+//                .frame(width: 15, height: 2)
+//                .clipShape(Capsule())
             }
         }
+        .padding(isActive ? 0 : 3)
+        .clipped()
+        .cornerRadius(isActive ? 16 : 0)
     }
 }
 
