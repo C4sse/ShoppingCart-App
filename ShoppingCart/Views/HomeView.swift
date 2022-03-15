@@ -11,7 +11,7 @@ struct HomeView: View {
     
     @State private var search: String = ""
     @State private var selectedIndex: Int = 1
-    var columns = [GridItem(.adaptive(minimum: getItemWidth()), spacing: 16)]
+    var columns = [GridItem(.adaptive(minimum: 160), spacing: 8)]
     private let categories = ["Banana", "Apple", "Grape", "Orange", "Kiwi", "Tomato"]
     
     @State private var showingSheet = false
@@ -39,32 +39,19 @@ struct HomeView: View {
                         .padding()
                     }
                     
-//                    ScrollView (.horizontal, showsIndicators: false) {
-//                        HStack (spacing: 0) {
-                    LazyVGrid(columns: columns, spacing: 16) {
+                    LazyVGrid(columns: columns, spacing: 8) {
                         ForEach(productList, id: \.id) { product in
-                                
+                            
                             ProductCardView(width: getItemWidth(), product: product, showDiscount: false)
                                 .environmentObject(cartManager)
-                                    
-//                                NavigationLink(
-//                                    destination: DetailScreen(),
-//                                    label: {
-//                                        ProductCardView(image: Image("fruit\(i)"))
-//                                    })
-                                    
-//                                    .navigationBarHidden(false)
-//                                    .foregroundColor(.black)
-                                    
-                            }
-//                            .padding(.leading)
+                            
+                            
+                        }
                     }
-//                    .padding()
-//                        }
-//                    }
-//                    .padding(.bottom)
+                    .padding()
                 }
             }
+            .background(backgroundColor1)
             .navigationTitle(Text("Home"))
             .toolbar {
                 NavigationLink {
@@ -75,7 +62,6 @@ struct HomeView: View {
                     CartButton(numberOfProducts: cartManager.products.count)
                 }
             }
-
         }
         .navigationViewStyle(StackNavigationViewStyle())
     }
@@ -148,7 +134,7 @@ func getItemWidth() -> CGFloat {
     
     let screenSize: CGRect = UIScreen.main.bounds
     let _ = print(screenSize)
-    var width = 160.0
+    var width = 185.0
     
     if screenSize.width < 330 {
         width = 130

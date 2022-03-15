@@ -10,7 +10,7 @@ import SwiftUI
 struct DiscountView: View {
     
     @StateObject var cartManager = CartManager()
-    var columns = [GridItem(.adaptive(minimum: 160), spacing: 20)]
+    var columns = [GridItem(.adaptive(minimum: 160), spacing: 8)]
     
     var body: some View {
         NavigationView {
@@ -18,7 +18,7 @@ struct DiscountView: View {
             ScrollView {
                 
                 ScrollView(.horizontal, showsIndicators: false) {
-                    HStack(alignment: .center, spacing: 20) {
+                    HStack(alignment: .center, spacing: 8) {
                         ForEach(0..<17) { _ in
                             
                             PromotedCard(width: UIScreen.main.bounds.size.width - 30)
@@ -36,7 +36,7 @@ struct DiscountView: View {
                     .offset(y: 10)
                     
                 ScrollView(.horizontal, showsIndicators: false) {
-                    HStack(alignment: .center, spacing: 20) {
+                    HStack(alignment: .center, spacing: 8) {
                         ForEach(productList, id: \.id) { product in
                             ProductCardView(width: getItemWidth(), product: product, showDiscount: true)
                             .environmentObject(cartManager)
@@ -46,10 +46,11 @@ struct DiscountView: View {
                 }
                 .padding()
                 
-                LazyVGrid(columns: columns, spacing: 20) {
+                LazyVGrid(columns: columns, spacing: 8) {
                     ForEach(productList, id: \.id) { product in
                         ProductCardView(width: getItemWidth(), product: product, showDiscount: true)
                         .environmentObject(cartManager)
+                        
                             
                     }
                 }
@@ -67,11 +68,13 @@ struct DiscountView: View {
                     CartButton(numberOfProducts: cartManager.products.count)
                 }
             }
+            .background(backgroundColor1)
         }
         .navigationViewStyle(StackNavigationViewStyle())
     }
+    
 }
-
+    
 
 struct DiscountView_Previews: PreviewProvider {
     static var previews: some View {

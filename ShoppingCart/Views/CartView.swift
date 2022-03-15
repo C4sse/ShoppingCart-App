@@ -11,10 +11,9 @@ struct CartView: View {
     @EnvironmentObject var cartManager: CartManager
     var body: some View {
         
-        NavigationView {
             
-            ZStack {
-                ScrollView {
+            ScrollView {
+                VStack {
                     
                     if cartManager.paymentSuccess {
                         
@@ -27,8 +26,7 @@ struct CartView: View {
                             ForEach(cartManager.products, id: \.id) { product in
                                 
                                 ProductRow(product: product)
-                                    .padding(.leading)
-                                    .padding(.trailing)
+                                    .cornerRadius(10)
                             }
                             
                         } else {
@@ -37,18 +35,17 @@ struct CartView: View {
                         }
                     }
                 }
-                .background(backgroundColor1)
-            
-            
+                
             }
-        }
-        .navigationTitle(Text("My Cart"))
-        .padding(.top)
-        .onDisappear {
-            if cartManager.paymentSuccess {
-                cartManager.paymentSuccess = false
+            .navigationTitle(Text("My Cart"))
+            .padding(.top)
+            .onDisappear {
+                if cartManager.paymentSuccess {
+                    cartManager.paymentSuccess = false
+                }
             }
-        }
+            .background(backgroundColor1)
+            .navigationViewStyle(StackNavigationViewStyle())
         
         HStack(alignment: .center) {
             
@@ -68,7 +65,6 @@ struct CartView: View {
             PaymentButton(action: {
                 cartManager.pay()
             })
-//                .padding()
         }
         .padding()
     }

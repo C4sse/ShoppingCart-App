@@ -25,7 +25,7 @@ struct ProductCardView: View {
                     
                     Image(product.image)
                         .resizable()
-                        .cornerRadius(20)
+//                        .cornerRadius(14, corners: [.topLeft, .topRight])
                     
                         .aspectRatio(contentMode: .fill)
                         .frame(width: width, height: 200)
@@ -37,17 +37,20 @@ struct ProductCardView: View {
 //                        }
                 }
                 .frame(width: width, height: 200)
-                .cornerRadius(20, corners: [.topLeft, .topRight])
+//                .cornerRadius(20, corners: [.topLeft, .topRight])
                 
                 Text("\(product.name)")
                     .bold()
                     .font(Font.title3)
                     .padding(.bottom, 5)
+                    .padding(.leading, 12)
+                    .padding(.trailing, 8)
                 
                 
                 Text("1 kg / $12.00")
-                //                .font(.system(.title3))
                     .font(.system(size: 13))
+                    .padding(.leading, 12)
+                    .padding(.trailing, 8)
                 
                 HStack(alignment: .center) {
                     Text("\(product.price, specifier: "%.2f")")
@@ -55,8 +58,10 @@ struct ProductCardView: View {
                         .fontWeight(.semibold)
                         .foregroundColor(.green)
                         .padding(.top, 5)
-                    //                    .frame(maxWidth: .infinity, alignment: .leading)
-                    Spacer(minLength: 30)
+                        .padding(.leading, 12)
+                        .padding(.trailing, 1)
+                    
+                    Spacer(minLength: 25)
                     
                     Button(action: {
                         
@@ -79,21 +84,23 @@ struct ProductCardView: View {
                         
                             .frame(width: 40, height: 40)
                     }
-                    .foregroundColor(.white)
+                    .foregroundColor(backgroundColor3)
                     .background(Color.green)
                     .cornerRadius(10.0)
-                    .padding(.trailing, 8)
+                    .padding(.trailing, 10)
                 }
+                .padding(.bottom, 12)
             }
             
             if showDiscount {
                 
                 Text("-20%")
-                    .foregroundColor(.white)
+                    .foregroundColor(backgroundColor3)
+                    .font(.system(size: 13))
                     .bold()
-                    .padding(12)
-                    .background(Color.red)
-                    .cornerRadius(20, corners: [.bottomLeft, .topRight])
+                    .padding(6)
+                    .background(redAccent)
+                    .cornerRadius(12, corners: [.bottomLeft, .topRight])
             }
 
                     
@@ -106,6 +113,8 @@ struct ProductCardView: View {
         .onTapGesture {
             self.showingSheet.toggle()
         }
+        .background(backgroundColor3)
+        .cornerRadius(12)
     }
 }
 

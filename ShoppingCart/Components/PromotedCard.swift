@@ -10,7 +10,7 @@ import SwiftUI
 struct PromotedCard: View {
     
     var width: CGFloat
-    
+    @State private var showingSheet = false
     var body: some View {
         ZStack(alignment: .topTrailing) {
             
@@ -28,13 +28,14 @@ struct PromotedCard: View {
                     Text("Name of thing")
                         .bold()
                         .font(Font.title)
-                        .foregroundColor(.white)
+                        .foregroundColor(backgroundColor3)
+                        .shadow(color: blackBasic, radius: 2.5)
                         .offset(x: 20, y: -35)
                     
                     Text("Description of the thing")
                         .frame(alignment: .leading)
-                        .foregroundColor(.white)
-                        .shadow(color: .white, radius: 5)
+                        .foregroundColor(backgroundColor3)
+                        .shadow(color: blackBasic, radius: 2.5)
                         .offset(x: 20, y: -25)
                     
                     
@@ -42,14 +43,21 @@ struct PromotedCard: View {
             }
             ZStack(alignment: .topTrailing) {
                 Text("-20%")
-                    .foregroundColor(.white)
+                    .foregroundColor(backgroundColor3)
                     .bold()
                     .padding(12)
-                    .background(Color.red)
+                    .background(redAccent)
                     .cornerRadius(30, corners: [.bottomLeft, .topRight])
 
                     
             }
+        }
+        .sheet(isPresented: $showingSheet) {
+            let _ = print("show")
+            DetailScreen()
+        }
+        .onTapGesture {
+            self.showingSheet.toggle()
         }
     }
 }

@@ -11,7 +11,7 @@ struct DetailScreen: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     var body: some View {
         ZStack {
-            Color("Bg")
+//            Color("Bg")
             ScrollView  {
                 // Product Image
                     Image("food4")
@@ -28,13 +28,13 @@ struct DetailScreen: View {
                 
                 Button(action: {}) {
                     Image(systemName: "minus")
-                        .foregroundColor(.white)
+                        .foregroundColor(darkGrayBasic)
 //                        .padding(.all, 13)
                         .padding(.bottom, 20)
                         .padding(.top, 20)
                         .padding(.leading, 13)
                         .padding(.trailing, 13)
-                        .background(Color(red: 0.399, green: 0.5, blue: 0.6667))
+                        .background(backgroundColor1)
                         .cornerRadius(10.0)
                     
                 }
@@ -56,9 +56,8 @@ struct DetailScreen: View {
                 
                 Button(action: {}) {
                     Image(systemName: "plus")
-                        .foregroundColor(.white)
-                        .padding(.all, 13)
-                        .background(Color(red: 0.399, green: 0.5, blue: 0.6667))
+                        .foregroundColor(darkGrayBasic)                        .padding(.all, 13)
+                        .background(backgroundColor1)
                         .cornerRadius(10.0)
                 }
                 
@@ -75,18 +74,18 @@ struct DetailScreen: View {
                         .padding(.bottom, 12)
                         .padding(.trailing, 8)
 //                        .padding(.horizontal, 8)
-                        .foregroundColor(Color.white)
+                        .foregroundColor(backgroundColor3)
                         .cornerRadius(10.0)
                     
                 }
-                .foregroundColor(.white)
+                .foregroundColor(backgroundColor3)
                 .background(Color.green)
                 .cornerRadius(10.0)
                 
             }
             .padding()
             .padding(.bottom, 12)
-            .background(Color.white)
+//            .background(Color.white)
 //            .cornerRadius(60.0, corners: [.topLeft])
             .frame(maxHeight: .infinity, alignment: .bottom)
             .edgesIgnoringSafeArea(.bottom)
@@ -159,11 +158,16 @@ struct DescriptionView: View {
             Text("1 kg / $198.00 ")
                 .font(.subheadline)
                 .fontWeight(.semibold)
-                .foregroundColor(.black)
+                .foregroundColor(blackBasic)
                 .padding(.bottom)
-                .brightness(0.5)
+                .brightness(0.3)
             
-//            Spacer(minLength: 50)
+            Text("$198.00")
+                .strikethrough(true)
+                .font(.caption)
+                .fontWeight(.semibold)
+                .foregroundColor(darkGrayBasic)
+//                .brightness(0.5)
             
             Text("$98.99")
                 .font(.title)
@@ -171,13 +175,15 @@ struct DescriptionView: View {
                 .foregroundColor(.green)
                 .padding(.bottom)
             
+            Divider()
+            
             VStack {
                 HStack(alignment: .center) {
                     Text("Words in russian")
                         .font(.subheadline)
                         .fontWeight(.bold)
                         .frame(maxWidth: .infinity, alignment: .leading)
-                        .foregroundColor(.black)
+                        .foregroundColor(blackBasic)
 
                     Text("something")
                         .font(.body)
@@ -191,7 +197,7 @@ struct DescriptionView: View {
                         .font(.subheadline)
                         .fontWeight(.bold)
                         .frame(maxWidth: .infinity, alignment: .leading)
-                        .foregroundColor(.black)
+                        .foregroundColor(blackBasic)
 
                     Text("other")
                         .font(.body)
@@ -205,7 +211,7 @@ struct DescriptionView: View {
                         .font(.subheadline)
                         .fontWeight(.bold)
                         .frame(maxWidth: .infinity, alignment: .leading)
-                        .foregroundColor(.black)
+                        .foregroundColor(blackBasic)
 
                     Text("other thing")
                         .font(.body)
@@ -219,7 +225,7 @@ struct DescriptionView: View {
                         .font(.subheadline)
                         .fontWeight(.bold)
                         .frame(maxWidth: .infinity, alignment: .leading)
-                        .foregroundColor(.black)
+                        .foregroundColor(blackBasic)
 
                     Text("ofcourse")
                         .font(.body)
@@ -307,7 +313,7 @@ struct DescriptionView: View {
         }
         .padding()
         .padding(.top)
-        .background(Color("Bg"))
+//        .background(Color("Bg"))
         .cornerRadius(30, corners: [.topLeft, .topRight])
         .offset(x: 0, y: -30.0)
         
