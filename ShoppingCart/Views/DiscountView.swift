@@ -35,6 +35,17 @@ struct DiscountView: View {
                     .frame(width: UIScreen.main.bounds.size.width - 30, alignment: .leading)
                     .offset(y: 10)
                     
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack(alignment: .center, spacing: 20) {
+                        ForEach(productList, id: \.id) { product in
+                            ProductCardView(width: getItemWidth(), product: product, showDiscount: true)
+                            .environmentObject(cartManager)
+                                
+                        }
+                    }
+                }
+                .padding()
+                
                 LazyVGrid(columns: columns, spacing: 20) {
                     ForEach(productList, id: \.id) { product in
                         ProductCardView(width: getItemWidth(), product: product, showDiscount: true)
