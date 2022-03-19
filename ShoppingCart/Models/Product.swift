@@ -16,6 +16,7 @@ struct Product: Identifiable {
     var image: String
     var price: Double
     var addedToCart: Bool = false
+    var count: Int = 1
 }
 
 var productList = [Product(name: "Orange sweater", image: "fruit1", price: 34.99),

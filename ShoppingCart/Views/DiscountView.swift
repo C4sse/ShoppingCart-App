@@ -9,7 +9,7 @@ import SwiftUI
 
 struct DiscountView: View {
     
-    @StateObject var cartManager = CartManager()
+    @EnvironmentObject var cartManager: CartManager
     var columns = [GridItem(.adaptive(minimum: 160), spacing: 8)]
     
     var body: some View {
@@ -18,16 +18,18 @@ struct DiscountView: View {
             ScrollView {
                 
                 ScrollView(.horizontal, showsIndicators: false) {
-                    HStack(alignment: .center, spacing: 8) {
-                        ForEach(0..<17) { _ in
+                    HStack(alignment: .center, spacing: 80) {
+                        
+                        ForEach(productList, id: \.id) { product in
                             
-                            PromotedCard(width: UIScreen.main.bounds.size.width - 30)
+                            PromotedCard(width: UIScreen.main.bounds.size.width - 30, product: product)
                             
                         }
                         
                     }.offset(x: 16)
                     
                 }
+                
                 Text("More items")
                     .font(.system(size: 22))
                     .bold()
@@ -40,7 +42,6 @@ struct DiscountView: View {
                         ForEach(productList, id: \.id) { product in
                             ProductCardView(width: getItemWidth(), product: product, showDiscount: true)
                             .environmentObject(cartManager)
-                                
                         }
                     }
                 }
@@ -50,8 +51,6 @@ struct DiscountView: View {
                     ForEach(productList, id: \.id) { product in
                         ProductCardView(width: getItemWidth(), product: product, showDiscount: true)
                         .environmentObject(cartManager)
-                        
-                            
                     }
                 }
                 .padding()

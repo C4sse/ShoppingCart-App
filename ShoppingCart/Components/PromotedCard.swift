@@ -11,21 +11,23 @@ struct PromotedCard: View {
     
     var width: CGFloat
     @State private var showingSheet = false
+    var product: Product
+    
     var body: some View {
         ZStack(alignment: .topTrailing) {
             
             ZStack(alignment: .leading) {
-                Image("food1")
+                Image(product.image)
                     .resizable()
-                    .cornerRadius(20)
-
+                    .aspectRatio(contentMode: .fill)
                     .frame(width: width, height: 200)
-                    .scaledToFit()
+                    .cornerRadius(20)
                     .brightness(-0.3)
+                    .clipped()
                 
                 VStack(alignment: .leading, spacing: 1) {
                     
-                    Text("Name of thing")
+                    Text(product.name)
                         .bold()
                         .font(Font.title)
                         .foregroundColor(backgroundColor3)
@@ -54,7 +56,7 @@ struct PromotedCard: View {
         }
         .sheet(isPresented: $showingSheet) {
             let _ = print("show")
-            DetailScreen()
+            DetailScreen(product: product)
         }
         .onTapGesture {
             self.showingSheet.toggle()
@@ -64,7 +66,7 @@ struct PromotedCard: View {
 
 struct PromotedCard_Previews: PreviewProvider {
     static var previews: some View {
-        PromotedCard(width: 300)
+        PromotedCard(width: 300, product: productList[0])
     }
 }
 

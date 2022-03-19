@@ -8,19 +8,25 @@
 import SwiftUI
 
 struct DetailScreen: View {
+    
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    @State var isAdded : Bool = false
+    var product: Product
+    
     var body: some View {
+        
         ZStack {
-//            Color("Bg")
+            
             ScrollView  {
                 // Product Image
-                    Image("food4")
+                    Image(product.image)
                         .resizable()
                         .aspectRatio(contentMode: .fill)
                         .edgesIgnoringSafeArea(.top)
+                        .frame(width: UIScreen.main.bounds.size.width, height: 300)
+                        .clipped()
                 
                 DescriptionView()
-                
             }
             .edgesIgnoringSafeArea(.top)
             
@@ -29,19 +35,13 @@ struct DetailScreen: View {
                 Button(action: {}) {
                     Image(systemName: "minus")
                         .foregroundColor(darkGrayBasic)
-//                        .padding(.all, 13)
                         .padding(.bottom, 20)
                         .padding(.top, 20)
                         .padding(.leading, 13)
                         .padding(.trailing, 13)
                         .background(backgroundColor1)
                         .cornerRadius(10.0)
-                    
                 }
-//                .frame(height: 60)
-//                .background(Color(red: 0.399, green: 0.5, blue: 0.6667))
-//                .foregroundColor(.black)
-                
                 
                 VStack(alignment: .center) {
                     Text("$1399")
@@ -56,23 +56,29 @@ struct DetailScreen: View {
                 
                 Button(action: {}) {
                     Image(systemName: "plus")
-                        .foregroundColor(darkGrayBasic)                        .padding(.all, 13)
+                        .foregroundColor(darkGrayBasic)
+                        .padding(.all, 13)
                         .background(backgroundColor1)
                         .cornerRadius(10.0)
                 }
                 
                 Spacer()
                 
-                Button(action: {}) {
-                    Image(systemName: "cart")
-                        .padding(.leading, 8)
-                    Text("Add to Cart")
+                Button(action: {
+                    
+                    isAdded.toggle()
+                    
+                }) {
+                    
+                    Image(systemName: isAdded == true ? "checkmark" : "cart")
+                        .padding(.leading, 12)
+                    Text( isAdded == true ?  "" : "Add to Cart")
                         .font(.subheadline)
                         .fontWeight(.semibold)
-                        .padding(.leading, 5)
+                        .padding(.leading, 3)
                         .padding(.top, 12)
                         .padding(.bottom, 12)
-                        .padding(.trailing, 8)
+                        .padding(.trailing, 5)
 //                        .padding(.horizontal, 8)
                         .foregroundColor(backgroundColor3)
                         .cornerRadius(10.0)
@@ -83,19 +89,14 @@ struct DetailScreen: View {
                 .cornerRadius(10.0)
                 
             }
-            .padding()
-            .padding(.bottom, 12)
-//            .background(Color.white)
-//            .cornerRadius(60.0, corners: [.topLeft])
+            .padding(.bottom, 5)
+            .padding(.leading, 5)
+            .padding(.trailing, 5)
+            .background(backgroundColor1)
             .frame(maxHeight: .infinity, alignment: .bottom)
             .edgesIgnoringSafeArea(.bottom)
         }
-//        .navigationBarBackButtonHidden(true)
-        .navigationBarItems(leading: BackButton(action: {presentationMode.wrappedValue.dismiss()}), trailing: Image("threeDot"))
-        
-        
     }
-    
 }
 
 
@@ -118,7 +119,7 @@ struct DetailScreen: View {
 
 struct DetailScreen_Previews: PreviewProvider {
     static var previews: some View {
-        DetailScreen()
+        DetailScreen(product: productList[0])
     }
 }
 
@@ -142,19 +143,6 @@ struct DescriptionView: View {
                 .padding(.bottom, 30)
                 .frame(width: 200, alignment: .leading)
             
-            // Rating
-            
-//            HStack (spacing: 4) {
-//                ForEach(0 ..< 5) { item in
-//                    Image("star")
-//                }
-//                Text("(4.9)")
-//                    .opacity(0.5)
-//                    .padding(.leading, 8)
-//                Spacer()
-//            }
-//            Spacer(minLength: 30)
-            
             Text("1 kg / $198.00 ")
                 .font(.subheadline)
                 .fontWeight(.semibold)
@@ -167,7 +155,6 @@ struct DescriptionView: View {
                 .font(.caption)
                 .fontWeight(.semibold)
                 .foregroundColor(darkGrayBasic)
-//                .brightness(0.5)
             
             Text("$98.99")
                 .font(.title)
@@ -313,10 +300,8 @@ struct DescriptionView: View {
         }
         .padding()
         .padding(.top)
-//        .background(Color("Bg"))
         .cornerRadius(30, corners: [.topLeft, .topRight])
         .offset(x: 0, y: -30.0)
-        
     }
 }
 

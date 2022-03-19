@@ -10,6 +10,7 @@ import SwiftUI
 struct ProductRow: View {
     @EnvironmentObject var cartManager: CartManager
     var product: Product
+    @State private var showing = false
     
     var body: some View {
         ZStack {
@@ -34,7 +35,9 @@ struct ProductRow: View {
                     
                     HStack(alignment: .center) {
                         
-                        Button(action: {}) {
+                        Button(action: {
+                            cartManager.removeQuantity(product: product)
+                        }) {
                             Image(systemName: "minus")
                                 .foregroundColor(darkGrayBasic)
                             //                        .padding(.all, 13)
@@ -44,19 +47,21 @@ struct ProductRow: View {
                                 .padding(.trailing, 3)
                                 .background(backgroundColor1)
                                 .cornerRadius(5.0)
-                            
                         }
                         
                         VStack(alignment: .center) {
-                            Text("1 item/s")
+                            Text("\(product.count)")
                                 .font(.subheadline)
                                 .fontWeight(.semibold)
                                 .font(.system(size: 9))
-                                .frame(width: 60)
+                                .frame(width: 20)
                         }
                         .padding(.all, 5)
                         
-                        Button(action: {}) {
+                        Button(action: {
+                            cartManager.incrQuantity(product: product)
+                            
+                        }) {
                             Image(systemName: "plus")
                                 .foregroundColor(darkGrayBasic)
                                 .padding(.all, 3)
@@ -84,21 +89,12 @@ struct ProductRow: View {
                     .onTapGesture {
                         cartManager.removeFromCart(product: product)
                     }
-                //            VStack(alignment: .trailing, spacing: 40) {
-                //
-                //            Text("$1399")
-                //                .font(.title3)
-                //                .foregroundColor(.green)
-                //                .font(.system(size: 10))
-                //                .bold()
-                //            }
             }
-            
-            
             .padding()
             .frame(maxWidth: .infinity, alignment: .leading)
             .background(backgroundColor3)
         }
+        
         .cornerRadius(20)
         .padding(.leading)
         .padding(.trailing)

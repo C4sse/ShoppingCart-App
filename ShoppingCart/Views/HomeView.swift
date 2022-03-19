@@ -15,7 +15,7 @@ struct HomeView: View {
     private let categories = ["Banana", "Apple", "Grape", "Orange", "Kiwi", "Tomato"]
     
     @State private var showingSheet = false
-    @StateObject var cartManager = CartManager()
+    @EnvironmentObject var cartManager: CartManager
     
     var body: some View {
         
@@ -44,8 +44,6 @@ struct HomeView: View {
                             
                             ProductCardView(width: getItemWidth(), product: product, showDiscount: false)
                                 .environmentObject(cartManager)
-                            
-                            
                         }
                     }
                     .padding()
@@ -133,7 +131,6 @@ struct ContentVieww: View {
 func getItemWidth() -> CGFloat {
     
     let screenSize: CGRect = UIScreen.main.bounds
-    let _ = print(screenSize)
     var width = 185.0
     
     if screenSize.width < 330 {

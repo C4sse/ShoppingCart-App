@@ -16,7 +16,7 @@ struct ProductCard: View {
     var body: some View {
         
         NavigationLink {
-            DetailScreen()
+//            DetailScreen()
         } label: {
             ZStack(alignment: .topTrailing) {
                 

@@ -14,6 +14,7 @@ struct ProductCardView: View {
     @EnvironmentObject var cartManager: CartManager
     @State var isAdded : Bool = false
     var product: Product
+    @State var count: Int = 1
     var showDiscount: Bool
     
     var body: some View {
@@ -25,19 +26,11 @@ struct ProductCardView: View {
                     
                     Image(product.image)
                         .resizable()
-//                        .cornerRadius(14, corners: [.topLeft, .topRight])
-                    
                         .aspectRatio(contentMode: .fill)
                         .frame(width: width, height: 200)
                         .clipped()
-                    
-//                        .onTapGesture {
-//                            let _ = print("on tap")
-//                            
-//                        }
                 }
                 .frame(width: width, height: 200)
-//                .cornerRadius(20, corners: [.topLeft, .topRight])
                 
                 Text("\(product.name)")
                     .bold()
@@ -53,41 +46,88 @@ struct ProductCardView: View {
                     .padding(.trailing, 8)
                 
                 HStack(alignment: .center) {
-                    Text("\(product.price, specifier: "%.2f")")
-                        .font(.title2)
-                        .fontWeight(.semibold)
-                        .foregroundColor(.green)
-                        .padding(.top, 5)
-                        .padding(.leading, 12)
-                        .padding(.trailing, 1)
                     
-                    Spacer(minLength: 25)
-                    
-                    Button(action: {
+                    if !isAdded {
                         
-                        if isAdded {
+                        Text("\(product.price, specifier: "%.2f")")
+                            .font(.title2)
+                            .fontWeight(.semibold)
+                            .foregroundColor(.green)
+                            .padding(.top, 5)
+                            .padding(.leading, 12)
+                            .padding(.trailing, 1)
+                        
+                        Spacer(minLength: 25)
+                        
+                        Button(action: {
+                            let _ = print("press")
+                            isAdded.toggle()
+                            if !isAdded {
+                                var product = product
+                                product.addedToCart = false
+                                cartManager.removeFromCart(product: product)
+                            } else {
+                                
+                                var product = product
+                                product.addedToCart = true
+                                cartManager.addToCart(product: product)
+                            }
+                        }) {
+                            Image(systemName: isAdded == true ?  "checkmark" : "cart")
+                                .padding(7)
                             
-                            var product = product
-                            product.addedToCart = false
-                            cartManager.removeFromCart(product: product)
-                            isAdded = product.addedToCart
-                        } else {
-                            
-                            var product = product
-                            product.addedToCart = true
-                            cartManager.addToCart(product: product)
-                            isAdded = product.addedToCart
+                                .frame(width: 40, height: 40)
                         }
-                    }) {
-                        Image(systemName: isAdded == true ?  "checkmark" : "cart")
-                            .padding(7)
+                        .foregroundColor(backgroundColor3)
+                        .background(Color.green)
+                        .cornerRadius(10.0)
+                        .padding(.trailing, 10)
                         
-                            .frame(width: 40, height: 40)
+                        
+                    } else {
+                        
+                            Button(action: {
+                                count = cartManager.removeQuantity(product: product)
+                                print("pressing")
+                            }) {
+                                Image(systemName: "minus")
+                                    .foregroundColor(darkGrayBasic)
+                                //                        .padding(.all, 13)
+                                    .padding(.bottom, 10)
+                                    .padding(.top, 11 )
+                                    .padding(.leading, 4)
+                                    .padding(.trailing, 4)
+                                    .background(backgroundColor1)
+                                    .cornerRadius(6.0)
+                                
+                            }
+                            .padding(.leading)
+                        Spacer()
+                            
+                            VStack(alignment: .center) {
+                                Text("$1399")
+                                    .font(.subheadline)
+                                    .foregroundColor(.green)
+                                    .bold()
+                                Text("\(count)")
+                                    .brightness(0.4)
+                                    .font(.subheadline)
+                            }
+                            .padding(.all, 5)
+                            
+                        Spacer()
+                        
+                            Button(action: {
+                                count = cartManager.incrQuantity(product: product)
+                            }) {
+                                Image(systemName: "plus")
+                                    .foregroundColor(darkGrayBasic)
+                                    .padding(.all, 4)
+                                    .background(backgroundColor1)
+                                    .cornerRadius(6.0)
+                            }
+                            .padding(.trailing)
                     }
-                    .foregroundColor(backgroundColor3)
-                    .background(Color.green)
-                    .cornerRadius(10.0)
-                    .padding(.trailing, 10)
                 }
                 .padding(.bottom, 12)
             }
@@ -102,13 +142,11 @@ struct ProductCardView: View {
                     .background(redAccent)
                     .cornerRadius(12, corners: [.bottomLeft, .topRight])
             }
-
-                    
         }
         .frame(width: width)
         .sheet(isPresented: $showingSheet) {
             let _ = print("show")
-            DetailScreen()
+            DetailScreen(product: product)
         }
         .onTapGesture {
             self.showingSheet.toggle()

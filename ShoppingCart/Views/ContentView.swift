@@ -9,16 +9,20 @@ import SwiftUI
 
 struct ContentView: View {
     
+    @StateObject var cartManager = CartManager()
+    
     var body: some View {
         TabView {
             
             HomeView()
+                .environmentObject(cartManager)
                 .tabItem {
                     Image(systemName: "list.bullet")
                     Text("Home")
                 }
             
             DiscountView()
+                .environmentObject(cartManager)
                 .tabItem {
                     Image(systemName: "percent")
                     Text("Discount")
