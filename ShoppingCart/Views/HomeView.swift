@@ -17,6 +17,7 @@ struct HomeView: View {
     @State private var showingSheet = false
     @EnvironmentObject var cartManager: CartManager
     
+    
     var body: some View {
         
         NavigationView {

@@ -17,9 +17,8 @@ class CartManager: ObservableObject {
     
     func addToCart(product: Product) {
         
-        
         products.append(product)
-        total += product.price
+        calculateTotal()
         
         products.sort { pro, next in
             return pro.name < next.name
@@ -27,8 +26,9 @@ class CartManager: ObservableObject {
     }
     
     func removeFromCart(product: Product) {
+        
         products = products.filter { $0.id !=  product.id }
-        total -= product.price
+        calculateTotal()
     }
     
     func incrQuantity(product: Product) -> Int {
@@ -40,6 +40,8 @@ class CartManager: ObservableObject {
         products.sort { pro, next in
             return pro.name < next.name
         }
+        
+        calculateTotal()
         
         return products[index].count
 //        var prod = product
@@ -57,6 +59,8 @@ class CartManager: ObservableObject {
             return pro.name < next.name
         }
         
+        calculateTotal()
+        
         return products[index].count
     }
     
@@ -66,5 +70,17 @@ class CartManager: ObservableObject {
             self.products = []
             self.total = 0
         }
+    }
+    
+    private func calculateTotal() {
+        
+        var t = 0.0
+        
+        products.forEach { prod in
+            
+            t += prod.price * Double(prod.count)
+        }
+        
+        total = t
     }
 }

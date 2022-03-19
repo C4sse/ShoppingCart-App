@@ -25,7 +25,7 @@ struct CartView: View {
                             
                             ForEach(cartManager.products, id: \.id) { product in
                                 
-                                ProductRow(product: product)
+                                ProductRow(product: product, count: product.count)
                                     .cornerRadius(10)
                             }
                             
@@ -53,7 +53,7 @@ struct CartView: View {
                 Text("Your Cart total is:")
                     .bold()
                 
-                Text("$1399")
+                Text("\(cartManager.total, specifier: "%.2f")")
                     .font(.title2)
                     .foregroundColor(.green)
                     .bold()

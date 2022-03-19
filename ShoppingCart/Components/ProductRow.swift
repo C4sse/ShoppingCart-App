@@ -11,6 +11,7 @@ struct ProductRow: View {
     @EnvironmentObject var cartManager: CartManager
     var product: Product
     @State private var showing = false
+    @State var count: Int
     
     var body: some View {
         ZStack {
@@ -26,7 +27,7 @@ struct ProductRow: View {
                     Text(product.name)
                         .bold()
                     
-                    Text("1 kg / $198.00 ")
+                    Text("1 kg / $\(product.price, specifier: "%.2f")")
                         .font(.subheadline)
                         .fontWeight(.semibold)
                         .foregroundColor(darkGrayBasic)
@@ -36,7 +37,7 @@ struct ProductRow: View {
                     HStack(alignment: .center) {
                         
                         Button(action: {
-                            cartManager.removeQuantity(product: product)
+                            count = cartManager.removeQuantity(product: product)
                         }) {
                             Image(systemName: "minus")
                                 .foregroundColor(darkGrayBasic)
@@ -59,7 +60,7 @@ struct ProductRow: View {
                         .padding(.all, 5)
                         
                         Button(action: {
-                            cartManager.incrQuantity(product: product)
+                            count = cartManager.incrQuantity(product: product)
                             
                         }) {
                             Image(systemName: "plus")
@@ -71,7 +72,7 @@ struct ProductRow: View {
                         
                         Spacer()
                         
-                        Text("$1399")
+                        Text("\(product.price * Double(count), specifier: "%.2f")")
                             .font(.title3)
                             .foregroundColor(.green)
                             .font(.system(size: 10))
@@ -103,7 +104,7 @@ struct ProductRow: View {
 
 struct ProductRow_Previews: PreviewProvider {
     static var previews: some View {
-        ProductRow(product: productList[3])
+        ProductRow(product: productList[3], count: 1)
             .environmentObject(CartManager())
     }
 }

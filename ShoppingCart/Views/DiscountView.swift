@@ -71,7 +71,7 @@ struct DiscountView: View {
         }
         .navigationViewStyle(StackNavigationViewStyle())
     }
-    
+        
 }
     
 

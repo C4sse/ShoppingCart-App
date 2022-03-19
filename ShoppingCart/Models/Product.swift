@@ -19,14 +19,14 @@ struct Product: Identifiable {
     var count: Int = 1
 }
 
-var productList = [Product(name: "Orange sweater", image: "fruit1", price: 34.99),
-                   Product(name: "Red wine sweater", image: "fruit2", price: 24.99),
-                   Product(name: "Sand Sweater", image: "fruit3", price: 33.50),
-                   Product(name: "Sea sweater", image: "fruit4", price: 34.99),
-                   Product(name: "Cream sweater", image: "sweater5", price: 31.99),
-                   Product(name: "Beige sweater", image: "sweater6", price: 29.99),
-                   Product(name: "Grey sweater", image: "sweater7", price: 27.45),
-                   Product(name: "Mink sweater", image: "sweater8", price: 26.00)]
+var productList = [Product(name: "Strawberry", image: "fruit1", price: 4.99),
+                   Product(name: "Banana", image: "fruit2", price: 4.99),
+                   Product(name: "Nach", image: "fruit3", price: 3.50),
+                   Product(name: "Cherry", image: "fruit4", price: 4.99),
+                   Product(name: "Cream sweater", image: "sweater5", price: 3.99),
+                   Product(name: "Beige sweater", image: "sweater6", price: 9.99),
+                   Product(name: "Grey sweater", image: "sweater7", price: 7.45),
+                   Product(name: "Mink sweater", image: "sweater8", price: 6.00)]
 
 let backgroundColor1 = Color(red: 238 / 255, green: 241 / 255, blue: 246 / 255)
 let backgroundColor2 = Color(red: 248 / 255, green: 248 / 255, blue: 248 / 255)

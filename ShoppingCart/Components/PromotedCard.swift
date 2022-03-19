@@ -55,7 +55,6 @@ struct PromotedCard: View {
             }
         }
         .sheet(isPresented: $showingSheet) {
-            let _ = print("show")
             DetailScreen(product: product)
         }
         .onTapGesture {

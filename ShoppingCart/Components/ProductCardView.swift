@@ -40,7 +40,7 @@ struct ProductCardView: View {
                     .padding(.trailing, 8)
                 
                 
-                Text("1 kg / $12.00")
+                Text("1 kg / $\(product.price, specifier: "%.2f")")
                     .font(.system(size: 13))
                     .padding(.leading, 12)
                     .padding(.trailing, 8)
@@ -49,7 +49,7 @@ struct ProductCardView: View {
                     
                     if !isAdded {
                         
-                        Text("\(product.price, specifier: "%.2f")")
+                        Text("\(product.price * Double(count), specifier: "%.2f")")
                             .font(.title2)
                             .fontWeight(.semibold)
                             .foregroundColor(.green)
@@ -60,7 +60,7 @@ struct ProductCardView: View {
                         Spacer(minLength: 25)
                         
                         Button(action: {
-                            let _ = print("press")
+                            
                             isAdded.toggle()
                             if !isAdded {
                                 var product = product
@@ -87,8 +87,8 @@ struct ProductCardView: View {
                     } else {
                         
                             Button(action: {
+                                
                                 count = cartManager.removeQuantity(product: product)
-                                print("pressing")
                             }) {
                                 Image(systemName: "minus")
                                     .foregroundColor(darkGrayBasic)
@@ -105,7 +105,7 @@ struct ProductCardView: View {
                         Spacer()
                             
                             VStack(alignment: .center) {
-                                Text("$1399")
+                                Text("\(product.price * Double(count), specifier: "%.2f")")
                                     .font(.subheadline)
                                     .foregroundColor(.green)
                                     .bold()
@@ -145,7 +145,7 @@ struct ProductCardView: View {
         }
         .frame(width: width)
         .sheet(isPresented: $showingSheet) {
-            let _ = print("show")
+            
             DetailScreen(product: product)
         }
         .onTapGesture {
