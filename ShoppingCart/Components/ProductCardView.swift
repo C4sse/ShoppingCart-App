@@ -147,6 +147,7 @@ struct ProductCardView: View {
         .sheet(isPresented: $showingSheet) {
             
             DetailScreen(product: product)
+                .environmentObject(cartManager)
         }
         .onTapGesture {
             self.showingSheet.toggle()
