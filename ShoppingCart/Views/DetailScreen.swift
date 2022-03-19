@@ -119,7 +119,7 @@ struct DetailScreen: View {
 
 struct DetailScreen_Previews: PreviewProvider {
     static var previews: some View {
-        DetailScreen(product: productList[0])
+        DetailScreen(product: Product(name: "Strawberry", image: "fruit1", price: 4.99))
     }
 }
 

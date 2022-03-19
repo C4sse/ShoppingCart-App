@@ -11,7 +11,7 @@ struct DiscountView: View {
     
     @EnvironmentObject var cartManager: CartManager
     var columns = [GridItem(.adaptive(minimum: 160), spacing: 8)]
-    
+    var productList: [Product]
     var body: some View {
         NavigationView {
             
@@ -70,13 +70,23 @@ struct DiscountView: View {
             .background(backgroundColor1)
         }
         .navigationViewStyle(StackNavigationViewStyle())
+        .onAppear {
+            print("appeared")
+        }
     }
         
 }
     
 
 struct DiscountView_Previews: PreviewProvider {
+    
+    
     static var previews: some View {
-        DiscountView()
+        
+        let productList = [Product(name: "Strawberry", image: "fruit1", price: 4.99),
+                           Product(name: "Banana", image: "fruit2", price: 4.99),
+                           Product(name: "Nach", image: "fruit3", price: 3.50)]
+        
+        DiscountView(productList: productList)
     }
 }

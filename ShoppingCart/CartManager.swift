@@ -72,6 +72,20 @@ class CartManager: ObservableObject {
         }
     }
     
+    func checkIfCartState(product: Product) -> Bool {
+        
+        guard let index = products.firstIndex(where: { $0.name == product.name }) else { return false }
+        
+        return products[index].addedToCart
+    }
+    
+    func checkQuantity(product: Product) -> Int {
+        
+        guard let index = products.firstIndex(where: { $0.name == product.name }) else { return 1 }
+        
+        return products[index].count
+    }
+    
     private func calculateTotal() {
         
         var t = 0.0

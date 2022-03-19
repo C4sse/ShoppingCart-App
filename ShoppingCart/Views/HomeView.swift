@@ -16,7 +16,7 @@ struct HomeView: View {
     
     @State private var showingSheet = false
     @EnvironmentObject var cartManager: CartManager
-    
+    var productList: [Product]
     
     var body: some View {
         
@@ -67,8 +67,12 @@ struct HomeView: View {
 }
 
 struct HomeView_Previews: PreviewProvider {
+    
     static var previews: some View {
-        HomeView()
+        let productList = [Product(name: "Strawberry", image: "fruit1", price: 4.99),
+                           Product(name: "Banana", image: "fruit2", price: 4.99),
+                           Product(name: "Nach", image: "fruit3", price: 3.50)]
+        HomeView(productList: productList)
     }
 }
 

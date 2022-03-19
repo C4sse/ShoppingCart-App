@@ -104,7 +104,7 @@ struct ProductRow: View {
 
 struct ProductRow_Previews: PreviewProvider {
     static var previews: some View {
-        ProductRow(product: productList[3], count: 1)
+        ProductRow(product: Product(name: "Strawberry", image: "fruit1", price: 4.99), count: 1)
             .environmentObject(CartManager())
     }
 }

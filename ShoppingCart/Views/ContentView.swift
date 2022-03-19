@@ -9,19 +9,28 @@ import SwiftUI
 
 struct ContentView: View {
     
+    var productList = [Product(name: "Strawberry", image: "fruit1", price: 4.99),
+                       Product(name: "Banana", image: "fruit2", price: 4.99),
+                       Product(name: "Nach", image: "fruit3", price: 3.50),
+                       Product(name: "Cherry", image: "fruit4", price: 4.99),
+                       Product(name: "Cream sweater", image: "sweater5", price: 3.99),
+                       Product(name: "Beige sweater", image: "sweater6", price: 9.99),
+                       Product(name: "Grey sweater", image: "sweater7", price: 7.45),
+                       Product(name: "Mink sweater", image: "sweater8", price: 6.00)]
+    
     @StateObject var cartManager = CartManager()
     
     var body: some View {
         TabView {
             
-            HomeView()
+            HomeView(productList: productList)
                 .environmentObject(cartManager)
                 .tabItem {
                     Image(systemName: "list.bullet")
                     Text("Home")
                 }
             
-            DiscountView()
+            DiscountView(productList: productList)
                 .environmentObject(cartManager)
                 .tabItem {
                     Image(systemName: "percent")

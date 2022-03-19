@@ -153,12 +153,17 @@ struct ProductCardView: View {
         }
         .background(backgroundColor3)
         .cornerRadius(12)
+        .onAppear {
+            print("appe", cartManager.checkIfCartState(product: product))
+            isAdded = cartManager.checkIfCartState(product: product)
+            count = cartManager.checkQuantity(product: product)
+        }
     }
 }
 
 struct ProductCardView_Previews: PreviewProvider {
-    let image: Image
+    
     static var previews: some View {
-        ProductCardView(width: 160, product: productList[0], showDiscount: true)
+        ProductCardView(width: 160, product: Product(name: "Strawberry", image: "fruit1", price: 4.99), showDiscount: true)
     }
 }
