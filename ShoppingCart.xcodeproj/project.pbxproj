@@ -42,7 +42,6 @@
 		C12AFFD927CC1B1900C53ABB /* ShoppingCart.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ShoppingCart.entitlements; sourceTree = "<group>"; };
 		C12AFFDA27CC1B7300C53ABB /* PaymentHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentHandler.swift; sourceTree = "<group>"; };
 		C13A035527D684DA00FC62FA /* DetailScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailScreen.swift; sourceTree = "<group>"; };
-		C16B851B27DE23D500B36C00 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		C19A8EFA27D249CB006D2B0B /* DiscountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscountView.swift; sourceTree = "<group>"; };
 		C19A8EFC27D24A18006D2B0B /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		C1C36DFE27D0FF85005E960D /* PromotedCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromotedCard.swift; sourceTree = "<group>"; };
@@ -79,7 +78,6 @@
 		C12AFFB927CBA77400C53ABB /* ShoppingCart */ = {
 			isa = PBXGroup;
 			children = (
-				C16B851B27DE23D500B36C00 /* Info.plist */,
 				C12AFFD927CC1B1900C53ABB /* ShoppingCart.entitlements */,
 				C12AFFBA27CBA77400C53ABB /* ShoppingCartApp.swift */,
 				C12AFFCE27CBAEC800C53ABB /* Views */,
