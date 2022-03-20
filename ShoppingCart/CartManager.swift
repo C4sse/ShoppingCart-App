@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 class CartManager: ObservableObject {
     
@@ -96,5 +97,30 @@ class CartManager: ObservableObject {
         }
         
         total = t
+    }
+    
+    func setOffset(product: Product, value: DragGesture.Value) -> CGFloat  {
+        
+        guard let index = products.firstIndex(where: { $0.name == product.name }) else { return 0 }
+        
+        products[index].offset = value.translation.width
+        
+        return products[index].offset
+    }
+    
+    func setOffset(product: Product, value: CGFloat) -> CGFloat {
+        
+        guard let index = products.firstIndex(where: { $0.name == product.name }) else { return 0 }
+        
+        products[index].offset = value
+        return products[index].offset
+    }
+    
+    func setIsSwipped(product: Product, isSwipped: Bool) -> Bool {
+        
+        guard let index = products.firstIndex(where: { $0.name == product.name }) else { return false }
+        
+        products[index].isSwiped = isSwipped
+        return products[index].isSwiped
     }
 }

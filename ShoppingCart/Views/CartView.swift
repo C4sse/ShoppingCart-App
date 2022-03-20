@@ -32,6 +32,7 @@ struct CartView: View {
                         } else {
                             
                             Text("Your cart is empty")
+                                .frame(width: UIScreen.main.bounds.width)
                         }
                     }
                 }

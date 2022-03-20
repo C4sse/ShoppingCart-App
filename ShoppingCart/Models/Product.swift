@@ -17,6 +17,8 @@ struct Product: Identifiable {
     var price: Double
     var addedToCart: Bool = false
     var count: Int = 1
+    var offset: CGFloat = 0
+    var isSwiped: Bool = false
 }
 
 

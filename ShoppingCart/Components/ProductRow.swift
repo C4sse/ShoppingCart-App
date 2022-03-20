@@ -12,9 +12,30 @@ struct ProductRow: View {
     var product: Product
     @State private var showing = false
     @State var count: Int
-    
+    @State var isSwipped: Bool = false
+    @State var offset: CGFloat = 0
     var body: some View {
         ZStack {
+            
+            LinearGradient(gradient: .init(colors: [.blue, .green]), startPoint: .leading, endPoint: .trailing)
+            
+            // delete button
+            
+            HStack {
+                
+                Spacer()
+                
+                Button {
+                    deleteProduct(product: product)
+                } label: {
+                    
+                    Image(systemName: "trash")
+                        .font(.title)
+                        .foregroundColor(.red)
+                        .frame(width: 90, height: 50)
+                }
+            }
+            
             HStack(alignment: .top,spacing: 20) {
                 
                 Image(product.image)
@@ -31,8 +52,6 @@ struct ProductRow: View {
                         .font(.subheadline)
                         .fontWeight(.semibold)
                         .foregroundColor(darkGrayBasic)
-//                        .padding(.bottom)
-//                        .brightness(0.5)
                     
                     HStack(alignment: .center) {
                         
@@ -94,17 +113,69 @@ struct ProductRow: View {
             .padding()
             .frame(maxWidth: .infinity, alignment: .leading)
             .background(backgroundColor3)
+            .offset(x: offset)
+            .gesture(DragGesture().onChanged(onChanged(value:)).onEnded(onEnd(value:)))
         }
-        
         .cornerRadius(20)
         .padding(.leading)
         .padding(.trailing)
     }
-}
+    
+    func onChanged(value: DragGesture.Value) {
+        print("swipping")
+        
+        if value.translation.width < 0 {
+            
+            if isSwipped {
+                let w = value.translation.width - 90
+                offset = cartManager.setOffset(product: product, value: w)
+            } else {
+                offset = cartManager.setOffset(product: product, value: value)
+            }
+        }
+    }
+    
+    func onEnd(value: DragGesture.Value) {
+        print("on end")
+        withAnimation(.easeOut(duration: 0.4)) {
 
-struct ProductRow_Previews: PreviewProvider {
-    static var previews: some View {
-        ProductRow(product: Product(name: "Strawberry", image: "fruit1", price: 4.99), count: 1)
-            .environmentObject(CartManager())
+            if value.translation.width < 0 {
+
+                // checking
+
+                if -value.translation.width > UIScreen.main.bounds.width / 3 {
+                    
+//                    withAnimation(.easeOut(duration: 10)) {
+                        offset = cartManager.setOffset(product: product, value: -1000)
+                        cartManager.removeFromCart(product: product)
+//                    }
+                } else if -product.offset > 50 {
+                    isSwipped = cartManager.setIsSwipped(product: product, isSwipped: true)
+                    offset = cartManager.setOffset(product: product, value: -90)
+                } else {
+                    isSwipped = cartManager.setIsSwipped(product: product, isSwipped: false)
+                    offset = cartManager.setOffset(product: product, value: 0)
+                }
+            } else {
+
+                isSwipped = cartManager.setIsSwipped(product: product, isSwipped: false)
+                offset = cartManager.setOffset(product: product, value: 0)
+            }
+        }
+    }
+    
+    func deleteProduct(product: Product) {
+        
+        withAnimation(.easeOut(duration: 0.4)) {
+            offset = cartManager.setOffset(product: product, value: -1000)
+            cartManager.removeFromCart(product: product)
+        }
     }
 }
+
+//struct ProductRow_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ProductRow(product: Product(name: "Strawberry", image: "fruit1", price: 4.99), count: 1)
+//            .environmentObject(CartManager())
+//    }
+//}
