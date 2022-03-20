@@ -21,6 +21,7 @@ struct ContentView: View {
     @StateObject var cartManager = CartManager()
     
     var body: some View {
+        
         TabView {
             
             HomeView(productList: productList)

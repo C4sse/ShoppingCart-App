@@ -155,7 +155,6 @@ struct ProductCardView: View {
         .background(backgroundColor3)
         .cornerRadius(12)
         .onAppear {
-            print("appe", cartManager.checkIfCartState(product: product))
             isAdded = cartManager.checkIfCartState(product: product)
             count = cartManager.checkQuantity(product: product)
         }
