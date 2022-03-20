@@ -11,7 +11,7 @@ struct HomeView: View {
     
     @State private var search: String = ""
     @State private var selectedIndex: Int = 0
-    var columns = [GridItem(.adaptive(minimum: 160), spacing: 8)]
+    var columns = [GridItem(.adaptive(minimum: 160), spacing: 12)]
     private let categories = ["all", "juice", "dessert", "meal", "vegetables"]
     
     @State private var showingSheet = false
@@ -47,7 +47,7 @@ struct HomeView: View {
                         .padding()
                     }
                     
-                    LazyVGrid(columns: columns, spacing: 8) {
+                    LazyVGrid(columns: columns, spacing: 12) {
                         
                         ForEach(getItems(), id: \.id) { product in
                             
@@ -110,15 +110,17 @@ struct CategoryView: View {
             Text(text)
                 .font(.system(size: 18))
                 .fontWeight(.medium)
-                .foregroundColor(isActive ? darkGrayBasic : lightGrayBasic)
+                .foregroundColor(isActive ? blackBasic : lightGrayBasic)
                 .padding(8)
 //                .cornerRadius(16)
-                .background(isActive ? backgroundColor1 : .white)
+                .background(isActive ? lightGrayBasic : backgroundColor1)
+                .cornerRadius(16)
                 .overlay(
                         RoundedRectangle(cornerRadius: 16)
                             .stroke(isActive ? .white : lightGrayBasic, lineWidth: isActive ? 0 : 2)
 //                            .background(.red)
                     )
+//                .clipped()
             if (isActive) {
 //                Color("Primary")
 //                .frame(width: 15, height: 2)

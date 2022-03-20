@@ -20,7 +20,6 @@ struct ProductRow: View {
             LinearGradient(gradient: .init(colors: [.blue, .green]), startPoint: .leading, endPoint: .trailing)
             
             // delete button
-            
             HStack {
                 
                 Spacer()
@@ -60,7 +59,6 @@ struct ProductRow: View {
                         }) {
                             Image(systemName: "minus")
                                 .foregroundColor(darkGrayBasic)
-                            //                        .padding(.all, 13)
                                 .padding(.bottom, 10)
                                 .padding(.top, 10)
                                 .padding(.leading, 3)
