@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct CartView: View {
+    
     @EnvironmentObject var cartManager: CartManager
     var body: some View {
         
@@ -36,7 +37,6 @@ struct CartView: View {
                         }
                     }
                 }
-                
             }
             .navigationTitle(Text("My Cart"))
             .padding(.top)

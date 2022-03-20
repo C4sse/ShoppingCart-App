@@ -18,7 +18,7 @@ struct DiscountView: View {
             ScrollView {
                 
                 ScrollView(.horizontal, showsIndicators: false) {
-                    HStack(alignment: .center, spacing: 80) {
+                    HStack(alignment: .center, spacing: 16) {
                         
                         ForEach(productList, id: \.id) { product in
                             
@@ -26,7 +26,8 @@ struct DiscountView: View {
                             
                         }
                         
-                    }.offset(x: 16)
+                    }
+                    .offset(x: 16)
                     
                 }
                 
