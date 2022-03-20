@@ -19,6 +19,7 @@ struct Product: Identifiable {
     var count: Int = 1
     var offset: CGFloat = 0
     var isSwiped: Bool = false
+    var category: String = ""
 }
 
 

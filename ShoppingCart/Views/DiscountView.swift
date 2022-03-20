@@ -48,6 +48,13 @@ struct DiscountView: View {
                 }
                 .padding()
                 
+                Text("Deals")
+                    .font(.system(size: 22))
+                    .bold()
+                    .padding(.top, 16.0)
+                    .frame(width: UIScreen.main.bounds.size.width - 30, alignment: .leading)
+                    .offset(y: 10)
+                
                 LazyVGrid(columns: columns, spacing: 8) {
                     ForEach(productList, id: \.id) { product in
                         ProductCardView(width: getItemWidth(), product: product, showDiscount: true)

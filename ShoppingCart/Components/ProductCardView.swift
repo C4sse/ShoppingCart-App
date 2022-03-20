@@ -38,7 +38,19 @@ struct ProductCardView: View {
                     .padding(.bottom, 5)
                     .padding(.leading, 12)
                     .padding(.trailing, 8)
+                    .lineLimit(1)
                 
+                if showDiscount {
+                    
+                    Text("$\(product.price + 3, specifier: "%.2f")")
+                        .strikethrough(true)
+                        .font(.caption)
+                        .fontWeight(.semibold)
+                        .foregroundColor(darkGrayBasic)
+                        .padding(.leading, 12)
+                        .padding(.trailing, 8)
+                        .padding(.bottom, 3)
+                }
                 
                 Text("1 kg / $\(product.price, specifier: "%.2f")")
                     .font(.system(size: 13))

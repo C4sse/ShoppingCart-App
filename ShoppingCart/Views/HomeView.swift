@@ -10,13 +10,19 @@ import SwiftUI
 struct HomeView: View {
     
     @State private var search: String = ""
-    @State private var selectedIndex: Int = 1
+    @State private var selectedIndex: Int = 0
     var columns = [GridItem(.adaptive(minimum: 160), spacing: 8)]
-    private let categories = ["Banana", "Apple", "Grape", "Orange", "Kiwi", "Tomato"]
+    private let categories = ["all", "juice", "dessert", "meal", "vegetables"]
     
     @State private var showingSheet = false
     @EnvironmentObject var cartManager: CartManager
     var productList: [Product]
+    @State var t: [Product] = []
+    var t1 = [Product(name: "Orange Juice", image: "1", price: 4.99),
+                      Product(name: "Chocolate Ice Cream", image: "2", price: 2.49),
+                      Product(name: "Kiwi Juice", image: "3", price: 4.39),
+                      Product(name: "Watermellon Juice", image: "4", price: 2.39),
+                      Product(name: "Banana And oats", image: "5", price: 4.79),]
     
     var body: some View {
         
@@ -33,6 +39,7 @@ struct HomeView: View {
                             ForEach ( 0 ..< categories.count) { i in
                                
                                 Button(action: {selectedIndex = i}) {
+                                    
                                     CategoryView(isActive: selectedIndex == i, text: categories[i])
                                 }
                             }
@@ -41,7 +48,8 @@ struct HomeView: View {
                     }
                     
                     LazyVGrid(columns: columns, spacing: 8) {
-                        ForEach(productList, id: \.id) { product in
+                        
+                        ForEach(getItems(), id: \.id) { product in
                             
                             ProductCardView(width: getItemWidth(), product: product, showDiscount: false)
                                 .environmentObject(cartManager)
@@ -64,6 +72,24 @@ struct HomeView: View {
         }
         .navigationViewStyle(StackNavigationViewStyle())
     }
+    
+    func getItems() -> [Product] {
+        
+        if selectedIndex == 0 {
+            return productList
+        }
+        
+        let o = productList.filter { product in
+            
+            if product.category == categories[selectedIndex] {
+                return true
+            }
+            
+            return false
+        }
+        
+        return o
+    }
 }
 
 struct HomeView_Previews: PreviewProvider {
@@ -75,8 +101,6 @@ struct HomeView_Previews: PreviewProvider {
         HomeView(productList: productList)
     }
 }
-
-
 
 struct CategoryView: View {
     let isActive: Bool
