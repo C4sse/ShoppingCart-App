@@ -17,7 +17,7 @@ struct ProductRow: View {
     var body: some View {
         ZStack {
             
-            LinearGradient(gradient: .init(colors: [.blue, .green]), startPoint: .leading, endPoint: .trailing)
+            LinearGradient(gradient: .init(colors: [backgroundColor2, backgroundColor2, greyAccent]), startPoint: .leading, endPoint: .trailing)
             
             // delete button
             HStack {
@@ -30,7 +30,7 @@ struct ProductRow: View {
                     
                     Image(systemName: "trash")
                         .font(.title)
-                        .foregroundColor(.red)
+                        .foregroundColor(redAccent)
                         .frame(width: 90, height: 50)
                 }
             }
