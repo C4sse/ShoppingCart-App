@@ -42,7 +42,7 @@ struct ProductCardView: View {
                 
                 if showDiscount {
                     
-                    Text("$\(product.price + 3, specifier: "%.2f")")
+                    Text("$ \(product.price + 3, specifier: "%.2f")")
                         .strikethrough(true)
                         .font(.caption)
                         .fontWeight(.semibold)
@@ -52,7 +52,7 @@ struct ProductCardView: View {
                         .padding(.bottom, 3)
                 }
                 
-                Text("1 kg / $\(product.price, specifier: "%.2f")")
+                Text("1 kg / $ \(product.price, specifier: "%.2f")")
                     .font(.system(size: 13))
                     .padding(.leading, 12)
                     .padding(.trailing, 8)
@@ -61,7 +61,7 @@ struct ProductCardView: View {
                     
                     if !isAdded {
                         
-                        Text("\(product.price * Double(count), specifier: "%.2f")")
+                        Text("$ \(product.price * Double(count), specifier: "%.2f")")
                             .font(.title2)
                             .fontWeight(.semibold)
                             .foregroundColor(.green)
@@ -117,7 +117,7 @@ struct ProductCardView: View {
                         Spacer()
                             
                             VStack(alignment: .center) {
-                                Text("\(product.price * Double(count), specifier: "%.2f")")
+                                Text("$ \(product.price * Double(count), specifier: "%.2f")")
                                     .font(.subheadline)
                                     .foregroundColor(.green)
                                     .bold()
@@ -176,6 +176,6 @@ struct ProductCardView: View {
 struct ProductCardView_Previews: PreviewProvider {
     
     static var previews: some View {
-        ProductCardView(width: 160, product: Product(name: "Strawberry", image: "fruit1", price: 4.99), showDiscount: true)
+        ProductCardView(width: 160, product: Product(name: "Strawberry", image: "17", price: 2.99, category: "juice", expirationDate: "10 days", country: "Russia", storageConditions: "refrigerate"), showDiscount: true)
     }
 }

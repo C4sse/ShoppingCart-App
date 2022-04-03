@@ -20,6 +20,9 @@ struct Product: Identifiable {
     var offset: CGFloat = 0
     var isSwiped: Bool = false
     var category: String = ""
+    var expirationDate: String
+    var country: String
+    var storageConditions: String
 }
 
 

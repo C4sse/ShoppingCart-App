@@ -18,11 +18,6 @@ struct HomeView: View {
     @EnvironmentObject var cartManager: CartManager
     var productList: [Product]
     @State var t: [Product] = []
-    var t1 = [Product(name: "Orange Juice", image: "1", price: 4.99),
-                      Product(name: "Chocolate Ice Cream", image: "2", price: 2.49),
-                      Product(name: "Kiwi Juice", image: "3", price: 4.39),
-                      Product(name: "Watermellon Juice", image: "4", price: 2.39),
-                      Product(name: "Banana And oats", image: "5", price: 4.79),]
     
     var body: some View {
         
@@ -95,10 +90,11 @@ struct HomeView: View {
 struct HomeView_Previews: PreviewProvider {
     
     static var previews: some View {
-        let productList = [Product(name: "Strawberry", image: "fruit1", price: 4.99),
-                           Product(name: "Banana", image: "fruit2", price: 4.99),
-                           Product(name: "Nach", image: "fruit3", price: 3.50)]
+        let productList = [Product(name: "Orange Juice", image: "1", price: 4.99, category: "juice", expirationDate: "10 days", country: "Russia", storageConditions: "refrigerate"),
+                           Product(name: "Chocolate Ice Cream", image: "2", price: 2.49, category: "ice cream", expirationDate: "10 days", country: "Russia", storageConditions: "freezer"),
+                           Product(name: "Kiwi Juice", image: "3", price: 4.39,  category: "juice", expirationDate: "10 days", country: "Russia", storageConditions: "refrigerate")]
         HomeView(productList: productList)
+            .environmentObject(CartManager())
     }
 }
 
@@ -113,11 +109,13 @@ struct CategoryView: View {
                 .frame(alignment: .leading)
                 .foregroundColor(isActive ? blackBasic : darkGrayBasic)
                 .padding(8)
+                .padding(.leading, 4)
+                .padding(.trailing, 4)
 //                .cornerRadius(16)
                 .background(isActive ? greyAccent : backgroundColor1)
-                .cornerRadius(16)
+                .cornerRadius(20)
                 .overlay(
-                        RoundedRectangle(cornerRadius: 16)
+                        RoundedRectangle(cornerRadius: 20)
                             .stroke(isActive ? .white : greyAccent, lineWidth: isActive ? 0 : 2)
 //                            .background(.red)
                     )
@@ -128,9 +126,9 @@ struct CategoryView: View {
 //                .clipShape(Capsule())
             }
         }
-        .padding(isActive ? 0 : 3)
+        .padding(isActive ? 0 : 0)
         .clipped()
-        .cornerRadius(isActive ? 16 : 0)
+        .cornerRadius(isActive ? 20 : 0)
     }
 }
 

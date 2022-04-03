@@ -73,7 +73,7 @@ struct ProductCard: View {
 
 struct ProductCard_Previews: PreviewProvider {
     static var previews: some View {
-        ProductCard(product: Product(name: "Strawberry", image: "fruit1", price: 4.99))
+        ProductCard(product: Product(name: "Mixed Flavor", image: "13", price: 2.75, category: "dessert", expirationDate: "10 days", country: "Russia", storageConditions: "refrigerate"))
             .environmentObject(CartManager())
     }
 }

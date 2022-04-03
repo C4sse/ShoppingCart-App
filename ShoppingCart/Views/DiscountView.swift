@@ -91,9 +91,9 @@ struct DiscountView_Previews: PreviewProvider {
     
     static var previews: some View {
         
-        let productList = [Product(name: "Strawberry", image: "fruit1", price: 4.99),
-                           Product(name: "Banana", image: "fruit2", price: 4.99),
-                           Product(name: "Nach", image: "fruit3", price: 3.50)]
+        let productList = [Product(name: "Mixed Flavor", image: "13", price: 2.75, category: "dessert", expirationDate: "10 days", country: "Russia", storageConditions: "refrigerate"),
+                           Product(name: "Blue-berry Flavor", image: "12", price: 2.00, category: "dessert", expirationDate: "10 days", country: "Russia", storageConditions: "refrigerate"),
+                           Product(name: "Strawberry", image: "17", price: 2.99, category: "juice", expirationDate: "10 days", country: "Russia", storageConditions: "refrigerate")]
         
         DiscountView(productList: productList)
     }

@@ -35,14 +35,14 @@ struct DetailScreen: View {
                         .padding(.bottom, 16)
                         .frame(width: 200, alignment: .leading)
                     
-                    Text("1 kg / $\(product.price, specifier: "%.2f")")
+                    Text("1 kg / $ \(product.price, specifier: "%.2f")")
                         .font(.subheadline)
                         .fontWeight(.semibold)
                         .foregroundColor(blackBasic)
                         .padding(.bottom)
                         .brightness(0.3)
                     
-                    Text("$\(product.price + 10, specifier: "%.2f")")
+                    Text("$ \(product.price + 10, specifier: "%.2f")")
                         .strikethrough(true)
                         .font(.caption)
                         .fontWeight(.semibold)
@@ -58,13 +58,13 @@ struct DetailScreen: View {
                     
                     VStack {
                         HStack(alignment: .center) {
-                            Text("Words in russian")
+                            Text("Expiration date")
                                 .font(.subheadline)
                                 .fontWeight(.bold)
                                 .frame(maxWidth: .infinity, alignment: .leading)
                                 .foregroundColor(blackBasic)
                             
-                            Text("something")
+                            Text(product.expirationDate)
                                 .font(.body)
                                 .fontWeight(.medium)
                                 .brightness(0.3)
@@ -72,13 +72,13 @@ struct DetailScreen: View {
                         .padding(.bottom, 5)
                         
                         HStack(alignment: .center) {
-                            Text("Russian stuff")
+                            Text("Country")
                                 .font(.subheadline)
                                 .fontWeight(.bold)
                                 .frame(maxWidth: .infinity, alignment: .leading)
                                 .foregroundColor(blackBasic)
                             
-                            Text("other")
+                            Text(product.country)
                                 .font(.body)
                                 .fontWeight(.medium)
                                 .brightness(0.3)
@@ -86,13 +86,13 @@ struct DetailScreen: View {
                         .padding(.bottom, 5)
                         
                         HStack(alignment: .center) {
-                            Text("More")
+                            Text("Manufacturer")
                                 .font(.subheadline)
                                 .fontWeight(.bold)
                                 .frame(maxWidth: .infinity, alignment: .leading)
                                 .foregroundColor(blackBasic)
                             
-                            Text("other thing")
+                            Text("N/A")
                                 .font(.body)
                                 .fontWeight(.medium)
                                 .brightness(0.3)
@@ -100,13 +100,13 @@ struct DetailScreen: View {
                         .padding(.bottom, 5)
                         
                         HStack(alignment: .center) {
-                            Text("Russian is cool")
+                            Text("Storage conditions")
                                 .font(.subheadline)
                                 .fontWeight(.bold)
                                 .frame(maxWidth: .infinity, alignment: .leading)
                                 .foregroundColor(blackBasic)
                             
-                            Text("ofcourse")
+                            Text(product.storageConditions)
                                 .font(.body)
                                 .fontWeight(.medium)
                                 .brightness(0.3)
@@ -212,7 +212,7 @@ struct DetailScreen: View {
 
 struct DetailScreen_Previews: PreviewProvider {
     static var previews: some View {
-        DetailScreen(product: Product(name: "Strawberry", image: "fruit1", price: 4.99))
+        DetailScreen(product: Product(name: "Mixed Flavor", image: "13", price: 2.75, category: "dessert", expirationDate: "10 days", country: "Russia", storageConditions: "refrigerate"))
     }
 }
 

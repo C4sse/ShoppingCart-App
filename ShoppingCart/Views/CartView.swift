@@ -12,41 +12,53 @@ struct CartView: View {
     @EnvironmentObject var cartManager: CartManager
     var body: some View {
         
-            
-            ScrollView {
-                VStack {
+        
+        ScrollView {
+            VStack(alignment: .leading) {
+                
+                if cartManager.paymentSuccess {
                     
-                    if cartManager.paymentSuccess {
+                    Text("Thanks for your purchase! Your order will be shipped shortly, You'll also receive email confirmation shortly, with tracking ID.")
+                        .padding()
+                } else {
+                    VStack (alignment: .leading) {
+                        HStack {
+                            
+                            Text("Items in cart: ")
+                                .fontWeight(.semibold)
+                                .foregroundColor(.black)
+                                .padding(.leading, 18)
+                            Text("\(cartManager.products.count)")
+                                .fontWeight(.semibold)
+                                .foregroundColor(.green)
+                        }
+                    }
+                    
+                    if cartManager.products.count > 0 {
                         
-                        Text("Thanks for your purchase! You'll get cozy in our comfy sweaters soon! You'll also receive email confirmation shortly.")
-                            .padding()
+                        ForEach(cartManager.products, id: \.id) { product in
+                            
+                            ProductRow(product: product, count: product.count)
+                                .cornerRadius(10)
+                        }
+                        
                     } else {
                         
-                        if cartManager.products.count > 0 {
-                            
-                            ForEach(cartManager.products, id: \.id) { product in
-                                
-                                ProductRow(product: product, count: product.count)
-                                    .cornerRadius(10)
-                            }
-                            
-                        } else {
-                            
-                            Text("Your cart is empty")
-                                .frame(width: UIScreen.main.bounds.width)
-                        }
+                        Text("Your cart is empty")
+                            .frame(width: UIScreen.main.bounds.width)
                     }
                 }
             }
-            .navigationTitle(Text("My Cart"))
-            .padding(.top)
-            .onDisappear {
-                if cartManager.paymentSuccess {
-                    cartManager.paymentSuccess = false
-                }
+        }
+        .navigationTitle(Text("My Cart"))
+        .padding(.top)
+        .onDisappear {
+            if cartManager.paymentSuccess {
+                cartManager.paymentSuccess = false
             }
-            .background(backgroundColor1)
-            .navigationViewStyle(StackNavigationViewStyle())
+        }
+        .background(backgroundColor1)
+        .navigationViewStyle(StackNavigationViewStyle())
         
         HStack(alignment: .center) {
             
@@ -54,7 +66,7 @@ struct CartView: View {
                 Text("Your Cart total is:")
                     .bold()
                 
-                Text("\(cartManager.total, specifier: "%.2f")")
+                Text("$ \(cartManager.total, specifier: "%.2f")")
                     .font(.title2)
                     .foregroundColor(.green)
                     .bold()

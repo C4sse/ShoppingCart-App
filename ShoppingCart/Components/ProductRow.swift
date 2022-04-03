@@ -47,7 +47,7 @@ struct ProductRow: View {
                     Text(product.name)
                         .bold()
                     
-                    Text("1 kg / $\(product.price, specifier: "%.2f")")
+                    Text("1 kg / $ \(product.price, specifier: "%.2f")")
                         .font(.subheadline)
                         .fontWeight(.semibold)
                         .foregroundColor(darkGrayBasic)
@@ -89,7 +89,7 @@ struct ProductRow: View {
                         
                         Spacer()
                         
-                        Text("\(product.price * Double(count), specifier: "%.2f")")
+                        Text("$ \(product.price * Double(count), specifier: "%.2f")")
                             .font(.title3)
                             .foregroundColor(.green)
                             .font(.system(size: 10))

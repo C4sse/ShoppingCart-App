@@ -65,7 +65,7 @@ struct PromotedCard: View {
 
 struct PromotedCard_Previews: PreviewProvider {
     static var previews: some View {
-        PromotedCard(width: 300, product: Product(name: "Strawberry", image: "fruit1", price: 4.99))
+        PromotedCard(width: 300, product: Product(name: "Mixed Flavor", image: "13", price: 2.75, category: "dessert", expirationDate: "10 days", country: "Russia", storageConditions: "refrigerate"))
     }
 }
 
