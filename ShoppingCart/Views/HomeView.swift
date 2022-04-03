@@ -54,7 +54,7 @@ struct HomeView: View {
                 }
             }
             .background(backgroundColor1)
-            .navigationTitle(Text("Home"))
+            .navigationTitle(Text("Tenant1"))
             .toolbar {
                 NavigationLink {
                     CartView()
