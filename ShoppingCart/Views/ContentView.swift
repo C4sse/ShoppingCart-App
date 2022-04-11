@@ -31,6 +31,7 @@ struct ContentView: View {
         Product(name: "Carrot", image: "15", price: 1.10, category: "vegetables", expirationDate: "10 days", country: "Russia", storageConditions: "refrigerate"),
         Product(name: "Paper", image: "25", price: 2.00, category: "vegetables", expirationDate: "10 days", country: "Russia", storageConditions: "refrigerate"),
     ]
+   
     
     @StateObject var cartManager = CartManager()
     
@@ -42,7 +43,7 @@ struct ContentView: View {
                 .environmentObject(cartManager)
                 .tabItem {
                     Image(systemName: "list.bullet")
-                    Text("Home")
+                    Text("Catalogue")
                 }
             
             DiscountView(productList: productList)
@@ -50,6 +51,19 @@ struct ContentView: View {
                 .tabItem {
                     Image(systemName: "percent")
                     Text("Discount")
+                }
+            
+            CartView()
+                .environmentObject(cartManager)
+                .tabItem {
+                    Image(systemName: "cart")
+                    Text("Cart")
+                }
+            
+            ProfileView()
+                .tabItem {
+                    Image(systemName: "person.fill")
+                    Text("Profile")
                 }
         }
     }
@@ -60,66 +74,3 @@ struct ContentView_Previews: PreviewProvider {
         ContentView()
     }
 }
-
-//import SwiftUI
-//
-//struct ContentView: View {
-//    @StateObject var cartManager = CartManager()
-//    var columns = [GridItem(.adaptive(minimum: 160), spacing: 20)]
-//
-//    var body: some View {
-////        NavigationView {
-//
-////            VStack {
-////                Text("hello")
-//                ScrollView(.vertical, showsIndicators: true) {
-//
-//                    ScrollView(.horizontal) {
-//                        HStack {
-//                            ForEach(0..<17) { _ in
-//    //                            ProductCard(product: product)
-//    //                                .environmentObject(cartManager)
-//                                Image(systemName: "person.fill").resizable().frame(width: 50, height: 50, alignment: .center).foregroundColor(.purple).clipShape(Circle())
-//                            }
-//
-//                        }
-//                    }
-////                    VStack{
-//                        Image("sweater1").resizable().frame(height: 250, alignment: .center)
-////                        Image("sweater1").resizable().frame(height: 250, alignment: .center)
-////                        Image("sweater1").resizable().frame(height: 250, alignment: .center)
-////                        Image("sweater1").resizable().frame(height: 250, alignment: .center)
-////                        Image("sweater1").resizable().frame(height: 250, alignment: .center)
-////                        Image("sweater1").resizable().frame(height: 250, alignment: .center)
-////                    }
-////                    .padding()
-//                }
-//
-////                ScrollView(.vertical, showsIndicators: true) {
-////                }
-////                ScrollView(.vertical) {
-//
-////                    LazyVGrid(columns: columns, spacing: 20) {
-////                        ForEach(productList, id: \.id) { product in
-////                            ProductCard(product: product)
-////                                .environmentObject(cartManager)
-////                        }
-////                    }
-////                    .padding()
-////                }
-////            }
-////                .navigationTitle(Text("ShoppingCart"))
-////                .toolbar {
-////                    NavigationLink {
-////                        CartView()
-////                            .environmentObject(cartManager)
-////                    } label: {
-////
-////                        CartButton(numberOfProducts: cartManager.products.count)
-////                    }
-////            }
-//
-////        }
-////        .navigationViewStyle(StackNavigationViewStyle())
-//    }
-//}

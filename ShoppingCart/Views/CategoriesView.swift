@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct HomeView: View {
+struct CategoriesView: View {
     
     @State private var search: String = ""
     @State private var selectedIndex: Int = 0
@@ -16,31 +16,35 @@ struct HomeView: View {
     
     @State private var showingSheet = false
     @EnvironmentObject var cartManager: CartManager
-    var productList: [Product]
+    var productList: [Product] = []
+    var productType: ProductType
     @State var t: [Product] = []
     
     var body: some View {
         
-        NavigationView {
             
+        ScrollView (.horizontal, showsIndicators: false) {
+            
+            HStack(spacing: 12) {
+                
+                ForEach ( 0 ..< categories.count) { i in
+                   
+                    Button(action: {selectedIndex = i}) {
+                        
+                        CategoryView(isActive: selectedIndex == i, text: categories[i])
+                    }
+                }
+            }
+            .padding()
+        }
+        .padding(0)
+        .background(backgroundColor1)
+        
             ScrollView(showsIndicators: false) {
                 
                 VStack (alignment: .leading) {
                     
-                    ScrollView (.horizontal, showsIndicators: false) {
-                        
-                        HStack(spacing: 12) {
-                            
-                            ForEach ( 0 ..< categories.count) { i in
-                               
-                                Button(action: {selectedIndex = i}) {
-                                    
-                                    CategoryView(isActive: selectedIndex == i, text: categories[i])
-                                }
-                            }
-                        }
-                        .padding()
-                    }
+                    
                     
                     LazyVGrid(columns: columns, spacing: 12) {
                         
@@ -54,7 +58,7 @@ struct HomeView: View {
                 }
             }
             .background(backgroundColor1)
-            .navigationTitle(Text("Tenant1"))
+            .navigationTitle(Text("Vegetables and fruits"))
             .toolbar {
                 NavigationLink {
                     CartView()
@@ -64,7 +68,6 @@ struct HomeView: View {
                     CartButton(numberOfProducts: cartManager.products.count)
                 }
             }
-        }
         .navigationViewStyle(StackNavigationViewStyle())
     }
     
@@ -87,13 +90,13 @@ struct HomeView: View {
     }
 }
 
-struct HomeView_Previews: PreviewProvider {
+struct CategoriesView_Previews: PreviewProvider {
     
     static var previews: some View {
         let productList = [Product(name: "Orange Juice", image: "1", price: 4.99, category: "juice", expirationDate: "10 days", country: "Russia", storageConditions: "refrigerate"),
                            Product(name: "Chocolate Ice Cream", image: "2", price: 2.49, category: "ice cream", expirationDate: "10 days", country: "Russia", storageConditions: "freezer"),
                            Product(name: "Kiwi Juice", image: "3", price: 4.39,  category: "juice", expirationDate: "10 days", country: "Russia", storageConditions: "refrigerate")]
-        HomeView(productList: productList)
+        CategoriesView(productType: ProductType(name: "Cookies, Sweetes", image: "cookies", category: ["All", "chocolate"]))
             .environmentObject(CartManager())
     }
 }
@@ -104,14 +107,12 @@ struct CategoryView: View {
     var body: some View {
         VStack (alignment: .center, spacing: 0) {
             Text(text)
-                .font(.system(size: 18))
-                .fontWeight(.medium)
+                .font(Font.custom("SFProText-Regular", fixedSize: 18))
                 .frame(alignment: .leading)
                 .foregroundColor(isActive ? blackBasic : darkGrayBasic)
                 .padding(8)
                 .padding(.leading, 4)
                 .padding(.trailing, 4)
-//                .cornerRadius(16)
                 .background(isActive ? greyAccent : backgroundColor1)
                 .cornerRadius(20)
                 .overlay(
