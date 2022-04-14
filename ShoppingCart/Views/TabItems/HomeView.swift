@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct HomeView: View {
+struct HomeView: View { // change 
     @State private var searchText = ""
     var columns = [GridItem(.adaptive(minimum: 160), spacing: 12)]
     var productTypeList = [
