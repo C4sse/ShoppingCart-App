@@ -66,6 +66,7 @@ struct ContentView: View {
                     Text("Profile")
                 }
         }
+        .preferredColorScheme(.light)
     }
 }
 

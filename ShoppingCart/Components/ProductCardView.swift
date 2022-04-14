@@ -33,43 +33,44 @@ struct ProductCardView: View {
                 .frame(width: width, height: 200)
                 
                 Text("\(product.name)")
-                    .bold()
-                    .font(Font.title3)
-                    .padding(.bottom, 5)
+                    .font(Font.custom("SFProText-Bold", size: 19))
+                    .padding(.bottom, 1)
                     .padding(.leading, 12)
                     .padding(.trailing, 8)
                     .lineLimit(1)
                 
-                if showDiscount {
-                    
-                    Text("$ \(product.price + 3, specifier: "%.2f")")
-                        .strikethrough(true)
-                        .font(.caption)
-                        .fontWeight(.semibold)
-                        .foregroundColor(darkGrayBasic)
-                        .padding(.leading, 12)
-                        .padding(.trailing, 8)
-                        .padding(.bottom, 3)
-                }
-                
                 Text("1 kg / $ \(product.price, specifier: "%.2f")")
-                    .font(.system(size: 13))
+                    .font(Font.custom("SFProText-Regular", size: 13))
+                    .foregroundColor(darkGrayBasic)
                     .padding(.leading, 12)
                     .padding(.trailing, 8)
+                    .padding(.top, 8)
                 
                 HStack(alignment: .center) {
                     
                     if !isAdded {
                         
-                        Text("$ \(product.price * Double(count), specifier: "%.2f")")
-                            .font(.title2)
-                            .fontWeight(.semibold)
-                            .foregroundColor(.green)
-                            .padding(.top, 5)
-                            .padding(.leading, 12)
-                            .padding(.trailing, 1)
+                        VStack(alignment: .leading) {
+                            
+                            if showDiscount {
+                                
+                                Text("$ \(product.price + 3, specifier: "%.2f")")
+                                    .strikethrough(true)
+                                    .font(Font.custom("SFProText-Regular", size: 13))
+                                    .foregroundColor(lightGrayBasic)
+                                    
+                            }
+                            
+                            Text("$ \(product.price * Double(count), specifier: "%.2f")")
+                                .font(Font.custom("SFProDisplay-Bold", size: 19))
+                                .foregroundColor(greenBasic)
+                                .padding(.top, 0)
+                                .padding(.leading, 0)
+                        }
+                        .padding(.leading, 12)
+                        .padding(.top, 3)
                         
-                        Spacer(minLength: 25)
+                        Spacer()
                         
                         Button(action: {
                             
@@ -91,7 +92,7 @@ struct ProductCardView: View {
                                 .frame(width: 40, height: 40)
                         }
                         .foregroundColor(backgroundColor3)
-                        .background(Color.green)
+                        .background(greenBasic)
                         .cornerRadius(10.0)
                         .padding(.trailing, 10)
                         
@@ -118,14 +119,12 @@ struct ProductCardView: View {
                             
                             VStack(alignment: .center) {
                                 Text("$ \(product.price * Double(count), specifier: "%.2f")")
-                                    .font(.subheadline)
-                                    .foregroundColor(.green)
-                                    .bold()
+                                    .font(Font.custom("SFProText-Bold", size: 16))
+                                    .foregroundColor(greenBasic)
                                 Text("\(count)")
                                     .brightness(0.4)
-                                    .font(.subheadline)
+                                    .font(Font.custom("SFProText-Regular", size: 13))
                             }
-                            .padding(.all, 5)
                             
                         Spacer()
                         
@@ -147,9 +146,8 @@ struct ProductCardView: View {
             if showDiscount {
                 
                 Text("-20%")
+                    .font(Font.custom("SFProText-Bold", size: 13))
                     .foregroundColor(backgroundColor3)
-                    .font(.system(size: 13))
-                    .bold()
                     .padding(6)
                     .background(redAccent)
                     .cornerRadius(12, corners: [.bottomLeft, .topRight])
@@ -177,5 +175,6 @@ struct ProductCardView_Previews: PreviewProvider {
     
     static var previews: some View {
         ProductCardView(width: 160, product: Product(name: "Strawberry", image: "17", price: 2.99, category: "juice", expirationDate: "10 days", country: "Russia", storageConditions: "refrigerate"), showDiscount: true)
+            .environmentObject(CartManager())
     }
 }

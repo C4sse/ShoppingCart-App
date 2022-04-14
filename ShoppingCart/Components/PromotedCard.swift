@@ -28,13 +28,13 @@ struct PromotedCard: View {
                 VStack(alignment: .leading, spacing: 1) {
                     
                     Text(product.name)
-                        .bold()
-                        .font(Font.title)
+                        .font(Font.custom("SFProDisplay-Bold", size: 24))
                         .foregroundColor(backgroundColor3)
                         .shadow(color: blackBasic, radius: 2.5)
                         .offset(x: 20, y: -35)
                     
                     Text("Description of the thing")
+                        .font(Font.custom("SFProDisplay-Regular", size: 16))
                         .frame(alignment: .leading)
                         .foregroundColor(backgroundColor3)
                         .shadow(color: blackBasic, radius: 2.5)
@@ -45,8 +45,8 @@ struct PromotedCard: View {
             }
             ZStack(alignment: .topTrailing) {
                 Text("-20%")
+                    .font(Font.custom("SFProDisplay-Semibold", size: 16))
                     .foregroundColor(backgroundColor3)
-                    .bold()
                     .padding(12)
                     .background(redAccent)
                     .cornerRadius(30, corners: [.bottomLeft, .topRight])

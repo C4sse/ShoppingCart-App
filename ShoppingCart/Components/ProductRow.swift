@@ -17,7 +17,7 @@ struct ProductRow: View {
     var body: some View {
         ZStack {
             
-            LinearGradient(gradient: .init(colors: [backgroundColor2, backgroundColor2, greyAccent]), startPoint: .leading, endPoint: .trailing)
+            LinearGradient(gradient: .init(colors: [lightAccent]), startPoint: .leading, endPoint: .trailing)
             
             // delete button
             HStack {
@@ -29,9 +29,8 @@ struct ProductRow: View {
                 } label: {
                     
                     Image(systemName: "trash")
-                        .font(.title)
-                        .foregroundColor(redAccent)
-                        .frame(width: 90, height: 50)
+                        .foregroundColor(darkGrayBasic)
+                        .frame(width: 90, height: 90)
                 }
             }
             
@@ -45,11 +44,10 @@ struct ProductRow: View {
                 
                 VStack(alignment: .leading, spacing: 10) {
                     Text(product.name)
-                        .bold()
+                        .font(Font.custom("SFProText-Semibold", size: 16))
                     
                     Text("1 kg / $ \(product.price, specifier: "%.2f")")
-                        .font(.subheadline)
-                        .fontWeight(.semibold)
+                        .font(Font.custom("SFProText-Regular", size: 11))
                         .foregroundColor(darkGrayBasic)
                     
                     HStack(alignment: .center) {
@@ -69,9 +67,8 @@ struct ProductRow: View {
                         
                         VStack(alignment: .center) {
                             Text("\(product.count)")
-                                .font(.subheadline)
-                                .fontWeight(.semibold)
-                                .font(.system(size: 9))
+                                .font(Font.custom("SFProText-Regular", size: 15))
+                                .foregroundColor(darkGrayBasic)
                                 .frame(width: 20)
                         }
                         .padding(.all, 5)
@@ -90,10 +87,8 @@ struct ProductRow: View {
                         Spacer()
                         
                         Text("$ \(product.price * Double(count), specifier: "%.2f")")
-                            .font(.title3)
-                            .foregroundColor(.green)
-                            .font(.system(size: 10))
-                            .bold()
+                            .font(Font.custom("SFProText-Bold", size: 20))
+                            .foregroundColor(greenBasic)
                             .offset(x: 30)
                         
                     }

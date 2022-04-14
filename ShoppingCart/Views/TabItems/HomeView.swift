@@ -10,9 +10,14 @@ import SwiftUI
 struct HomeView: View {
     @State private var queryString = ""
     var columns = [GridItem(.adaptive(minimum: 160), spacing: 12)]
-    var productTypeList = [ProductType(name: "Sweets, Cookies", image: "cookies", category: ["All", "chocolate"]),
-                           ProductType(name: "Sweets, Cookies", image: "cookies", category: ["All", "chocolate"])
-                            ]
+    var productTypeList = [
+        ProductType(name: "Sweets, Cookies", image: "cookies", category: ["All", "chocolate"]),
+        ProductType(name: "Sweets, Cookies", image: "cookies", category: ["All", "chocolate"]),
+        ProductType(name: "Sweets, Cookies", image: "cookies", category: ["All", "chocolate"]),
+        ProductType(name: "Sweets, Cookies", image: "cookies", category: ["All", "chocolate"]),
+        ProductType(name: "Sweets, Cookies", image: "cookies", category: ["All", "chocolate"]),
+        ProductType(name: "Sweets, Cookies", image: "cookies", category: ["All", "chocolate"])
+    ]
     @EnvironmentObject var cartManager: CartManager
     var productList: [Product]
     
@@ -38,12 +43,7 @@ struct HomeView: View {
             .background(backgroundColor1)
             .navigationTitle(Text("Catalogue"))
             .searchable(text: $queryString, placement: .navigationBarDrawer(displayMode: .automatic)) {
-//                print(queryString)
             }
-//            .background(NavigationConfigurator { nc in
-//                nc.navigationBar.barTintColor = UIColor(red: 238 / 255, green: 241 / 255, blue: 246 / 255, alpha: 1)
-//                            nc.navigationBar.titleTextAttributes = [.foregroundColor : blackBasic]
-//                        })
             .toolbar {
             }
         }

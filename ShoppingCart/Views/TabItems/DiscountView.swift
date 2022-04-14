@@ -32,8 +32,7 @@ struct DiscountView: View {
                 }
                 
                 Text("More items")
-                    .font(.system(size: 22))
-                    .bold()
+                    .font(Font.custom("SFProDisplay-Bold", fixedSize: 22))
                     .padding(.top, 16.0)
                     .frame(width: UIScreen.main.bounds.size.width - 30, alignment: .leading)
                     .offset(y: 10)
@@ -49,8 +48,7 @@ struct DiscountView: View {
                 .padding()
                 
                 Text("Deals")
-                    .font(.system(size: 22))
-                    .bold()
+                    .font(Font.custom("SFProDisplay-Bold", fixedSize: 22))
                     .padding(.top, 16.0)
                     .frame(width: UIScreen.main.bounds.size.width - 30, alignment: .leading)
                     .offset(y: 10)
@@ -96,5 +94,6 @@ struct DiscountView_Previews: PreviewProvider {
                            Product(name: "Strawberry", image: "17", price: 2.99, category: "juice", expirationDate: "10 days", country: "Russia", storageConditions: "refrigerate")]
         
         DiscountView(productList: productList)
+            .environmentObject(CartManager())
     }
 }

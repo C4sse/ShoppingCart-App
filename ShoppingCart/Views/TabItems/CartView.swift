@@ -22,18 +22,19 @@ struct CartView: View {
                         if cartManager.paymentSuccess {
                             
                             Text("Thanks for your purchase! Your order will be shipped shortly, You'll also receive email confirmation shortly, with tracking ID.")
+                                .font(Font.custom("SFProText-Light", size: 16))
                                 .padding()
                         } else {
                             VStack (alignment: .leading) {
                                 HStack {
                                     
                                     Text("Items in cart: ")
-                                        .fontWeight(.semibold)
-                                        .foregroundColor(.black)
+                                        .font(Font.custom("SFProText-Medium", size: 16))
+                                        .foregroundColor(blackBasic)
                                         .padding(.leading, 18)
                                     Text("\(cartManager.products.count)")
-                                        .fontWeight(.semibold)
-                                        .foregroundColor(.green)
+                                        .font(Font.custom("SFProText-Semibold", size: 16))
+                                        .foregroundColor(greenBasic)
                                 }
                             }
                             
@@ -48,6 +49,7 @@ struct CartView: View {
                             } else {
                                 
                                 Text("Your cart is empty")
+                                    .font(Font.custom("SFProText-Semibold", size: 16))
                                     .frame(width: UIScreen.main.bounds.width)
                             }
                         }
@@ -67,12 +69,11 @@ struct CartView: View {
                     
                     VStack(alignment: .leading) {
                         Text("Your Cart total is:")
-                            .bold()
+                            .font(Font.custom("SFProText-Semibold", size: 17))
                         
                         Text("$ \(cartManager.total, specifier: "%.2f")")
-                            .font(.title2)
-                            .foregroundColor(.green)
-                            .bold()
+                            .font(Font.custom("SFProText-Bold", size: 24))
+                            .foregroundColor(greenBasic)
                     }
                     .padding(.all, 5)
                     

@@ -33,15 +33,13 @@ struct CatalogueCell: View {
                     
                     VStack() {}
                     .frame(width: 60, height: 3)
-                    .foregroundColor(.red)
-                    .background(Color.white)
+                    .background(backgroundColor3)
                     .cornerRadius(1.5)
                     
                     Text("\(productType.name)")
-                        .bold()
-                        .font(Font.subheadline)
+                        .font(Font.custom("SFProText-Regular", size: 15))
                         .lineLimit(1)
-                        .foregroundColor(.white)
+                        .foregroundColor(backgroundColor3)
                         .padding(.top, 0)
                 }
                 .padding(.bottom, 30)

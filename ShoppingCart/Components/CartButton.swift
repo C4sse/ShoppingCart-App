@@ -16,7 +16,7 @@ struct CartButton: View {
             
             if numberOfProducts > 0 {
                 Text("\(numberOfProducts)")
-                    .font(.caption).bold()
+                    .font(Font.custom("SFProDisplay-Regular", size: 10))
                     .foregroundColor(backgroundColor3)
                     .frame(width: 15, height: 15)
                     .background(redAccent)

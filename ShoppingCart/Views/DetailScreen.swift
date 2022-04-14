@@ -30,28 +30,24 @@ struct DetailScreen: View {
                 VStack (alignment: .leading) {
                     // Title
                     Text(product.name)
-                        .font(.title2)
-                        .fontWeight(.bold)
-                        .padding(.bottom, 16)
+                        .font(Font.custom("SFProDisplay-Bold", size: 26))
+                        .padding(.bottom, 20)
                         .frame(width: 200, alignment: .leading)
                     
                     Text("1 kg / $ \(product.price, specifier: "%.2f")")
-                        .font(.subheadline)
-                        .fontWeight(.semibold)
+                        .font(Font.custom("SFProDisplay-Semibold", size: 14))
                         .foregroundColor(blackBasic)
                         .padding(.bottom)
                         .brightness(0.3)
                     
                     Text("$ \(product.price + 10, specifier: "%.2f")")
                         .strikethrough(true)
-                        .font(.caption)
-                        .fontWeight(.semibold)
+                        .font(Font.custom("SFProDisplay-Semibold", size: 12))
                         .foregroundColor(darkGrayBasic)
                     
-                    Text("\(product.price, specifier: "%.2f")")
-                        .font(.title)
-                        .fontWeight(.semibold)
-                        .foregroundColor(.green)
+                    Text("$ \(product.price, specifier: "%.2f")")
+                        .font(Font.custom("SFProDisplay-Bold", size: 24))
+                        .foregroundColor(greenBasic)
                         .padding(.bottom, 3)
                     
                     Divider()
@@ -59,57 +55,49 @@ struct DetailScreen: View {
                     VStack {
                         HStack(alignment: .center) {
                             Text("Expiration date")
-                                .font(.subheadline)
-                                .fontWeight(.bold)
+                                .font(Font.custom("SFProDisplay-Bold", size: 14))
                                 .frame(maxWidth: .infinity, alignment: .leading)
                                 .foregroundColor(blackBasic)
                             
                             Text(product.expirationDate)
-                                .font(.body)
-                                .fontWeight(.medium)
-                                .brightness(0.3)
+                                .font(Font.custom("SFProDisplay-Bold", size: 14))
+                                .foregroundColor(darkGrayBasic)
                         }
                         .padding(.bottom, 5)
                         
                         HStack(alignment: .center) {
                             Text("Country")
-                                .font(.subheadline)
-                                .fontWeight(.bold)
+                                .font(Font.custom("SFProDisplay-Bold", size: 14))
                                 .frame(maxWidth: .infinity, alignment: .leading)
                                 .foregroundColor(blackBasic)
                             
                             Text(product.country)
-                                .font(.body)
-                                .fontWeight(.medium)
-                                .brightness(0.3)
+                                .font(Font.custom("SFProDisplay-Bold", size: 14))
+                                .foregroundColor(darkGrayBasic)
                         }
                         .padding(.bottom, 5)
                         
                         HStack(alignment: .center) {
                             Text("Manufacturer")
-                                .font(.subheadline)
-                                .fontWeight(.bold)
+                                .font(Font.custom("SFProDisplay-Bold", size: 14))
                                 .frame(maxWidth: .infinity, alignment: .leading)
                                 .foregroundColor(blackBasic)
                             
                             Text("N/A")
-                                .font(.body)
-                                .fontWeight(.medium)
-                                .brightness(0.3)
+                                .font(Font.custom("SFProDisplay-Bold", size: 14))
+                                .foregroundColor(darkGrayBasic)
                         }
                         .padding(.bottom, 5)
                         
                         HStack(alignment: .center) {
                             Text("Storage conditions")
-                                .font(.subheadline)
-                                .fontWeight(.bold)
+                                .font(Font.custom("SFProDisplay-Bold", size: 14))
                                 .frame(maxWidth: .infinity, alignment: .leading)
                                 .foregroundColor(blackBasic)
                             
                             Text(product.storageConditions)
-                                .font(.body)
-                                .fontWeight(.medium)
-                                .brightness(0.3)
+                                .font(Font.custom("SFProDisplay-Bold", size: 14))
+                                .foregroundColor(darkGrayBasic)
                         }
                     }
                     
@@ -143,13 +131,12 @@ struct DetailScreen: View {
                     }
                     
                     VStack(alignment: .center) {
-                        Text("\(product.price * Double(count), specifier: "%.2f")")
-                            .font(.title2)
-                            .foregroundColor(.green)
-                            .bold()
+                        Text("$ \(product.price * Double(count), specifier: "%.2f")")
+                            .font(Font.custom("SFProDisplay-Bold", size: 20))
+                            .foregroundColor(greenBasic)
                         Text("\(count)")
-                            .brightness(0.4)
-                            .font(.subheadline)
+                            .font(Font.custom("SFProText-Light", size: 15))
+                            .foregroundColor(darkGrayBasic)
                     }
                     .padding(.all, 5)
                     
@@ -179,20 +166,20 @@ struct DetailScreen: View {
                     
                     Image(systemName: isAdded == true ? "checkmark" : "cart")
                         .padding(.leading, 12)
+//                        .padding(.trailing, 0)
                         
                     Text( isAdded == true ?  "" : "Add to Cart")
-                        .font(.subheadline)
-                        .fontWeight(.semibold)
-                        .padding(.leading, 4)
+                        .font(Font.custom("SFProDisplay-Regular", size: 14))
+                        .foregroundColor(backgroundColor3)
+                        .padding(.leading, 0)
                         .padding(.top, 12)
                         .padding(.bottom, 12)
-                        .padding(.trailing,  isAdded == true ? 3 : 12)
-                        .foregroundColor(backgroundColor3)
+                        .padding(.trailing,  isAdded == true ? 0 : 12)
                         .cornerRadius(10.0)
                     
                 }
                 .foregroundColor(backgroundColor3)
-                .background(Color.green)
+                .background(greenBasic)
                 .cornerRadius(10.0)
                 
             }
@@ -213,6 +200,7 @@ struct DetailScreen: View {
 struct DetailScreen_Previews: PreviewProvider {
     static var previews: some View {
         DetailScreen(product: Product(name: "Mixed Flavor", image: "13", price: 2.75, category: "dessert", expirationDate: "10 days", country: "Russia", storageConditions: "refrigerate"))
+            .environmentObject(CartManager())
     }
 }
 
@@ -231,9 +219,9 @@ struct BackButton: View {
     var body: some View {
         Button(action: action) {
             Image(systemName: "chevron.backward")
-                .foregroundColor(.black)
+                .foregroundColor(blackBasic)
                 .padding(.all, 12)
-                .background(Color.white)
+                .background(backgroundColor3)
                 .cornerRadius(8.0)
         }
     }

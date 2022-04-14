@@ -22,29 +22,26 @@ struct CategoriesView: View {
     
     var body: some View {
         
-            
-        ScrollView (.horizontal, showsIndicators: false) {
-            
-            HStack(spacing: 12) {
-                
-                ForEach ( 0 ..< categories.count) { i in
-                   
-                    Button(action: {selectedIndex = i}) {
-                        
-                        CategoryView(isActive: selectedIndex == i, text: categories[i])
-                    }
-                }
-            }
-            .padding()
-        }
-        .padding(0)
-        .background(backgroundColor1)
-        
             ScrollView(showsIndicators: false) {
                 
                 VStack (alignment: .leading) {
                     
-                    
+                    ScrollView (.horizontal, showsIndicators: false) {
+                        
+                        HStack(spacing: 12) {
+                            
+                            ForEach ( 0 ..< categories.count) { i in
+                               
+                                Button(action: {selectedIndex = i}) {
+                                    
+                                    CategoryView(isActive: selectedIndex == i, text: categories[i])
+                                }
+                            }
+                        }
+                        .padding()
+                    }
+                    .padding(0)
+                    .background(backgroundColor1)
                     
                     LazyVGrid(columns: columns, spacing: 12) {
                         
@@ -122,12 +119,9 @@ struct CategoryView: View {
                     )
 //                .clipped()
             if (isActive) {
-//                Color("Primary")
-//                .frame(width: 15, height: 2)
-//                .clipShape(Capsule())
             }
         }
-        .padding(isActive ? 0 : 0)
+        .padding(isActive ? 0 : 2)
         .clipped()
         .cornerRadius(isActive ? 20 : 0)
     }
@@ -140,9 +134,8 @@ struct SheetView: View {
         Button("Press to dismiss") {
             dismiss()
         }
-        .font(.title)
         .padding()
-        .background(Color.black)
+        .background(blackBasic)
     }
 }
 
