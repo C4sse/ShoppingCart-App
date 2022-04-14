@@ -8,18 +8,31 @@
 import SwiftUI
 
 struct HomeView: View {
-    @State private var queryString = ""
+    @State private var searchText = ""
     var columns = [GridItem(.adaptive(minimum: 160), spacing: 12)]
     var productTypeList = [
         ProductType(name: "Sweets, Cookies", image: "cookies", category: ["All", "chocolate"]),
-        ProductType(name: "Sweets, Cookies", image: "cookies", category: ["All", "chocolate"]),
-        ProductType(name: "Sweets, Cookies", image: "cookies", category: ["All", "chocolate"]),
-        ProductType(name: "Sweets, Cookies", image: "cookies", category: ["All", "chocolate"]),
-        ProductType(name: "Sweets, Cookies", image: "cookies", category: ["All", "chocolate"]),
-        ProductType(name: "Sweets, Cookies", image: "cookies", category: ["All", "chocolate"])
+        ProductType(name: "Meat, poultry", image: "cookies", category: ["All", "chocolate"]),
+        ProductType(name: "Milk, eggs", image: "cookies", category: ["All", "chocolate"]),
+        ProductType(name: "Bread, pastries", image: "cookies", category: ["All", "chocolate"]),
+        ProductType(name: "Snacks snacks", image: "cookies", category: ["All", "chocolate"]),
+        ProductType(name: "Pet products", image: "cookies", category: ["All", "chocolate"]),
+        ProductType(name: "Household goods", image: "cookies", category: ["All", "chocolate"]),
+        ProductType(name: "Household chemicals", image: "cookies", category: ["All", "chocolate"]),
+        ProductType(name: "Ready-made food", image: "cookies", category: ["All", "chocolate"])
     ]
+    
     @EnvironmentObject var cartManager: CartManager
+    
     var productList: [Product]
+    
+    var searchResults: [ProductType] {
+            if searchText.isEmpty {
+                return productTypeList
+            } else {
+                return productTypeList.filter { $0.name.contains(searchText) }
+            }
+        }
     
     var body: some View {
         
@@ -29,9 +42,9 @@ struct HomeView: View {
                 
                 LazyVGrid(columns: columns, spacing: 12) {
                     
-                    ForEach(productTypeList, id: \.id) { productType in
+                    ForEach(searchResults, id: \.id) { productType in
                     
-                            NavigationLink(destination: CategoriesView(productType: ProductType(name: "Cookies, Sweetes", image: "cookies", category: ["All", "chocolate"]))
+                        NavigationLink(destination: CategoriesView(productList: productList, productType: productType)
                                 .environmentObject(cartManager)) {
                                     CatalogueCell(width: getItemWidth(), productType: productType)
                                 }
@@ -42,7 +55,7 @@ struct HomeView: View {
             }
             .background(backgroundColor1)
             .navigationTitle(Text("Catalogue"))
-            .searchable(text: $queryString, placement: .navigationBarDrawer(displayMode: .automatic)) {
+            .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .automatic)) {
             }
             .toolbar {
             }

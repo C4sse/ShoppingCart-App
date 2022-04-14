@@ -16,7 +16,7 @@ struct CategoriesView: View {
     
     @State private var showingSheet = false
     @EnvironmentObject var cartManager: CartManager
-    var productList: [Product] = []
+    var productList: [Product]
     var productType: ProductType
     @State var t: [Product] = []
     
@@ -57,13 +57,13 @@ struct CategoriesView: View {
             .background(backgroundColor1)
             .navigationTitle(Text("Vegetables and fruits"))
             .toolbar {
-                NavigationLink {
-                    CartView()
-                        .environmentObject(cartManager)
-                } label: {
-                    
-                    CartButton(numberOfProducts: cartManager.products.count)
-                }
+//                NavigationLink {
+//                    CartView()
+//                        .environmentObject(cartManager)
+//                } label: {
+//                    
+//                    CartButton(numberOfProducts: cartManager.products.count)
+//                }
             }
         .navigationViewStyle(StackNavigationViewStyle())
     }
@@ -93,7 +93,7 @@ struct CategoriesView_Previews: PreviewProvider {
         let productList = [Product(name: "Orange Juice", image: "1", price: 4.99, category: "juice", expirationDate: "10 days", country: "Russia", storageConditions: "refrigerate"),
                            Product(name: "Chocolate Ice Cream", image: "2", price: 2.49, category: "ice cream", expirationDate: "10 days", country: "Russia", storageConditions: "freezer"),
                            Product(name: "Kiwi Juice", image: "3", price: 4.39,  category: "juice", expirationDate: "10 days", country: "Russia", storageConditions: "refrigerate")]
-        CategoriesView(productType: ProductType(name: "Cookies, Sweetes", image: "cookies", category: ["All", "chocolate"]))
+        CategoriesView(productList: productList, productType: ProductType(name: "Cookies, Sweetes", image: "cookies", category: ["All", "chocolate"]))
             .environmentObject(CartManager())
     }
 }
