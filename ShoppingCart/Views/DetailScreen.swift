@@ -10,10 +10,10 @@ import SwiftUI
 struct DetailScreen: View {
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-    @State var isAdded : Bool = false
-    var product: Product
+    var product: RealmProduct
     @State var count: Int = 1
-    @EnvironmentObject var cartManager: CartManager
+    @EnvironmentObject var realmManager: RealmManager
+    
     var body: some View {
         
         ZStack {
@@ -115,10 +115,10 @@ struct DetailScreen: View {
             
             HStack(alignment: .center) {
                 
-                if isAdded {
+                if product.addedToCart {
                     
                     Button(action: {
-                        count = cartManager.removeQuantity(product: product)
+                        realmManager.subtractQuantity(id: product.id)
                     }) {
                         Image(systemName: "minus")
                             .foregroundColor(darkGrayBasic)
@@ -141,7 +141,7 @@ struct DetailScreen: View {
                     .padding(.all, 5)
                     
                     Button(action: {
-                        count = cartManager.incrQuantity(product: product)
+                        realmManager.addQuantity(id: product.id)
                     }) {
                         Image(systemName: "plus")
                             .foregroundColor(darkGrayBasic)
@@ -154,34 +154,23 @@ struct DetailScreen: View {
                 Spacer()
                 
                 Button(action: {
-                    
-                    isAdded.toggle()
-                    if isAdded {
-                        cartManager.addToCart(product: product)
-                    } else {
-                        
-                        cartManager.removeFromCart(product: product)
-                    }
+                    realmManager.addToCart(id: product.id, isAdded: !product.addedToCart)
                 }) {
-                    
-                    Image(systemName: isAdded == true ? "checkmark" : "cart")
+                    Image(systemName: product.addedToCart == true ? "checkmark" : "cart")
                         .padding(.leading, 12)
-//                        .padding(.trailing, 0)
                         
-                    Text( isAdded == true ?  "" : "Add to Cart")
+                    Text( product.addedToCart == true ?  "" : "Add to Cart")
                         .font(Font.custom("SFProDisplay-Regular", size: 14))
                         .foregroundColor(backgroundColor3)
                         .padding(.leading, 0)
                         .padding(.top, 12)
                         .padding(.bottom, 12)
-                        .padding(.trailing,  isAdded == true ? 0 : 12)
+                        .padding(.trailing, product.addedToCart == true ? 0 : 12)
                         .cornerRadius(10.0)
-                    
                 }
                 .foregroundColor(backgroundColor3)
                 .background(greenBasic)
                 .cornerRadius(10.0)
-                
             }
             .padding(.bottom, 16)
             .padding(.leading, 16)
@@ -190,39 +179,13 @@ struct DetailScreen: View {
             .frame(maxHeight: .infinity, alignment: .bottom)
             .edgesIgnoringSafeArea(.bottom)
         }
-        .onAppear {
-            count = cartManager.checkQuantity(product: product)
-            isAdded = cartManager.checkIfCartState(product: product)
-        }
     }
 }
 
 struct DetailScreen_Previews: PreviewProvider {
     static var previews: some View {
-        DetailScreen(product: Product(name: "Mixed Flavor", image: "13", price: 2.75, category: "dessert", expirationDate: "10 days", country: "Russia", storageConditions: "refrigerate"))
-            .environmentObject(CartManager())
+        DetailScreen(product: RealmProduct())
+            .environmentObject(RealmManager())
     }
 }
 
-struct ColorDotView: View {
-    let color: Color
-    var body: some View {
-        color
-            .frame(width: 24, height: 24)
-            .clipShape(Circle())
-    }
-}
-
-
-struct BackButton: View {
-    let action: () -> Void
-    var body: some View {
-        Button(action: action) {
-            Image(systemName: "chevron.backward")
-                .foregroundColor(blackBasic)
-                .padding(.all, 12)
-                .background(backgroundColor3)
-                .cornerRadius(8.0)
-        }
-    }
-}

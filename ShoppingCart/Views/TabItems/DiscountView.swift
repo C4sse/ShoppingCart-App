@@ -9,9 +9,9 @@ import SwiftUI
 
 struct DiscountView: View {
     
-    @EnvironmentObject var cartManager: CartManager
+    @Binding var realmManager: RealmManager
     var columns = [GridItem(.adaptive(minimum: 160), spacing: 8)]
-    var productList: [Product]
+//    var productList: [RealmProduct]
     var body: some View {
         NavigationView {
             
@@ -19,16 +19,11 @@ struct DiscountView: View {
                 
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(alignment: .center, spacing: 16) {
-                        
-                        ForEach(productList, id: \.id) { product in
-                            
+                        ForEach(realmManager.products, id: \.id) { product in
                             PromotedCard(width: UIScreen.main.bounds.size.width - 30, product: product)
-                            
                         }
-                        
                     }
                     .offset(x: 16)
-                    
                 }
                 
                 Text("More items")
@@ -39,9 +34,8 @@ struct DiscountView: View {
                     
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(alignment: .center, spacing: 8) {
-                        ForEach(productList, id: \.id) { product in
-                            ProductCardView(width: getItemWidth(), product: product, showDiscount: true)
-                            .environmentObject(cartManager)
+                        ForEach(realmManager.products, id: \.id) { product in
+//                            ProductCardView(width: getItemWidth(), realmManager: $realmManager, product: product, showDiscount: true)
                         }
                     }
                 }
@@ -54,23 +48,21 @@ struct DiscountView: View {
                     .offset(y: 10)
                 
                 LazyVGrid(columns: columns, spacing: 8) {
-                    ForEach(productList, id: \.id) { product in
-                        ProductCardView(width: getItemWidth(), product: product, showDiscount: true)
-                        .environmentObject(cartManager)
+                    ForEach(realmManager.products, id: \.id) { product in
+//                        ProductCardView(width: getItemWidth(), realmManager: $realmManager, product: product, showDiscount: true)
                     }
                 }
-                .padding()
                 
                 
             }
             .navigationTitle(Text("ShoppingCart"))
             .toolbar {
                 NavigationLink {
-                    CartView()
-                        .environmentObject(cartManager)
+//                    CartView()
+//                        .environmentObject(realmManager)
                 } label: {
-                    
-                    CartButton(numberOfProducts: cartManager.products.count)
+
+                    CartButton(numberOfProducts: realmManager.products.count)
                 }
             }
             .background(backgroundColor1)
@@ -84,16 +76,16 @@ struct DiscountView: View {
 }
     
 
-struct DiscountView_Previews: PreviewProvider {
-    
-    
-    static var previews: some View {
-        
-        let productList = [Product(name: "Mixed Flavor", image: "13", price: 2.75, category: "dessert", expirationDate: "10 days", country: "Russia", storageConditions: "refrigerate"),
-                           Product(name: "Blue-berry Flavor", image: "12", price: 2.00, category: "dessert", expirationDate: "10 days", country: "Russia", storageConditions: "refrigerate"),
-                           Product(name: "Strawberry", image: "17", price: 2.99, category: "juice", expirationDate: "10 days", country: "Russia", storageConditions: "refrigerate")]
-        
-        DiscountView(productList: productList)
-            .environmentObject(CartManager())
-    }
-}
+//struct DiscountView_Previews: PreviewProvider {
+//    
+//    
+//    static var previews: some View {
+//        
+//        let productList = [Product(name: "Mixed Flavor", image: "13", price: 2.75, category: "dessert", expirationDate: "10 days", country: "Russia", storageConditions: "refrigerate"),
+//                           Product(name: "Blue-berry Flavor", image: "12", price: 2.00, category: "dessert", expirationDate: "10 days", country: "Russia", storageConditions: "refrigerate"),
+//                           Product(name: "Strawberry", image: "17", price: 2.99, category: "juice", expirationDate: "10 days", country: "Russia", storageConditions: "refrigerate")]
+//        
+//        DiscountView(productList: productList)
+//            .environmentObject(CartManager())
+//    }
+//}

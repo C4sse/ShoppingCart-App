@@ -11,9 +11,10 @@ struct ProductCardView: View {
     
     var width: CGFloat
     @State private var showingSheet = false
-    @EnvironmentObject var cartManager: CartManager
-    @State var isAdded : Bool = false
-    var product: Product
+//    @EnvironmentObject var cartManager: CartManager
+//    @State var isAdded : Bool = false
+    @EnvironmentObject var realmManager: RealmManager
+    @State var product: RealmProduct
     @State var count: Int = 1
     var showDiscount: Bool
     
@@ -21,34 +22,39 @@ struct ProductCardView: View {
         ZStack(alignment: .topTrailing) {
             
             VStack(alignment: .leading) {
-                
-                VStack {
+                VStack(alignment: .leading) {
+                    VStack {
+                        
+                        Image(product.image)
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width: width, height: 200)
+                            .clipped()
+                    }
+                    .frame(width: width, height: 200)
                     
-                    Image(product.image)
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .frame(width: width, height: 200)
-                        .clipped()
+                    Text("\(product.name)")
+                        .font(Font.custom("SFProText-Bold", size: 19))
+                        .padding(.bottom, 1)
+                        .padding(.leading, 12)
+                        .padding(.trailing, 8)
+                        .lineLimit(1)
+                    
+                    Text("1 kg / $\(product.price, specifier: "%.2f")")
+                        .font(Font.custom("SFProText-Regular", size: 13))
+                        .foregroundColor(darkGrayBasic)
+                        .padding(.leading, 12)
+                        .padding(.trailing, 8)
+                        .padding(.top, 8)
                 }
-                .frame(width: width, height: 200)
-                
-                Text("\(product.name)")
-                    .font(Font.custom("SFProText-Bold", size: 19))
-                    .padding(.bottom, 1)
-                    .padding(.leading, 12)
-                    .padding(.trailing, 8)
-                    .lineLimit(1)
-                
-                Text("1 kg / $ \(product.price, specifier: "%.2f")")
-                    .font(Font.custom("SFProText-Regular", size: 13))
-                    .foregroundColor(darkGrayBasic)
-                    .padding(.leading, 12)
-                    .padding(.trailing, 8)
-                    .padding(.top, 8)
+                .background(backgroundColor3)
+                .onTapGesture {
+                    self.showingSheet.toggle()
+                }
                 
                 HStack(alignment: .center) {
                     
-                    if !isAdded {
+                    if !product.addedToCart {
                         
                         VStack(alignment: .leading) {
                             
@@ -73,20 +79,9 @@ struct ProductCardView: View {
                         Spacer()
                         
                         Button(action: {
-                            
-                            isAdded.toggle()
-                            if !isAdded {
-                                var product = product
-                                product.addedToCart = false
-                                cartManager.removeFromCart(product: product)
-                            } else {
-                                
-                                var product = product
-                                product.addedToCart = true
-                                cartManager.addToCart(product: product)
-                            }
+                            realmManager.addToCart(id: product.id, isAdded: !product.addedToCart)
                         }) {
-                            Image(systemName: isAdded == true ?  "checkmark" : "cart")
+                            Image(systemName: product.addedToCart == true ?  "checkmark" : "cart")
                                 .padding(7)
                             
                                 .frame(width: 40, height: 40)
@@ -101,10 +96,10 @@ struct ProductCardView: View {
                         
                             Button(action: {
                                 
-                                count = cartManager.removeQuantity(product: product)
+                                realmManager.subtractQuantity(id: product.id)
                             }) {
                                 Image(systemName: "minus")
-                                    .foregroundColor(darkGrayBasic)
+                                    .foregroundColor(product.cartQuantity < 2 ? lightGrayBasic : darkGrayBasic)
                                 //                        .padding(.all, 13)
                                     .padding(.bottom, 10)
                                     .padding(.top, 11 )
@@ -114,6 +109,8 @@ struct ProductCardView: View {
                                     .cornerRadius(6.0)
                                 
                             }
+                            .disabled(product.cartQuantity < 2 ? true : false)
+                            
                             .padding(.leading)
                         Spacer()
                             
@@ -121,7 +118,7 @@ struct ProductCardView: View {
                                 Text("$ \(product.price * Double(count), specifier: "%.2f")")
                                     .font(Font.custom("SFProText-Bold", size: 16))
                                     .foregroundColor(greenBasic)
-                                Text("\(count)")
+                                Text("\(product.cartQuantity)")
                                     .brightness(0.4)
                                     .font(Font.custom("SFProText-Regular", size: 13))
                             }
@@ -129,7 +126,7 @@ struct ProductCardView: View {
                         Spacer()
                         
                             Button(action: {
-                                count = cartManager.incrQuantity(product: product)
+                                realmManager.addQuantity(id: product.id)
                             }) {
                                 Image(systemName: "plus")
                                     .foregroundColor(darkGrayBasic)
@@ -157,24 +154,17 @@ struct ProductCardView: View {
         .sheet(isPresented: $showingSheet) {
             
             DetailScreen(product: product)
-                .environmentObject(cartManager)
-        }
-        .onTapGesture {
-            self.showingSheet.toggle()
+                .environmentObject(realmManager)
         }
         .background(backgroundColor3)
         .cornerRadius(12)
-        .onAppear {
-            isAdded = cartManager.checkIfCartState(product: product)
-            count = cartManager.checkQuantity(product: product)
-        }
     }
 }
 
-struct ProductCardView_Previews: PreviewProvider {
-    
-    static var previews: some View {
-        ProductCardView(width: 160, product: Product(name: "Strawberry", image: "17", price: 2.99, category: "juice", expirationDate: "10 days", country: "Russia", storageConditions: "refrigerate"), showDiscount: true)
-            .environmentObject(CartManager())
-    }
-}
+//struct ProductCardView_Previews: PreviewProvider {
+//    
+//    static var previews: some View {
+//        ProductCardView(width: 160, product: Product(name: "Strawberry", image: "17", price: 2.99, category: "juice", expirationDate: "10 days", country: "Russia", storageConditions: "refrigerate"), showDiscount: true)
+//            .environmentObject(CartManager())
+//    }
+//}

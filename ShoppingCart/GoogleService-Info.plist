@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>334194794187-3nkhtloc03gl3oc0lufsv5vajsn4jsti.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.334194794187-3nkhtloc03gl3oc0lufsv5vajsn4jsti</string>
+	<key>API_KEY</key>
+	<string>AIzaSyD5VY1W9jDVTsLiQKkXJtkCN2v5fg75MnI</string>
+	<key>GCM_SENDER_ID</key>
+	<string>334194794187</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.qwicktake.ShoppingCart</string>
+	<key>PROJECT_ID</key>
+	<string>shoppingcart-cd6e1</string>
+	<key>STORAGE_BUCKET</key>
+	<string>shoppingcart-cd6e1.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:334194794187:ios:b579628ba9374bcf9a454e</string>
+	<key>DATABASE_URL</key>
+	<string>https://shoppingcart-cd6e1-default-rtdb.firebaseio.com</string>
+</dict>
+</plist>

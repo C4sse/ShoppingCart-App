@@ -11,7 +11,7 @@ struct PromotedCard: View {
     
     var width: CGFloat
     @State private var showingSheet = false
-    var product: Product
+    var product: RealmProduct
     
     var body: some View {
         ZStack(alignment: .topTrailing) {
@@ -55,7 +55,7 @@ struct PromotedCard: View {
             }
         }
         .sheet(isPresented: $showingSheet) {
-            DetailScreen(product: product)
+//            DetailScreen(product: product)
         }
         .onTapGesture {
             self.showingSheet.toggle()
@@ -63,11 +63,11 @@ struct PromotedCard: View {
     }
 }
 
-struct PromotedCard_Previews: PreviewProvider {
-    static var previews: some View {
-        PromotedCard(width: 300, product: Product(name: "Mixed Flavor", image: "13", price: 2.75, category: "dessert", expirationDate: "10 days", country: "Russia", storageConditions: "refrigerate"))
-    }
-}
+//struct PromotedCard_Previews: PreviewProvider {
+//    static var previews: some View {
+//        PromotedCard(width: 300, product: Product(name: "Mixed Flavor", image: "13", price: 2.75, category: "dessert", expirationDate: "10 days", country: "Russia", storageConditions: "refrigerate"))
+//    }
+//}
 
 struct RoundedCorner: Shape {
 

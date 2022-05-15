@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct ProductRow: View {
-    @EnvironmentObject var cartManager: CartManager
-    var product: Product
+    @EnvironmentObject var realmManager: RealmManager
+    var product: RealmProduct
     @State private var showing = false
     @State var count: Int
     @State var isSwipped: Bool = false
@@ -25,7 +25,7 @@ struct ProductRow: View {
                 Spacer()
                 
                 Button {
-                    deleteProduct(product: product)
+//                    deleteProduct(product: product)
                 } label: {
                     
                     Image(systemName: "trash")
@@ -53,7 +53,7 @@ struct ProductRow: View {
                     HStack(alignment: .center) {
                         
                         Button(action: {
-                            count = cartManager.removeQuantity(product: product)
+//                            count = cartManager.removeQuantity(product: product)
                         }) {
                             Image(systemName: "minus")
                                 .foregroundColor(darkGrayBasic)
@@ -66,7 +66,7 @@ struct ProductRow: View {
                         }
                         
                         VStack(alignment: .center) {
-                            Text("\(product.count)")
+                            Text("\(product.cartQuantity)")
                                 .font(Font.custom("SFProText-Regular", size: 15))
                                 .foregroundColor(darkGrayBasic)
                                 .frame(width: 20)
@@ -74,7 +74,7 @@ struct ProductRow: View {
                         .padding(.all, 5)
                         
                         Button(action: {
-                            count = cartManager.incrQuantity(product: product)
+//                            count = cartManager.incrQuantity(product: product)
                             
                         }) {
                             Image(systemName: "plus")
@@ -100,7 +100,7 @@ struct ProductRow: View {
                     .foregroundColor(darkGrayBasic)
 //                    .padding(.top)
                     .onTapGesture {
-                        cartManager.removeFromCart(product: product)
+//                        cartManager.removeFromCart(product: product)
                     }
             }
             .padding()
@@ -117,51 +117,51 @@ struct ProductRow: View {
     func onChanged(value: DragGesture.Value) {
         print("swipping")
         
-        if value.translation.width < 0 {
-            
-            if isSwipped {
-                let w = value.translation.width - 90
-                offset = cartManager.setOffset(product: product, value: w)
-            } else {
-                offset = cartManager.setOffset(product: product, value: value)
-            }
-        }
+//        if value.translation.width < 0 {
+//
+//            if isSwipped {
+//                let w = value.translation.width - 90
+//                offset = cartManager.setOffset(product: product, value: w)
+//            } else {
+//                offset = cartManager.setOffset(product: product, value: value)
+//            }
+//        }
     }
     
     func onEnd(value: DragGesture.Value) {
         print("on end")
-        withAnimation(.easeOut(duration: 0.4)) {
-
-            if value.translation.width < 0 {
-
-                // checking
-
-                if -value.translation.width > UIScreen.main.bounds.width / 3 {
-                    
-//                    withAnimation(.easeOut(duration: 10)) {
-                        offset = cartManager.setOffset(product: product, value: -1000)
-                        cartManager.removeFromCart(product: product)
-//                    }
-                } else if -product.offset > 50 {
-                    isSwipped = cartManager.setIsSwipped(product: product, isSwipped: true)
-                    offset = cartManager.setOffset(product: product, value: -90)
-                } else {
-                    isSwipped = cartManager.setIsSwipped(product: product, isSwipped: false)
-                    offset = cartManager.setOffset(product: product, value: 0)
-                }
-            } else {
-
-                isSwipped = cartManager.setIsSwipped(product: product, isSwipped: false)
-                offset = cartManager.setOffset(product: product, value: 0)
-            }
-        }
+//        withAnimation(.easeOut(duration: 0.4)) {
+//
+//            if value.translation.width < 0 {
+//
+//                // checking
+//
+//                if -value.translation.width > UIScreen.main.bounds.width / 3 {
+//
+////                    withAnimation(.easeOut(duration: 10)) {
+//                        offset = cartManager.setOffset(product: product, value: -1000)
+//                        cartManager.removeFromCart(product: product)
+////                    }
+//                } else if -product.offset > 50 {
+//                    isSwipped = cartManager.setIsSwipped(product: product, isSwipped: true)
+//                    offset = cartManager.setOffset(product: product, value: -90)
+//                } else {
+//                    isSwipped = cartManager.setIsSwipped(product: product, isSwipped: false)
+//                    offset = cartManager.setOffset(product: product, value: 0)
+//                }
+//            } else {
+//
+//                isSwipped = cartManager.setIsSwipped(product: product, isSwipped: false)
+//                offset = cartManager.setOffset(product: product, value: 0)
+//            }
+//        }
     }
     
     func deleteProduct(product: Product) {
         
         withAnimation(.easeOut(duration: 0.4)) {
-            offset = cartManager.setOffset(product: product, value: -1000)
-            cartManager.removeFromCart(product: product)
+//            offset = cartManager.setOffset(product: product, value: -1000)
+//            cartManager.removeFromCart(product: product)
         }
     }
 }

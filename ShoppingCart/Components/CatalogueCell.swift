@@ -12,23 +12,17 @@ struct CatalogueCell: View {
     var width: CGFloat
     var productType: ProductType
     @State private var showingSheet = false
-    @EnvironmentObject var cartManager: CartManager
     
     var body: some View {
         
         ZStack(alignment: .leading) {
-            
             ZStack(alignment: .bottom) {
-                
-                
                 Image(productType.image)
                     .resizable()
                     .aspectRatio(contentMode: .fill)
                     .frame(width: width, height: 200)
                     .clipped()
                     .brightness(-0.3)
-                
-                
                 VStack(alignment: .leading) {
                     
                     VStack() {}
