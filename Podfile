@@ -21,4 +21,5 @@ target 'ShoppingCart' do
   pod 'ProgressHUD'
   pod 'GoogleSignIn'
   pod  'SwiftRandom'
+  pod 'SDWebImageSwiftUI'
 end

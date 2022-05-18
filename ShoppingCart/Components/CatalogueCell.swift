@@ -6,18 +6,20 @@
 //
 
 import SwiftUI
+import SDWebImageSwiftUI
 
 struct CatalogueCell: View {
     
     var width: CGFloat
-    var productType: ProductType
+//    var productType: RealmCategory
+    var name: String
     @State private var showingSheet = false
     
     var body: some View {
         
         ZStack(alignment: .leading) {
             ZStack(alignment: .bottom) {
-                Image(productType.image)
+                WebImage(url: URL(string: "https://nokiatech.github.io/heif/content/images/ski_jump_1440x960.heic"))
                     .resizable()
                     .aspectRatio(contentMode: .fill)
                     .frame(width: width, height: 200)
@@ -30,7 +32,7 @@ struct CatalogueCell: View {
                     .background(backgroundColor3)
                     .cornerRadius(1.5)
                     
-                    Text("\(productType.name)")
+                    Text("\(name)")
                         .font(Font.custom("SFProText-Regular", size: 15))
                         .lineLimit(1)
                         .foregroundColor(backgroundColor3)
@@ -61,8 +63,8 @@ struct CatalogueCell: View {
     }
 }
 
-struct CatalogueCell_Previews: PreviewProvider {
-    static var previews: some View {
-        CatalogueCell(width: 200, productType: ProductType(name: "Cookies, Sweetes", image: "cookies", category: ["All", "chocolate"]))
-    }
-}
+//struct CatalogueCell_Previews: PreviewProvider {
+//    static var previews: some View {
+//        CatalogueCell(width: 200, productType: ProductType(name: "Cookies, Sweetes", image: "cookies", category: ["All", "chocolate"]))
+//    }
+//}

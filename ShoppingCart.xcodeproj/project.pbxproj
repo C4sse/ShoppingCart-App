@@ -21,12 +21,13 @@
 		C12AFFDB27CC1B7300C53ABB /* PaymentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12AFFDA27CC1B7300C53ABB /* PaymentHandler.swift */; };
 		C12D88C6280E8E0B00F94BAA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C12D88C5280E8E0B00F94BAA /* GoogleService-Info.plist */; };
 		C12D88C8280EA2F200F94BAA /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12D88C7280EA2F200F94BAA /* LoginViewModel.swift */; };
-		C13221842815C0DC0056CAB2 /* RealmApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = C13221832815C0DC0056CAB2 /* RealmApi.swift */; };
 		C13A035627D684DA00FC62FA /* DetailScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C13A035527D684DA00FC62FA /* DetailScreen.swift */; };
 		C16D0E36280EB4A200EE4042 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C16D0E35280EB4A200EE4042 /* SignInView.swift */; };
 		C16D0E39280EBA6A00EE4042 /* KeyboardResponder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C16D0E38280EBA6A00EE4042 /* KeyboardResponder.swift */; };
 		C19A8EFB27D249CB006D2B0B /* DiscountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19A8EFA27D249CB006D2B0B /* DiscountView.swift */; };
 		C19A8EFD27D24A18006D2B0B /* CategoriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19A8EFC27D24A18006D2B0B /* CategoriesView.swift */; };
+		C19C6E9E28341C29004BD498 /* RealmCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19C6E9D28341C29004BD498 /* RealmCategory.swift */; };
+		C19C6EA028341D14004BD498 /* CategoriesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19C6E9F28341D14004BD498 /* CategoriesManager.swift */; };
 		C1C36DFF27D0FF86005E960D /* PromotedCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C36DFE27D0FF85005E960D /* PromotedCard.swift */; };
 		C1C6BFCE280B86C600E429B1 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C6BFCD280B86C600E429B1 /* SignUpView.swift */; };
 		C1C6BFD0280B878900E429B1 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C6BFCF280B878900E429B1 /* User.swift */; };
@@ -48,7 +49,7 @@
 		C1F33E6B280B470F008854C2 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1F33E6A280B470F008854C2 /* AuthService.swift */; };
 		C1F33E6D280B49B3008854C2 /* Api.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1F33E6C280B49B3008854C2 /* Api.swift */; };
 		C1F33E6F280B4A6D008854C2 /* UserApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1F33E6E280B4A6D008854C2 /* UserApi.swift */; };
-		C1F33E71280B5047008854C2 /* FeedApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1F33E70280B5047008854C2 /* FeedApi.swift */; };
+		C1F33E71280B5047008854C2 /* ItemsApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1F33E70280B5047008854C2 /* ItemsApi.swift */; };
 		C1F96FBC28002ACB004313F7 /* SFProDisplay-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C1F96FB328002ACA004313F7 /* SFProDisplay-Bold.ttf */; };
 		C1F96FBD28002ACB004313F7 /* SFProDisplay-SemiboldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C1F96FB428002ACA004313F7 /* SFProDisplay-SemiboldItalic.ttf */; };
 		C1F96FBE28002ACB004313F7 /* SFProText-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C1F96FB528002ACA004313F7 /* SFProText-Medium.ttf */; };
@@ -82,12 +83,13 @@
 		C12AFFDA27CC1B7300C53ABB /* PaymentHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentHandler.swift; sourceTree = "<group>"; };
 		C12D88C5280E8E0B00F94BAA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C12D88C7280EA2F200F94BAA /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
-		C13221832815C0DC0056CAB2 /* RealmApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmApi.swift; sourceTree = "<group>"; };
 		C13A035527D684DA00FC62FA /* DetailScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailScreen.swift; sourceTree = "<group>"; };
 		C16D0E35280EB4A200EE4042 /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
 		C16D0E38280EBA6A00EE4042 /* KeyboardResponder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardResponder.swift; sourceTree = "<group>"; };
 		C19A8EFA27D249CB006D2B0B /* DiscountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscountView.swift; sourceTree = "<group>"; };
 		C19A8EFC27D24A18006D2B0B /* CategoriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesView.swift; sourceTree = "<group>"; };
+		C19C6E9D28341C29004BD498 /* RealmCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmCategory.swift; sourceTree = "<group>"; };
+		C19C6E9F28341D14004BD498 /* CategoriesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesManager.swift; sourceTree = "<group>"; };
 		C1C36DFE27D0FF85005E960D /* PromotedCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromotedCard.swift; sourceTree = "<group>"; };
 		C1C6BFCD280B86C600E429B1 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		C1C6BFCF280B878900E429B1 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -109,7 +111,7 @@
 		C1F33E6A280B470F008854C2 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		C1F33E6C280B49B3008854C2 /* Api.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Api.swift; sourceTree = "<group>"; };
 		C1F33E6E280B4A6D008854C2 /* UserApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserApi.swift; sourceTree = "<group>"; };
-		C1F33E70280B5047008854C2 /* FeedApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedApi.swift; sourceTree = "<group>"; };
+		C1F33E70280B5047008854C2 /* ItemsApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsApi.swift; sourceTree = "<group>"; };
 		C1F96FB328002ACA004313F7 /* SFProDisplay-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFProDisplay-Bold.ttf"; sourceTree = "<group>"; };
 		C1F96FB428002ACA004313F7 /* SFProDisplay-SemiboldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFProDisplay-SemiboldItalic.ttf"; sourceTree = "<group>"; };
 		C1F96FB528002ACA004313F7 /* SFProText-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFProText-Medium.ttf"; sourceTree = "<group>"; };
@@ -205,6 +207,7 @@
 			isa = PBXGroup;
 			children = (
 				C1D8AC36282D3698004641E3 /* RealmProduct.swift */,
+				C19C6E9D28341C29004BD498 /* RealmCategory.swift */,
 				C12AFFC927CBA8ED00C53ABB /* Product.swift */,
 				C1F96FC928003C03004313F7 /* ProductType.swift */,
 				C1F96FCB28003CFA004313F7 /* Colors.swift */,
@@ -254,9 +257,9 @@
 				C1F33E6C280B49B3008854C2 /* Api.swift */,
 				C1F33E6A280B470F008854C2 /* AuthService.swift */,
 				C1F33E6E280B4A6D008854C2 /* UserApi.swift */,
-				C1F33E70280B5047008854C2 /* FeedApi.swift */,
-				C13221832815C0DC0056CAB2 /* RealmApi.swift */,
+				C1F33E70280B5047008854C2 /* ItemsApi.swift */,
 				C1D8AC37282D3699004641E3 /* RealmManager.swift */,
+				C19C6E9F28341D14004BD498 /* CategoriesManager.swift */,
 			);
 			path = Api;
 			sourceTree = "<group>";
@@ -473,7 +476,7 @@
 			files = (
 				C1E140C22809BE2A002B2506 /* iPadSheetDimensions.swift in Sources */,
 				C12AFFD827CC150B00C53ABB /* PaymentButton.swift in Sources */,
-				C1F33E71280B5047008854C2 /* FeedApi.swift in Sources */,
+				C1F33E71280B5047008854C2 /* ItemsApi.swift in Sources */,
 				C1C36DFF27D0FF86005E960D /* PromotedCard.swift in Sources */,
 				C1E140C32809BE2A002B2506 /* WelcomeSheetPageView.swift in Sources */,
 				C1D8AC39282D3699004641E3 /* RealmManager.swift in Sources */,
@@ -484,8 +487,8 @@
 				C1E140BF2809BE2A002B2506 /* Color+Extensions.swift in Sources */,
 				C12AFFD227CBB69D00C53ABB /* CartView.swift in Sources */,
 				C16D0E36280EB4A200EE4042 /* SignInView.swift in Sources */,
+				C19C6EA028341D14004BD498 /* CategoriesManager.swift in Sources */,
 				C12AFFBD27CBA77400C53ABB /* ContentView.swift in Sources */,
-				C13221842815C0DC0056CAB2 /* RealmApi.swift in Sources */,
 				C1E140C42809BE2A002B2506 /* WelcomeSheetView.swift in Sources */,
 				C1E140C12809BE2A002B2506 /* iPhoneDimensions.swift in Sources */,
 				C19A8EFB27D249CB006D2B0B /* DiscountView.swift in Sources */,
@@ -501,6 +504,7 @@
 				C1C6BFD0280B878900E429B1 /* User.swift in Sources */,
 				C1F33E6D280B49B3008854C2 /* Api.swift in Sources */,
 				C1E140AB2809B28C002B2506 /* SignInScreenView.swift in Sources */,
+				C19C6E9E28341C29004BD498 /* RealmCategory.swift in Sources */,
 				C1E140BD2809BE2A002B2506 /* WelcomeSheetPageRow.swift in Sources */,
 				C1DD65762803041C00BC8D15 /* ProfileView.swift in Sources */,
 				C1F33E6F280B4A6D008854C2 /* UserApi.swift in Sources */,

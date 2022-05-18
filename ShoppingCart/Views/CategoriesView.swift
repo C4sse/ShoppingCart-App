@@ -6,18 +6,17 @@
 //
 
 import SwiftUI
+import RealmSwift
 
 struct CategoriesView: View {
     
-    @EnvironmentObject var realmManager: RealmManager
+    @StateObject var realmManager = RealmManager()
     @State private var search: String = ""
     @State private var selectedIndex: Int = 0
     @State private var showingSheet = false
     var columns = [GridItem(.adaptive(minimum: 160), spacing: 12)]
-    var productType: ProductType
-    //    @State var t: [Product] = []
-    //    @State private var taskTitle: String = ""
-    //    private let categories = ["all", "juice", "dessert", "meal", "vegetables"]
+    var category: RealmCategory
+    @State private var filteredProducts: [RealmProduct] = []
     
     var body: some View {
         
@@ -44,11 +43,16 @@ struct CategoriesView: View {
                     
                     HStack(spacing: 12) {
                         
-                        ForEach (0 ..< productType.category.count, id:\.self) { i in
+                        ForEach (0 ..< category.filters.count, id:\.self) { i in
                             
-                            Button(action: {selectedIndex = i}) {
+                            Button(action: {
+                                selectedIndex = i
+                                if selectedIndex > 0 {
+                                    filteredProducts = realmManager.products.filter { $0.type.contains(category.filters[i]) }
+                                }
+                            }) {
                                 
-                                CategoryView(isActive: selectedIndex == i, text: productType.category[i])
+                                CategoryView(isActive: selectedIndex == i, text: category.filters[i])
                             }
                         }
                     }
@@ -68,34 +72,37 @@ struct CategoriesView: View {
                 .padding()
             }
         }
-//        .padding(0)
         .background(backgroundColor1)
-        .navigationTitle(Text("Vegetables and fruits"))
+        .navigationTitle(Text(category.name))
         .toolbar {
         }
         .navigationViewStyle(StackNavigationViewStyle())
+        .onAppear {
+            realmManager.getitems(categoryId: category.id)
+            print("selected index", selectedIndex)
+        }
     }
 }
 
-struct CategoriesView_Previews: PreviewProvider {
-    
-    
-    static var realmManager: RealmManager {
-        
-        let realmManager = RealmManager()
-        
-        realmManager.addTask(title: "Orange Juice", image: "1", price: 4.99, category: "juice", expirationDate: "10 days", country: "Russia", storageConditions: "refrigerate")
-        realmManager.addTask(title: "Chocolate Ice Cream", image: "2", price: 2.49, category: "ice cream", expirationDate: "10 days", country: "Russia", storageConditions: "freezer")
-        realmManager.addTask(title: "Kiwi Juice", image: "3", price: 4.39,  category: "juice", expirationDate: "10 days", country: "Russia", storageConditions: "refrigerate")
-        
-        return realmManager
-    }
-    static var previews: some View {
-        
-        CategoriesView(productType: ProductType(name: "ih", image: "hi", category: ["All", "Choco"]))
-            .environmentObject(realmManager)
-    }
-}
+//struct CategoriesView_Previews: PreviewProvider {
+//
+//
+//    static var realmManager: RealmManager {
+//
+//        let realmManager = RealmManager()
+//
+//        realmManager.addTask(title: "Orange Juice", image: "1", price: 4.99, category: "juice", expirationDate: "10 days", country: "Russia", storageConditions: "refrigerate")
+//        realmManager.addTask(title: "Chocolate Ice Cream", image: "2", price: 2.49, category: "ice cream", expirationDate: "10 days", country: "Russia", storageConditions: "freezer")
+//        realmManager.addTask(title: "Kiwi Juice", image: "3", price: 4.39,  category: "juice", expirationDate: "10 days", country: "Russia", storageConditions: "refrigerate")
+//
+//        return realmManager
+//    }
+//    static var previews: some View {
+//
+//        CategoriesView(productType: ProductType(name: "ih", image: "hi", category: ["All", "Choco"]))
+//            .environmentObject(realmManager)
+//    }
+//}
 
 struct CategoryView: View {
     let isActive: Bool

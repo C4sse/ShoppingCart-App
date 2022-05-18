@@ -33,9 +33,9 @@ struct CartView: View {
                                         .font(Font.custom("SFProText-Medium", size: 16))
                                         .foregroundColor(blackBasic)
                                         .padding(.leading, 18)
-                                    Text("\(realmManager.inCartProducts.count)")
-                                        .font(Font.custom("SFProText-Semibold", size: 16))
-                                        .foregroundColor(greenBasic)
+//                                    Text("\(realmManager.inCartProducts.count)")
+//                                        .font(Font.custom("SFProText-Semibold", size: 16))
+//                                        .foregroundColor(greenBasic)
                                 }
                             }
 
@@ -43,8 +43,8 @@ struct CartView: View {
 
                                 ForEach(realmManager.products, id: \.id) { product in
 
-                                    ProductRow(product: product, count: realmManager.inCartProducts.count)
-                                        .cornerRadius(10)
+//                                    ProductRow(product: product, count: realmManager.inCartProducts.count)
+//                                        .cornerRadius(10)
                                 }
 
                             } else {

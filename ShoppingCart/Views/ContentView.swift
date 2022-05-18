@@ -13,7 +13,7 @@ struct ContentView: View {
     @State var realmManager = RealmManager()
     @State var isLoggedIn: Bool = Api.User.CURRENT_USER != nil
     private var token: NotificationToken?
-//    @State var count: Int = realmManager.inCartProducts.count
+    @StateObject var categoriesManager = CategoriesManager()
     
     var body: some View {
         
@@ -25,7 +25,8 @@ struct ContentView: View {
             
             TabView {
                 
-                HomeView(realmManager: $realmManager)
+                HomeView()
+                    .environmentObject(categoriesManager)
                     .tabItem {
                         Image(systemName: "list.bullet")
                         Text("Catalogue")

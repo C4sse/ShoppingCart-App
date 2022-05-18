@@ -10,119 +10,91 @@ import RealmSwift
 import ProgressHUD
 
 class RealmManager: ObservableObject {
-//    private(set) var localRealm: Realm?
-    var cartFile: Realm!
+    
     let paymentHandler = PaymentHandler()
-    private(set) var categoriesFile: Realm!
+    
     private(set) var productsFile: Realm!
     @Published var paymentSuccess = false
     @Published private(set) var total: Double = 0
     @Published var products: [RealmProduct] = []
-    @Published var inCartProducts: [RealmProduct] = []
     
     // On initialize of the class, we'll open a Realm and get the tasks saved in the Realm
     init() {
         openRealm()
-        getTasks()
     }
 
     // Function to open a Realm (like a box) - needed for saving data inside of the Realm
     func openRealm() {
-        do {
+        
+        let config = Realm.Configuration(
+            // Set the new schema version. This must be greater than the previously used
+            // version (if you've never set a schema version before, the version is 0).
+            schemaVersion: 6,
             
-            let config = Realm.Configuration(
-                // Set the new schema version. This must be greater than the previously used
-                // version (if you've never set a schema version before, the version is 0).
-                schemaVersion: 5,
+            // Set the block which will be called automatically when opening a Realm with
+            // a schema version lower than the one set above
+            migrationBlock: { migration, oldSchemaVersion in
+                // We haven’t migrated anything yet, so oldSchemaVersion == 0
                 
-                // Set the block which will be called automatically when opening a Realm with
-                // a schema version lower than the one set above
-                migrationBlock: { migration, oldSchemaVersion in
-                    // We haven’t migrated anything yet, so oldSchemaVersion == 0
-                    
-                    if (oldSchemaVersion < 1) {
-                        // Nothing to do!
-                        // Realm will automatically detect new properties and removed properties
-                        // And will update the schema on disk automatically
-                    }
-                })
+                if (oldSchemaVersion < 1) {
+                    // Nothing to do!
+                    // Realm will automatically detect new properties and removed properties
+                    // And will update the schema on disk automatically
+                }
+            })
+        
+        func inLibraryFolder(fileName: String) -> URL {
             
-            func inLibraryFolder(fileName: String) -> URL {
-                
-                return URL(fileURLWithPath: NSSearchPathForDirectoriesInDomains(.libraryDirectory, .userDomainMask, true)[0], isDirectory: true)
-                    .appendingPathComponent(fileName)
+            return URL(fileURLWithPath: NSSearchPathForDirectoriesInDomains(.libraryDirectory, .userDomainMask, true)[0], isDirectory: true)
+                .appendingPathComponent(fileName)
+        }
+        
+        // Tell Realm to use this new configuration object for the default Realm
+        Realm.Configuration.defaultConfiguration = config
+        
+        productsFile = try! Realm(fileURL: inLibraryFolder(fileName: "items.realm"))
+    }
+    
+    func getitems(categoryId: String) {
+        
+        let predicate = NSPredicate(format: "category = %@", categoryId)
+        let prods = self.productsFile.objects(RealmProduct.self)
+        
+        prods.forEach { prod in
+            products.append(prod)
+        }
+        
+        ItemsApi.getItems(forCategoryId: categoryId, realManager: self) { [self] in
+            
+            let predicate = NSPredicate(format: "category = %@", categoryId)
+            let prods = self.productsFile.objects(RealmProduct.self)
+            print(prods.count)
+            prods.forEach { prod in
+                products.append(prod)
             }
-            
-            // Tell Realm to use this new configuration object for the default Realm
-            Realm.Configuration.defaultConfiguration = config
-            
-            cartFile = try! Realm(fileURL: inLibraryFolder(fileName: "cart.realm"))
-            categoriesFile = try! Realm(fileURL: inLibraryFolder(fileName: "categories.realm"))
-            productsFile = try! Realm(fileURL: inLibraryFolder(fileName: "items.realm"))
-            
-        } catch {
-            print("Error opening Realm", error)
         }
     }
-
-    // Function to add a task
-    func addTask(title: String, image: String, price: Double, category: String, expirationDate: String, country: String, storageConditions: String) {
+    
+    func addItem(dict: [String: Any], key: String) {
         if let localRealm = productsFile { // Need to unwrap optional, since localRealm is optional
             do {
                 // Trying to write to the localRealm
                 try localRealm.write {
                     // Creating a new Task
                     let realmProduct = RealmProduct(value: [
-                        "id": UUID().uuidString,
-                        "name": title,
-                        "price": 1.00,
-                        "image": image,
-                        "category": category,
-                        "expirationDate": expirationDate,
-                        "country": country,
-                        "storageConditions": storageConditions
+                        "id": key,
+                        "name": dict["name"] as? String,
+                        "price": dict["price"] as? Double,
+                        "image": dict["image"] as? String,
+                        "category": dict["category"] as? String,
+                        "type": dict["tag"] as? String
                     ])
                    
                     // Adding newTask to localRealm
-                    localRealm.add(realmProduct)
-                    
-                    // Re-setting the tasks array
-                    getTasks()
-                    print("Added new task to Realm!", realmProduct)
+                    localRealm.add(realmProduct, update: .all)
                 }
             } catch {
                 print("Error adding task to Realm: \(error)")
-            }
-        }
-    }
-    
-    // Function to get all tasks from Realm and setting them in the tasks array
-    func getTasks() {
-        if let productsFile = productsFile {
-            
-            // Getting all objects from localRealm and sorting them by completed state
-            let allTasks = productsFile.objects(RealmProduct.self)
-            
-            // Resetting the tasks array
-            products = []
-            
-            // Append each task to the tasks array
-            allTasks.forEach { task in
-                products.append(task)
-            }
-        }
-        
-        if let cartFile = cartFile {
-            
-            // Getting all objects from localRealm and sorting them by completed state
-            let allCartProducts = cartFile.objects(RealmProduct.self)
-            
-            // Resetting the tasks array
-            inCartProducts = []
-            
-            // Append each task to the tasks array
-            allCartProducts.forEach { product in
-                inCartProducts.append(product)
             }
         }
     }
@@ -130,7 +102,7 @@ class RealmManager: ObservableObject {
     // Function to update a task's completed state
     func addToCart(id: String, isAdded: Bool) {
         
-        if let productsFile = productsFile, let cartFile = cartFile {
+        if let productsFile = productsFile {
             do {
                 // Find the task we want to update by its id
                 let productToUpdate = productsFile.objects(RealmProduct.self).filter(NSPredicate(format: "id == %@", id))
@@ -145,26 +117,11 @@ class RealmManager: ObservableObject {
                     productToUpdate[0].addedToCart = isAdded
                     
                     // Re-setting the tasks array
-                    getTasks()
+//                    getTasks()
                     print("Updated task with id \(id)! Completed status: \(isAdded)")
                 }
                 
-                let realmProduct = RealmProduct(value: [
-                    "id": productToUpdate[0].id,
-                    "name": productToUpdate[0].title,
-                    "price": productToUpdate[0].price,
-                    "image": productToUpdate[0].image,
-                    "category": productToUpdate[0].category,
-                    "expirationDate": productToUpdate[0].expirationDate,
-                    "country": productToUpdate[0].country,
-                    "storageConditions": productToUpdate[0].storageConditions
-                ])
-                
-                try cartFile.write {
-                    
-                    cartFile.add(realmProduct, update: .all)
-                    getTasks()
-                }
+                // perform network call
                 
             } catch {
                 print("Error updating task \(id) to Realm: \(error)")
@@ -193,7 +150,7 @@ class RealmManager: ObservableObject {
                         taskToUpdate[0].cartQuantity = taskToUpdate[0].cartQuantity + 1
                         
                         // Re-setting the tasks array
-                        getTasks()
+//                        getTasks()
                         calculateTotal()
                         print("Updated task with id \(id)!")
                     } else {
@@ -224,7 +181,7 @@ class RealmManager: ObservableObject {
                     taskToUpdate[0].cartQuantity = taskToUpdate[0].cartQuantity - 1
                     
                     // Re-setting the tasks array
-                    getTasks()
+//                    getTasks()
                     calculateTotal()
                     print("Updated task with id \(id)!")
                 }
@@ -251,7 +208,7 @@ class RealmManager: ObservableObject {
                     localRealm.delete(taskToDelete)
                     
                     // Re-setting the tasks array
-                    getTasks()
+//                    getTasks()
                     print("Deleted task with id \(id)")
                 }
             } catch {
@@ -272,14 +229,8 @@ class RealmManager: ObservableObject {
                     localRealm.deleteAll()
                     
                     // Re-setting the tasks array
-                    getTasks()
+//                    getTasks()
                     
-                }
-                
-                try cartFile.write {
-                    
-                    cartFile.deleteAll()
-                    getTasks()
                 }
                 
             } catch {
@@ -290,11 +241,11 @@ class RealmManager: ObservableObject {
     
     // MARK: cart manager
     func pay() {
-        paymentHandler.startPayment(products: inCartProducts, total: total) { success in
-            self.paymentSuccess = success
-            self.products = []
-            self.total = 0
-        }
+//        paymentHandler.startPayment(products: inCartProducts, total: total) { success in
+//            self.paymentSuccess = success
+////            self.products = []
+//            self.total = 0
+//        }
     }
     
     private func calculateTotal() {
