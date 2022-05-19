@@ -17,7 +17,7 @@ struct ContentView: View {
     
     var body: some View {
         
-        if isLoggedIn {
+        if !isLoggedIn {
             
             SignInScreenView(isSignedIn: $isLoggedIn)
             
@@ -45,7 +45,7 @@ struct ContentView: View {
                     }
 //                    .badge(count)
 
-                ProfileView()
+                ProfileView(isLoggedIn: $isLoggedIn)
                     .tabItem {
                         Image(systemName: "person.fill")
                         Text("Profile")

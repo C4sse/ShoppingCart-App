@@ -184,13 +184,13 @@ class AuthService {
         }
     }
     
-    static func signOut() {
+    static func signOut(completion: @escaping () -> Void) {
         
         do {
             
             GIDSignIn.sharedInstance.signOut()
             try Auth.auth().signOut()
-            
+            completion()
         } catch let logoutError {
             ProgressHUD.showError(logoutError.localizedDescription)
             return

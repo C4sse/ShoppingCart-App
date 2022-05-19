@@ -36,6 +36,10 @@ struct SignInScreenView: View {
                         
                         SignInWithAppleButton { (request) in
                             
+                            ProgressHUD.animationType = .multipleCirclePulse
+                            ProgressHUD.colorHUD = .darkGray
+                            ProgressHUD.colorAnimation = .darkGray
+                            ProgressHUD.show()
                             loginData.nonce = Api.Auth.randomNonceString()
                             request.requestedScopes = [.email, .fullName]
                             request.nonce = Api.Auth.sha256(loginData.nonce)
