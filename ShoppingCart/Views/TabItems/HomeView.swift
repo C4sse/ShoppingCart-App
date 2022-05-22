@@ -45,7 +45,16 @@ struct HomeView: View { // change
         }
         .navigationViewStyle(StackNavigationViewStyle())
         .onAppear {
+            RealmManager().deleteAll()
             categoriesManager.getCategories(categoriesManager: categoriesManager)
+            let dict: [String: Any] = [
+                "name": "Choco",
+                "image": "https://loremflickr.com/cache/resized/65535_51997341473_55b86a2b17_n_320_240_nofilter.jpg",
+                "price": 2.0,
+                "availableQuantity": 3,
+                "type": "chocolate"
+            ]
+            ItemsApi.addProductToStore(dict: dict, forCategoryId: "123")
         }
     }
 }

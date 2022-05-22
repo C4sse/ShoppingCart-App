@@ -29,7 +29,7 @@ class RealmManager: ObservableObject {
         let config = Realm.Configuration(
             // Set the new schema version. This must be greater than the previously used
             // version (if you've never set a schema version before, the version is 0).
-            schemaVersion: 6,
+            schemaVersion: 8,
             
             // Set the block which will be called automatically when opening a Realm with
             // a schema version lower than the one set above
@@ -69,6 +69,9 @@ class RealmManager: ObservableObject {
             let predicate = NSPredicate(format: "category = %@", categoryId)
             let prods = self.productsFile.objects(RealmProduct.self)
             print(prods.count)
+            
+            products = []
+            
             prods.forEach { prod in
                 products.append(prod)
             }
@@ -80,16 +83,16 @@ class RealmManager: ObservableObject {
             do {
                 // Trying to write to the localRealm
                 try localRealm.write {
-                    // Creating a new Task
-                    let realmProduct = RealmProduct(value: [
-                        "id": key,
-                        "name": dict["name"] as? String,
-                        "price": dict["price"] as? Double,
-                        "image": dict["image"] as? String,
-                        "category": dict["category"] as? String,
-                        "type": dict["tag"] as? String
-                    ])
-                   
+                    // Creating a new local database entry
+                    
+                    let realmProduct = RealmProduct()
+                    
+                    realmProduct.id = key
+                    if let name = dict["name"] as? String { realmProduct.name = name }
+                    if let price = dict["price"] as? Double { realmProduct.price = price }
+                    if let image = dict["image"] as? String { realmProduct.image = image }
+                    if let type = dict["type"] as? String { realmProduct.type = type }
+                    
                     // Adding newTask to localRealm
                     localRealm.add(realmProduct, update: .all)
                 }
@@ -144,10 +147,10 @@ class RealmManager: ObservableObject {
                 // Trying to write to the localRealm
                 try localRealm.write {
                     
-                    if taskToUpdate[0].cartQuantity < taskToUpdate[0].availableQuantity {
+                    if taskToUpdate[0].cartQuantity< taskToUpdate[0].availableQuantity {
                         
                         // Getting the first item of the array and changing its completed state
-                        taskToUpdate[0].cartQuantity = taskToUpdate[0].cartQuantity + 1
+                        taskToUpdate[0].cartQuantity = (taskToUpdate[0].cartQuantity) + 1
                         
                         // Re-setting the tasks array
 //                        getTasks()
@@ -178,7 +181,7 @@ class RealmManager: ObservableObject {
                 try localRealm.write {
                     
                     // Getting the first item of the array and changing its completed state
-                    taskToUpdate[0].cartQuantity = taskToUpdate[0].cartQuantity - 1
+                    taskToUpdate[0].cartQuantity = (taskToUpdate[0].cartQuantity) - 1
                     
                     // Re-setting the tasks array
 //                    getTasks()

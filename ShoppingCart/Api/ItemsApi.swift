@@ -8,6 +8,7 @@
 import FirebaseDatabase
 import RealmSwift
 import CryptoKit
+import ProgressHUD
 
 class ItemsApi {
     
@@ -58,6 +59,23 @@ class ItemsApi {
             }
             
             completion()
+        }
+    }
+    
+    // MARK: uploading
+    static func addProductToStore(dict: [String: Any], forCategoryId categoryId: String) {
+        
+        guard let newId = Database.database().reference().child("products").childByAutoId().key else { return }
+        
+        Database.database().reference().child("products").child(newId).setValue(dict) { error, ref in
+            
+            if error != nil {
+                
+                ProgressHUD.showError(error?.localizedDescription)
+                return
+            }
+            
+            Database.database().reference().child("categoryItems").child(categoryId).child(newId).setValue(true)
         }
     }
 }
