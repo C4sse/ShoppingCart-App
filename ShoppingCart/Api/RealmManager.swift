@@ -58,24 +58,23 @@ class RealmManager: ObservableObject {
     
     func getitems(categoryId: String) {
         
-        let predicate = NSPredicate(format: "category = %@", categoryId)
-        let prods = self.productsFile.objects(RealmProduct.self)
-        
-        prods.forEach { prod in
-            products.append(prod)
-        }
+//        let predicate = NSPredicate(format: "category = %@", categoryId)
+//        let prods = self.productsFile.objects(RealmProduct.self)
+//
+//        prods.forEach { prod in
+//            products.append(prod)
+//        }
         
         ItemsApi.getItems(forCategoryId: categoryId, realManager: self) { [self] in
             
-            let predicate = NSPredicate(format: "category = %@", categoryId)
             let prods = self.productsFile.objects(RealmProduct.self)
             print(prods.count)
             
             products = []
-            
-            
             prods.forEach { prod in
-                print(prod.isDiscounted)
+                print("invalidated")
+                print(prod.isInvalidated)
+                
                 products.append(prod)
             }
             
@@ -97,7 +96,6 @@ class RealmManager: ObservableObject {
             print(prods.count)
             
             discountProducts = []
-            
             
             prods.forEach { prod in
                 print(prod.isDiscounted)
@@ -262,7 +260,8 @@ class RealmManager: ObservableObject {
                     
                     // Deleting the task
                     localRealm.deleteAll()
-                    
+                    products = []
+                    discountProducts = []
                     // Re-setting the tasks array
 //                    getTasks()
                     

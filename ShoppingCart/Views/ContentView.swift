@@ -10,7 +10,7 @@ import RealmSwift
 
 struct ContentView: View {
     
-    @State var realmManager = RealmManager()
+    @StateObject var realmManager = RealmManager()
     @State var isLoggedIn: Bool = Api.User.CURRENT_USER != nil
     private var token: NotificationToken?
     @StateObject var categoriesManager = CategoriesManager()
@@ -27,18 +27,21 @@ struct ContentView: View {
                 
                 HomeView()
                     .environmentObject(categoriesManager)
+                    .environmentObject(realmManager)
                     .tabItem {
                         Image(systemName: "list.bullet")
                         Text("Catalogue")
                     }
                 
                 DiscountView()
+                    .environmentObject(realmManager)
                     .tabItem {
                         Image(systemName: "percent")
                         Text("Discount")
                     }
 
-                CartView(realmManager: $realmManager)
+                CartView()
+                    .environmentObject(realmManager)
                     .tabItem {
                         Image(systemName: "cart")
                         Text("Cart")

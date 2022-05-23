@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SDWebImageSwiftUI
 
 struct PromotedCard: View {
     
@@ -17,7 +18,7 @@ struct PromotedCard: View {
         ZStack(alignment: .topTrailing) {
             
             ZStack(alignment: .leading) {
-                Image(product.image)
+                WebImage(url: URL(string: product.image))
                     .resizable()
                     .aspectRatio(contentMode: .fill)
                     .frame(width: width, height: 200)

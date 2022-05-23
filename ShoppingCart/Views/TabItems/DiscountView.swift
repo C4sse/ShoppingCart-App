@@ -9,7 +9,7 @@ import SwiftUI
 
 struct DiscountView: View {
     
-    @StateObject var realmManager = RealmManager()
+    @EnvironmentObject var realmManager: RealmManager
     var columns = [GridItem(.adaptive(minimum: 160), spacing: 8)]
 //    var productList: [RealmProduct]
     var body: some View {

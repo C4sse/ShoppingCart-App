@@ -9,6 +9,7 @@ import SwiftUI
 
 struct HomeView: View { // change
     
+    @EnvironmentObject var realmManager: RealmManager
     @EnvironmentObject var categoriesManager: CategoriesManager
     @State private var searchText = ""
     var columns = [GridItem(.adaptive(minimum: 160), spacing: 12)]
@@ -32,8 +33,9 @@ struct HomeView: View { // change
                     ForEach(categoriesManager.categories, id: \.id) { category in
                         
                         if !category.isInvalidated {
-                            NavigationLink(destination: CategoriesView(category: category)) {
-                                CatalogueCell(width: getItemWidth(), name: category.name)
+                            NavigationLink(destination: CategoriesView(category: category)
+                                .environmentObject(realmManager)) {
+                                    CatalogueCell(width: getItemWidth(), name: category.name, imageUrl: category.image)
                             }
                         }
                     }

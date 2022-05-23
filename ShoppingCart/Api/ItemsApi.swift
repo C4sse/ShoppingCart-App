@@ -35,7 +35,7 @@ class ItemsApi {
                     
                     filters = filters.sorted { $0 < $1 }
                     
-                    realmCategory.addCategory(id: category.key, image: (dict["name"] as? String)!, name: (dict["name"] as? String)!, filters: filters)
+                    realmCategory.addCategory(id: category.key, image: (dict["image"] as? String)!, name: (dict["name"] as? String)!, filters: filters)
                 }
             }
             

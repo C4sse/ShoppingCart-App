@@ -58,6 +58,10 @@ class CategoriesManager: ObservableObject {
                 // Trying to write to the localRealm
                 try localRealm.write {
                     // Creating a new Task
+                    print(id)
+                    print(name)
+                    print(image)
+                    
                     let realmProduct = RealmCategory(value: [
                         "id": id,
                         "name": name,

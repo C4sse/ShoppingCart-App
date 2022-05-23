@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CartView: View {
     
-    @Binding var realmManager: RealmManager
+    @EnvironmentObject var realmManager: RealmManager
     
     var body: some View {
         

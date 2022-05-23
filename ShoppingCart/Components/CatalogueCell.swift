@@ -13,13 +13,14 @@ struct CatalogueCell: View {
     var width: CGFloat
 //    var productType: RealmCategory
     var name: String
+    var imageUrl: String
     @State private var showingSheet = false
     
     var body: some View {
         
         ZStack(alignment: .leading) {
             ZStack(alignment: .bottom) {
-                WebImage(url: URL(string: "https://nokiatech.github.io/heif/content/images/ski_jump_1440x960.heic"))
+                WebImage(url: URL(string: imageUrl))
                     .resizable()
                     .aspectRatio(contentMode: .fill)
                     .frame(width: width, height: 200)

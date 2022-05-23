@@ -10,7 +10,7 @@ import RealmSwift
 
 struct CategoriesView: View {
     
-    @StateObject var realmManager = RealmManager()
+    @EnvironmentObject var realmManager: RealmManager
     @State private var search: String = ""
     @State private var selectedIndex: Int = 0
     @State private var showingSheet = false
@@ -74,17 +74,17 @@ struct CategoriesView: View {
                             }
                         })
                         
-                        } else {
+                    } else {
+                        
+                        ForEach(realmManager.products, content: { product in
                             
-                            ForEach(realmManager.products, content: { product in
+                            if !product.isInvalidated {
                                 
-                                if  !product.isInvalidated {
-                                    
-                                    ProductCardView(width: getItemWidth(), product: product, showDiscount: false)
-                                        .environmentObject(realmManager)
-                                }
-                            })
-                        }
+                                ProductCardView(width: getItemWidth(), product: product, showDiscount: false)
+                                    .environmentObject(realmManager)
+                            }
+                        })
+                    }
                 }
                 .padding()
             }
@@ -95,6 +95,9 @@ struct CategoriesView: View {
         }
         .navigationViewStyle(StackNavigationViewStyle())
         .onAppear {
+            
+            filteredProducts = []
+            realmManager.products = []
             realmManager.getitems(categoryId: category.id)
             print("selected index", selectedIndex)
         }
@@ -150,15 +153,15 @@ struct CategoryView: View {
 
 func getItemWidth() -> CGFloat {
     
-//    let screenSize: CGRect = UIScreen.main.bounds
-//    var width = 185.0
-//
-//    if screenSize.width < 330 {
-//        width = 130
-//    } else if screenSize.width > 420 {
-//        width = 180
-//    }
+    //    let screenSize: CGRect = UIScreen.main.bounds
+    //    var width = 185.0
+    //
+    //    if screenSize.width < 330 {
+    //        width = 130
+    //    } else if screenSize.width > 420 {
+    //        width = 180
+    //    }
     
     return UIScreen.main.bounds.size.width / 2 - 24
-//    return width
+    //    return width
 }

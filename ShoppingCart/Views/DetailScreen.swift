@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SDWebImageSwiftUI
 
 struct DetailScreen: View {
     
@@ -20,7 +21,7 @@ struct DetailScreen: View {
             
             ScrollView  {
                 // Product Image
-                Image(product.image)
+                WebImage(url: URL(string: product.image))
                     .resizable()
                     .aspectRatio(contentMode: .fill)
                     .edgesIgnoringSafeArea(.top)
