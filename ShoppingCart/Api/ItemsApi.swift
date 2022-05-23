@@ -9,6 +9,7 @@ import FirebaseDatabase
 import RealmSwift
 import CryptoKit
 import ProgressHUD
+import FirebaseStorage
 
 class ItemsApi {
     
@@ -44,26 +45,61 @@ class ItemsApi {
     
     static func getItems(forCategoryId categoryId: String, realManager: RealmManager, completion: @escaping () -> Void) {
         
-        Database.database().reference().child("products").observe(.value) { snapshot in
+        print(categoryId)
+        
+        Database.database().reference().child("categoryItems").child(categoryId).observe(.value) { snap in
             
-            guard let items = (snapshot.children.allObjects as? [DataSnapshot]) else {
+            guard let items = (snap.children.allObjects as? [DataSnapshot]) else {
                 return
             }
-            print(items.count)
+            
             items.forEach { item in
                 print(item)
-                if let dict = item.value as? [String: Any] {
+                
+                Database.database().reference().child("products").child(item.key).observe(.value) { snapshot in
                     
-                    realManager.addItem(dict: dict, key: item.key)
+                    guard let dict = snapshot.value as? [String: Any] else {
+                        return
+                    }
+                    
+                    print(items.count)
+                    
+                    print(item)
+                    
+                    realManager.addItem(dict: dict, key: snapshot.key)
+                    
+                    completion()
                 }
             }
+        }
+    }
+    
+    static func getDiscountedItems(realManager: RealmManager, completion: @escaping () -> Void) {
+        
+        Database.database().reference().child("discountItems").observe(.value) { snap in
             
-            completion()
+            guard let items = (snap.children.allObjects as? [DataSnapshot]) else {
+                return
+            }
+            
+            items.forEach { item in
+                
+                Database.database().reference().child("products").child(item.key).observe(.value) { snapshot in
+                    
+                    guard let dict = snapshot.value as? [String: Any] else {
+                        return
+                    }
+                    
+                    realManager.addItem(dict: dict, key: snapshot.key)
+                    
+                    completion()
+                }
+            }
         }
     }
     
     // MARK: uploading
-    static func addProductToStore(dict: [String: Any], forCategoryId categoryId: String) {
+    static func addProductToStore(dict: [String: Any], forCategoryId categoryId: String, isDiscounted: Bool) {
         
         guard let newId = Database.database().reference().child("products").childByAutoId().key else { return }
         
@@ -76,6 +112,34 @@ class ItemsApi {
             }
             
             Database.database().reference().child("categoryItems").child(categoryId).child(newId).setValue(true)
+            
+            if isDiscounted {
+                Database.database().reference().child("discountItems").child(newId).setValue(true)
+            }
+        }
+    }
+    
+    static func uploadImageToFirebaseStorage(data: Data, onSuccess: @escaping (_ imageUrl: String) -> Void) {
+        
+        let photoIdString = NSUUID().uuidString
+        let storageRef = Storage.storage().reference().child("products").child(photoIdString)
+        
+        storageRef.putData(data, metadata: nil) { (metadata, error) in
+            
+            if error != nil {
+                ProgressHUD.showError(error!.localizedDescription)
+                return
+            }
+            
+            storageRef.downloadURL(completion: { (url: URL?, error: Error?) in
+                
+                if error != nil {
+                    ProgressHUD.showError(error!.localizedDescription)
+                    return
+                }
+                
+                if let photoUrl = url?.absoluteString { onSuccess(photoUrl) }
+            })
         }
     }
 }

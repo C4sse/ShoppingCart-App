@@ -17,6 +17,7 @@ class RealmManager: ObservableObject {
     @Published var paymentSuccess = false
     @Published private(set) var total: Double = 0
     @Published var products: [RealmProduct] = []
+    @Published var discountProducts: [RealmProduct] = []
     
     // On initialize of the class, we'll open a Realm and get the tasks saved in the Realm
     init() {
@@ -29,7 +30,7 @@ class RealmManager: ObservableObject {
         let config = Realm.Configuration(
             // Set the new schema version. This must be greater than the previously used
             // version (if you've never set a schema version before, the version is 0).
-            schemaVersion: 8,
+            schemaVersion: 9,
             
             // Set the block which will be called automatically when opening a Realm with
             // a schema version lower than the one set above
@@ -72,9 +73,39 @@ class RealmManager: ObservableObject {
             
             products = []
             
+            
             prods.forEach { prod in
+                print(prod.isDiscounted)
                 products.append(prod)
             }
+            
+            print(discountProducts.count)
+        }
+    }
+    
+    func getDiscounteditems() {
+        
+        let prods = self.productsFile.objects(RealmProduct.self)
+        
+        prods.forEach { prod in
+            products.append(prod)
+        }
+        
+        ItemsApi.getDiscountedItems(realManager: self) { [self] in
+            
+            let prods = self.productsFile.objects(RealmProduct.self)
+            print(prods.count)
+            
+            discountProducts = []
+            
+            
+            prods.forEach { prod in
+                print(prod.isDiscounted)
+                products.append(prod)
+            }
+            
+            discountProducts = products.filter { $0.isDiscounted == true }
+            print(discountProducts.count)
         }
     }
     
@@ -92,6 +123,7 @@ class RealmManager: ObservableObject {
                     if let price = dict["price"] as? Double { realmProduct.price = price }
                     if let image = dict["image"] as? String { realmProduct.image = image }
                     if let type = dict["type"] as? String { realmProduct.type = type }
+                    if let isDiscounted = dict["isDiscounted"] as? Bool { realmProduct.isDiscounted = isDiscounted }
                     
                     // Adding newTask to localRealm
                     localRealm.add(realmProduct, update: .all)
@@ -147,7 +179,7 @@ class RealmManager: ObservableObject {
                 // Trying to write to the localRealm
                 try localRealm.write {
                     
-                    if taskToUpdate[0].cartQuantity< taskToUpdate[0].availableQuantity {
+                    if taskToUpdate[0].cartQuantity < taskToUpdate[0].availableQuantity {
                         
                         // Getting the first item of the array and changing its completed state
                         taskToUpdate[0].cartQuantity = (taskToUpdate[0].cartQuantity) + 1

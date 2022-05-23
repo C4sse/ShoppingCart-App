@@ -156,6 +156,17 @@ struct Settings: View {
                             .foregroundColor(.primary)
                         Spacer()
                     }
+                    
+                    NavigationLink {
+                        
+                        AddItemToShop()
+                    } label: {
+                        
+                        
+                        Text("Add item to shop")
+                            .foregroundColor(.primary)
+                        Spacer()
+                    }
                 }
                 
                 Section() {

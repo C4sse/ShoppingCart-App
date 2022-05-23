@@ -63,11 +63,28 @@ struct CategoriesView: View {
                 
                 LazyVGrid(columns: columns, spacing: 12) {
                     
-                    ForEach(realmManager.products, content: { product in
+                    if selectedIndex > 0 {
                         
-                        ProductCardView(width: getItemWidth(), product: product, showDiscount: false)
-                            .environmentObject(realmManager)
-                    })
+                        ForEach(filteredProducts, content: { product in
+                            
+                            if  !product.isInvalidated {
+                                
+                                ProductCardView(width: getItemWidth(), product: product, showDiscount: false)
+                                    .environmentObject(realmManager)
+                            }
+                        })
+                        
+                        } else {
+                            
+                            ForEach(realmManager.products, content: { product in
+                                
+                                if  !product.isInvalidated {
+                                    
+                                    ProductCardView(width: getItemWidth(), product: product, showDiscount: false)
+                                        .environmentObject(realmManager)
+                                }
+                            })
+                        }
                 }
                 .padding()
             }

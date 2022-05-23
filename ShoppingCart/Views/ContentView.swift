@@ -32,7 +32,7 @@ struct ContentView: View {
                         Text("Catalogue")
                     }
                 
-                DiscountView(realmManager: $realmManager)
+                DiscountView()
                     .tabItem {
                         Image(systemName: "percent")
                         Text("Discount")

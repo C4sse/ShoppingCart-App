@@ -9,7 +9,7 @@ import SwiftUI
 
 struct DiscountView: View {
     
-    @Binding var realmManager: RealmManager
+    @StateObject var realmManager = RealmManager()
     var columns = [GridItem(.adaptive(minimum: 160), spacing: 8)]
 //    var productList: [RealmProduct]
     var body: some View {
@@ -34,8 +34,9 @@ struct DiscountView: View {
                     
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(alignment: .center, spacing: 8) {
-                        ForEach(realmManager.products, id: \.id) { product in
-//                            ProductCardView(width: getItemWidth(), realmManager: $realmManager, product: product, showDiscount: true)
+                        ForEach(realmManager.discountProducts, id: \.id) { product in
+                            ProductCardView(width: getItemWidth(), product: product, showDiscount: true)
+                                .environmentObject(realmManager)
                         }
                     }
                 }
@@ -48,8 +49,9 @@ struct DiscountView: View {
                     .offset(y: 10)
                 
                 LazyVGrid(columns: columns, spacing: 8) {
-                    ForEach(realmManager.products, id: \.id) { product in
-//                        ProductCardView(width: getItemWidth(), realmManager: $realmManager, product: product, showDiscount: true)
+                    ForEach(realmManager.discountProducts, id: \.id) { product in
+                        ProductCardView(width: getItemWidth(), product: product, showDiscount: true)
+                            .environmentObject(realmManager)
                     }
                 }
                 
@@ -69,7 +71,9 @@ struct DiscountView: View {
         }
         .navigationViewStyle(StackNavigationViewStyle())
         .onAppear {
-            print("appeared")
+            print("dicount view")
+            realmManager.getDiscounteditems()
+            
         }
     }
         

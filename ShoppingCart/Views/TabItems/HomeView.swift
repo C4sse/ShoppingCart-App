@@ -31,8 +31,10 @@ struct HomeView: View { // change
                     
                     ForEach(categoriesManager.categories, id: \.id) { category in
                         
-                        NavigationLink(destination: CategoriesView(category: category)) {
-                            CatalogueCell(width: getItemWidth(), name: category.name)
+                        if !category.isInvalidated {
+                            NavigationLink(destination: CategoriesView(category: category)) {
+                                CatalogueCell(width: getItemWidth(), name: category.name)
+                            }
                         }
                     }
                 }
@@ -45,16 +47,9 @@ struct HomeView: View { // change
         }
         .navigationViewStyle(StackNavigationViewStyle())
         .onAppear {
-            RealmManager().deleteAll()
+            
+//            RealmManager().deleteAll()
             categoriesManager.getCategories(categoriesManager: categoriesManager)
-            let dict: [String: Any] = [
-                "name": "Choco",
-                "image": "https://loremflickr.com/cache/resized/65535_51997341473_55b86a2b17_n_320_240_nofilter.jpg",
-                "price": 2.0,
-                "availableQuantity": 3,
-                "type": "chocolate"
-            ]
-            ItemsApi.addProductToStore(dict: dict, forCategoryId: "123")
         }
     }
 }

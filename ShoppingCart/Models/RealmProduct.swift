@@ -23,4 +23,5 @@ class RealmProduct: Object, ObjectKeyIdentifiable {
     @Persisted var country: String = ""
     @Persisted var storageConditions: String = ""
     @Persisted var type: String = ""
+    @Persisted var isDiscounted: Bool = false
 }
