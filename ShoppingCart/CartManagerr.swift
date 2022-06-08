@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-class CartManager: ObservableObject {
+class CartManagerr: ObservableObject {
 
     @Published private(set) var products: [Product] = []
     @Published private(set) var total: Double = 0
