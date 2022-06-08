@@ -20,9 +20,9 @@ struct CartView: View {
                 ScrollView {
                     VStack(alignment: .leading) {
                         
-                        if realmManager.paymentSuccess {
+                        if true {
 
-                            Text("Thanks for your purchase! Your order will be shipped shortly, You'll also receive email confirmation shortly, with tracking ID.")
+                            Text("Thanks for your purchase! Your order will be shipped shortly, You'll also receive email confirmation shortly, with a tracking ID.")
                                 .font(Font.custom("SFProText-Light", size: 16))
                                 .padding()
                         } else {
@@ -59,9 +59,9 @@ struct CartView: View {
                 .padding(.top)
                 .navigationTitle(Text("My Cart"))
                 .onDisappear {
-                    if realmManager.paymentSuccess {
-                        realmManager.paymentSuccess = false
-                    }
+//                    if realmManager.paymentSuccess {
+//                        realmManager.paymentSuccess = false
+//                    }
                 }
                 .background(backgroundColor1)
                 
@@ -72,16 +72,15 @@ struct CartView: View {
                         Text("Your Cart total is:")
                             .font(Font.custom("SFProText-Semibold", size: 17))
                         
-                        Text("$ \(realmManager.total, specifier: "%.2f")")
-                            .font(Font.custom("SFProText-Bold", size: 24))
-                            .foregroundColor(greenBasic)
+//                        Text("$ \(realmManager.total, specifier:
+                        
                     }
                     .padding(.all, 5)
                     
                     Spacer()
                     
                     PaymentButton(action: {
-                        realmManager.pay()
+//                        realmManager.pay()
                     })
                 }
                 

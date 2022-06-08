@@ -14,8 +14,6 @@ class RealmManager: ObservableObject {
     let paymentHandler = PaymentHandler()
     
     private(set) var productsFile: Realm!
-    @Published var paymentSuccess = false
-    @Published private(set) var total: Double = 0
     @Published var products: [RealmProduct] = []
     @Published var discountProducts: [RealmProduct] = []
     
@@ -68,12 +66,9 @@ class RealmManager: ObservableObject {
         ItemsApi.getItems(forCategoryId: categoryId, realManager: self) { [self] in
             
             let prods = self.productsFile.objects(RealmProduct.self)
-            print(prods.count)
             
             products = []
             prods.forEach { prod in
-                print("invalidated")
-                print(prod.isInvalidated)
                 
                 products.append(prod)
             }
@@ -135,29 +130,32 @@ class RealmManager: ObservableObject {
     // Function to update a task's completed state
     func addToCart(id: String, isAdded: Bool) {
         
-        if let productsFile = productsFile {
-            do {
-                // Find the task we want to update by its id
-                let productToUpdate = productsFile.objects(RealmProduct.self).filter(NSPredicate(format: "id == %@", id))
-                
-                // Make sure we found the task and taskToUpdate array isn't empty
-                guard !productToUpdate.isEmpty else { return }
-
-                // Trying to write to the localRealm
-                try productsFile.write {
+        ItemsApi.addToCart(productId: id) { [self] in
+            
+            if let productsFile = productsFile {
+                do {
+                    // Find the task we want to update by its id
+                    let productToUpdate = productsFile.objects(RealmProduct.self).filter(NSPredicate(format: "id == %@", id))
                     
-                    // Getting the first item of the array and changing its completed state
-                    productToUpdate[0].addedToCart = isAdded
+                    // Make sure we found the task and taskToUpdate array isn't empty
+                    guard !productToUpdate.isEmpty else { return }
                     
-                    // Re-setting the tasks array
-//                    getTasks()
-                    print("Updated task with id \(id)! Completed status: \(isAdded)")
+                    // Trying to write to the localRealm
+                    try productsFile.write {
+                        
+                        // Getting the first item of the array and changing its completed state
+                        productToUpdate[0].addedToCart = isAdded
+                        
+                        // Re-setting the tasks array
+                        //                    getTasks()
+                        print("Updated task with id \(id)! Completed status: \(isAdded)")
+                    }
+                    
+                    // perform network call
+                    
+                } catch {
+                    print("Error updating task \(id) to Realm: \(error)")
                 }
-                
-                // perform network call
-                
-            } catch {
-                print("Error updating task \(id) to Realm: \(error)")
             }
         }
     }
@@ -184,7 +182,6 @@ class RealmManager: ObservableObject {
                         
                         // Re-setting the tasks array
 //                        getTasks()
-                        calculateTotal()
                         print("Updated task with id \(id)!")
                     } else {
                         
@@ -215,7 +212,6 @@ class RealmManager: ObservableObject {
                     
                     // Re-setting the tasks array
 //                    getTasks()
-                    calculateTotal()
                     print("Updated task with id \(id)!")
                 }
             } catch {
@@ -271,27 +267,6 @@ class RealmManager: ObservableObject {
                 print("Error deleting all  to Realm: \(error)")
             }
         }
-    }
-    
-    // MARK: cart manager
-    func pay() {
-//        paymentHandler.startPayment(products: inCartProducts, total: total) { success in
-//            self.paymentSuccess = success
-////            self.products = []
-//            self.total = 0
-//        }
-    }
-    
-    private func calculateTotal() {
-
-        var t = 0.0
-
-        products.forEach { prod in
-
-            t += prod.price * Double(prod.cartQuantity)
-        }
-
-        total = t
     }
 }
 

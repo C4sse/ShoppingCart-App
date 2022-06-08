@@ -17,7 +17,6 @@
 		C12AFFCA27CBA8ED00C53ABB /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12AFFC927CBA8ED00C53ABB /* Product.swift */; };
 		C12AFFD027CBB49B00C53ABB /* CartButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12AFFCF27CBB49B00C53ABB /* CartButton.swift */; };
 		C12AFFD227CBB69D00C53ABB /* CartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12AFFD127CBB69D00C53ABB /* CartView.swift */; };
-		C12AFFD427CBB8AD00C53ABB /* CartManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12AFFD327CBB8AD00C53ABB /* CartManager.swift */; };
 		C12AFFD627CBBC4300C53ABB /* ProductRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12AFFD527CBBC4300C53ABB /* ProductRow.swift */; };
 		C12AFFD827CC150B00C53ABB /* PaymentButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12AFFD727CC150B00C53ABB /* PaymentButton.swift */; };
 		C12AFFDB27CC1B7300C53ABB /* PaymentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12AFFDA27CC1B7300C53ABB /* PaymentHandler.swift */; };
@@ -50,6 +49,7 @@
 		C1E140C52809BE2A002B2506 /* FormSheetWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1E140BB2809BE2A002B2506 /* FormSheetWrapper.swift */; };
 		C1E140C62809BE2A002B2506 /* ScrollOnlyOnOverflow.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1E140BC2809BE2A002B2506 /* ScrollOnlyOnOverflow.swift */; };
 		C1EA225C283A5F9C004621E6 /* AddItemToShop.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1EA225B283A5F9C004621E6 /* AddItemToShop.swift */; };
+		C1EA7DC02840050700348D52 /* CartManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1EA7DBF2840050700348D52 /* CartManager.swift */; };
 		C1F33E6B280B470F008854C2 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1F33E6A280B470F008854C2 /* AuthService.swift */; };
 		C1F33E6D280B49B3008854C2 /* Api.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1F33E6C280B49B3008854C2 /* Api.swift */; };
 		C1F33E6F280B4A6D008854C2 /* UserApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1F33E6E280B4A6D008854C2 /* UserApi.swift */; };
@@ -82,7 +82,6 @@
 		C12AFFC927CBA8ED00C53ABB /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
 		C12AFFCF27CBB49B00C53ABB /* CartButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartButton.swift; sourceTree = "<group>"; };
 		C12AFFD127CBB69D00C53ABB /* CartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartView.swift; sourceTree = "<group>"; };
-		C12AFFD327CBB8AD00C53ABB /* CartManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartManager.swift; sourceTree = "<group>"; };
 		C12AFFD527CBBC4300C53ABB /* ProductRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductRow.swift; sourceTree = "<group>"; };
 		C12AFFD727CC150B00C53ABB /* PaymentButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentButton.swift; sourceTree = "<group>"; };
 		C12AFFD927CC1B1900C53ABB /* ShoppingCart.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ShoppingCart.entitlements; sourceTree = "<group>"; };
@@ -116,6 +115,7 @@
 		C1E140BB2809BE2A002B2506 /* FormSheetWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormSheetWrapper.swift; sourceTree = "<group>"; };
 		C1E140BC2809BE2A002B2506 /* ScrollOnlyOnOverflow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollOnlyOnOverflow.swift; sourceTree = "<group>"; };
 		C1EA225B283A5F9C004621E6 /* AddItemToShop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemToShop.swift; sourceTree = "<group>"; };
+		C1EA7DBF2840050700348D52 /* CartManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartManager.swift; sourceTree = "<group>"; };
 		C1F33E6A280B470F008854C2 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		C1F33E6C280B49B3008854C2 /* Api.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Api.swift; sourceTree = "<group>"; };
 		C1F33E6E280B4A6D008854C2 /* UserApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserApi.swift; sourceTree = "<group>"; };
@@ -197,8 +197,6 @@
 				C12AFFC827CBA8D100C53ABB /* Models */,
 				C12AFFBE27CBA77600C53ABB /* Assets.xcassets */,
 				C12AFFC027CBA77600C53ABB /* Preview Content */,
-				C12AFFD327CBB8AD00C53ABB /* CartManager.swift */,
-				C12AFFDA27CC1B7300C53ABB /* PaymentHandler.swift */,
 			);
 			path = ShoppingCart;
 			sourceTree = "<group>";
@@ -270,6 +268,8 @@
 				C1F33E70280B5047008854C2 /* ItemsApi.swift */,
 				C1D8AC37282D3699004641E3 /* RealmManager.swift */,
 				C19C6E9F28341D14004BD498 /* CategoriesManager.swift */,
+				C1EA7DBF2840050700348D52 /* CartManager.swift */,
+				C12AFFDA27CC1B7300C53ABB /* PaymentHandler.swift */,
 			);
 			path = Api;
 			sourceTree = "<group>";
@@ -495,6 +495,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C1E140C22809BE2A002B2506 /* iPadSheetDimensions.swift in Sources */,
+				C1EA7DC02840050700348D52 /* CartManager.swift in Sources */,
 				C12AFFD827CC150B00C53ABB /* PaymentButton.swift in Sources */,
 				C1F33E71280B5047008854C2 /* ItemsApi.swift in Sources */,
 				C1C36DFF27D0FF86005E960D /* PromotedCard.swift in Sources */,
@@ -515,7 +516,6 @@
 				C1E140C62809BE2A002B2506 /* ScrollOnlyOnOverflow.swift in Sources */,
 				C1C6BFCE280B86C600E429B1 /* SignUpView.swift in Sources */,
 				C1EA225C283A5F9C004621E6 /* AddItemToShop.swift in Sources */,
-				C12AFFD427CBB8AD00C53ABB /* CartManager.swift in Sources */,
 				C112907E283583C000C55CE4 /* SettingsView.swift in Sources */,
 				C12AFFBB27CBA77400C53ABB /* ShoppingCartApp.swift in Sources */,
 				C1E140C02809BE2A002B2506 /* WelcomeSheet.swift in Sources */,
@@ -671,7 +671,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = ShoppingCart/ShoppingCart.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 12;
+				CURRENT_PROJECT_VERSION = 13;
 				DEVELOPMENT_ASSET_PATHS = "\"ShoppingCart/Preview Content\"";
 				DEVELOPMENT_TEAM = YLUJFA3QRD;
 				ENABLE_PREVIEWS = YES;
@@ -704,7 +704,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = ShoppingCart/ShoppingCart.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 12;
+				CURRENT_PROJECT_VERSION = 13;
 				DEVELOPMENT_ASSET_PATHS = "\"ShoppingCart/Preview Content\"";
 				DEVELOPMENT_TEAM = YLUJFA3QRD;
 				ENABLE_PREVIEWS = YES;

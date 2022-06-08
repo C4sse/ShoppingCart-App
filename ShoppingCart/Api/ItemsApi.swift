@@ -74,6 +74,36 @@ class ItemsApi {
         }
     }
     
+    static func getCart(cartManager: CartManager, completion: @escaping () -> Void) {
+        
+        guard let uid = Api.User.CURRENT_USER?.uid else {
+            return
+        }
+        print(uid)
+        
+        Database.database().reference().child("cart").child(uid).observe(.value) { snap in
+            
+            guard let items = (snap.children.allObjects as? [DataSnapshot]) else {
+                return
+            }
+            
+            items.forEach { item in
+                print(item)
+                
+                Database.database().reference().child("products").child(item.key).observe(.value) { snapshot in
+                    
+                    guard let dict = snapshot.value as? [String: Any] else {
+                        return
+                    }
+                    
+                    cartManager.write(dict: dict, key: snapshot.key)
+                    
+                    completion()
+                }
+            }
+        }
+    }
+    
     static func getDiscountedItems(realManager: RealmManager, completion: @escaping () -> Void) {
         
         Database.database().reference().child("discountItems").observe(.value) { snap in
@@ -116,6 +146,40 @@ class ItemsApi {
             if isDiscounted {
                 Database.database().reference().child("discountItems").child(newId).setValue(true)
             }
+        }
+    }
+    
+    static func addToCart(productId: String, completion: @escaping () -> Void) {
+        
+        guard let uid = Api.User.CURRENT_USER?.uid else {
+            return
+        }
+        
+        Database.database().reference().child("cart").child(uid).child(productId).setValue(1) { error, ref in
+            
+            if error != nil {
+                ProgressHUD.showError(error?.localizedDescription)
+                return
+            }
+            
+            completion()
+        }
+    }
+    
+    static func removeFromCart(productId: String, completion: @escaping () -> Void) {
+        
+        guard let uid = Api.User.CURRENT_USER?.uid else {
+            return
+        }
+        
+        Database.database().reference().child("cart").child(uid).child(productId).setValue(nil) { error, ref in
+            
+            if error != nil {
+                ProgressHUD.showError(error?.localizedDescription)
+                return
+            }
+            
+            completion()
         }
     }
     
