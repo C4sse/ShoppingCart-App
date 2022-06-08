@@ -11,7 +11,7 @@ struct DiscountView: View {
     
     @EnvironmentObject var realmManager: RealmManager
     var columns = [GridItem(.adaptive(minimum: 160), spacing: 8)]
-//    var productList: [RealmProduct]
+    
     var body: some View {
         NavigationView {
             
@@ -60,8 +60,8 @@ struct DiscountView: View {
             .navigationTitle(Text("ShoppingCart"))
             .toolbar {
                 NavigationLink {
-//                    CartView()
-//                        .environmentObject(realmManager)
+                    CartView()
+                        .environmentObject(realmManager)
                 } label: {
 
                     CartButton(numberOfProducts: realmManager.products.count)
